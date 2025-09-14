@@ -67,6 +67,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#c.statPortMemcpy"><code class="docutils literal notranslate"><span class="pre">statPortMemcpy</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#c.statPortCalloc"><code class="docutils literal notranslate"><span class="pre">statPortCalloc</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#c.STAT_SUPPORT_TYPE"><code class="docutils literal notranslate"><span class="pre">STAT_SUPPORT_TYPE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv45fsqrtf"><code class="docutils literal notranslate"><span class="pre">fsqrt()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#_CPPv48fieldPtrP10Statistics"><code class="docutils literal notranslate"><span class="pre">fieldPtr()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#_CPPv48oneStoreP10StatisticsPKv"><code class="docutils literal notranslate"><span class="pre">oneStore()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#_CPPv47oneLoadP10Statistics7uint8_tPv"><code class="docutils literal notranslate"><span class="pre">oneLoad()</span></code></a></li>
@@ -243,7 +244,11 @@
 <div class="docutils container">
 <em>#include &lt;stddef.h&gt;</em></div>
 <div class="docutils container">
+<em>#include &lt;stdlib.h&gt;</em></div>
+<div class="docutils container">
 <em>#include “<a class="reference internal" href="#statistics__config_8h"><span class="std std-ref">statistics_config.h</span></a>”</em></div>
+<div class="docutils container">
+<em>#include &lt;stdint.h&gt;</em></div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
 <dl class="cpp macro">
@@ -254,6 +259,11 @@
 </div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv45fsqrtf">
+<span id="_CPPv35fsqrtf"></span><span id="_CPPv25fsqrtf"></span><span id="fsqrt__float"></span><span class="target" id="statistics_8c_1a9ca3fa13ca52cc57b69e3b5af75e6a63"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fsqrt</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv45fsqrtf" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv48fieldPtrP10Statistics">
 <span id="_CPPv38fieldPtrP10Statistics"></span><span id="_CPPv28fieldPtrP10Statistics"></span><span id="fieldPtr__StatisticsP"></span><span class="target" id="statistics_8c_1a343a5cc169a8de34813bcb7e8da952cc"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">fieldPtr</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48fieldPtrP10Statistics" title="Link to this definition"></a><br /></dt>
