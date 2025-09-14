@@ -1,0 +1,21 @@
+{
+    "name": "Statistics",
+    "version": "1.0.0",
+    "description": "Implementation of simple statistics functionality for embedded systems.",
+    "keywords": "statistics, math, embedded, mean calculation, max determination",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rici4kubicek/statistics.git"
+    },
+    "authors": [
+        {
+            "name": "Richard Kubíček",
+            "email": "rici.kubicek@gmail.com",
+            "url": "https://richardkubicek.com",
+            "maintainer": true
+        }
+    ],
+    "license": "MIT",
+    "frameworks": "*",
+    "platforms": "*"
+}
