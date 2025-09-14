@@ -1,6 +1,6 @@
 {
     "name": "Statistics",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Implementation of simple statistics functionality for embedded systems.",
     "keywords": "statistics, math, embedded, mean calculation, max determination",
     "repository": {
@@ -13,6 +13,17 @@
             "email": "rici.kubicek@gmail.com",
             "url": "https://richardkubicek.com",
             "maintainer": true
+        }
+    ],
+    "examples": [
+        {
+            "name": "Basic usage of min/max/mean calculation",
+            "base": "example",
+            "files": [
+                "platformio.ini",
+                "src/main.c",
+                "scripts/run_native.py"
+            ]
         }
     ],
     "license": "MIT",
