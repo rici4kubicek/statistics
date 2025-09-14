@@ -1,6 +1,6 @@
 {
     "name": "Statistics",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "Implementation of simple statistics functionality for embedded systems.",
     "keywords": "statistics, math, embedded, mean calculation, max determination",
     "repository": {
