@@ -1,6 +1,6 @@
 {
     "name": "Statistics",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Implementation of simple statistics functionality for embedded systems.",
     "keywords": "statistics, math, embedded, mean calculation, max determination",
     "repository": {
@@ -17,7 +17,7 @@
     ],
     "examples": [
         {
-            "name": "Basic usage of min, max and mean calculation",
+            "name": "Basic usage of min-max and mean calculation",
             "base": "example",
             "files": [
                 "platformio.ini",
