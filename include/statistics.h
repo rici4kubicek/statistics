@@ -39,6 +39,8 @@ void Statistics_AddSample(Statistics * stat, const void * sample);
 _type Statistics_Mean_##_NameSuffix(Statistics * stat);   \
 _type Statistics_Max_##_NameSuffix(Statistics * stat);  \
 _type Statistics_Min_##_NameSuffix(Statistics * stat);  \
+float Statistics_Variance_##_NameSuffix(Statistics * stat); \
+float Statistics_Stdev_##_NameSuffix(Statistics * stat);    \
 
 _STAT_SUPPORT_TYPE(uint8_t, U8);
 _STAT_SUPPORT_TYPE(int8_t, I8);
