@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include "statistics.h"
+#include <time.h>
+
+Statistics stat;
+
+int main() {
+    printf("Hello, world!\n");
+    fflush(stdout);
+
+    Statistics_Init(&stat, sizeof(uint8_t), 4);
+
+    uint8_t v = 1;
+    Statistics_AddSample(&stat, &v);
+    v = 21;
+    Statistics_AddSample(&stat, &v);
+    v = 79;
+    Statistics_AddSample(&stat, &v);
+    v = 100;
+    Statistics_AddSample(&stat, &v);
+    v = 31;
+    Statistics_AddSample(&stat, &v);
+
+    printf("Max: %d\n", Statistics_Max_U8(&stat));
+    printf("Min: %d\n", Statistics_Min_U8(&stat));
+    printf("Mean: %d\n", Statistics_Mean_U8(&stat));
+
+    return 0;
+}
