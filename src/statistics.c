@@ -87,7 +87,7 @@ void Statistics_AddSample(Statistics * stat, const void * data)
 #define STAT_SUPPORT_TYPE(_type, _NameSuffix)    \
 _type Statistics_Mean_##_NameSuffix(Statistics * stat)   \
 {                   \
-    _type avg = 0;  \
+    float avg = 0;  \
     for (int idx = 0; idx < stat->samplesCnt; idx++) {  \
         _type value;    \
         oneLoad(stat, idx, &value); \

@@ -20,6 +20,8 @@ int main() {
     Statistics_AddSample(&stat, &v);
     v = 31;
     Statistics_AddSample(&stat, &v);
+    v = 85;
+    Statistics_AddSample(&stat, &v);
 
     printf("Max: %d\n", Statistics_Max_U8(&stat));
     printf("Min: %d\n", Statistics_Min_U8(&stat));
