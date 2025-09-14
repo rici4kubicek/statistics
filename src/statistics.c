@@ -19,7 +19,27 @@
 #include "statistics.h"
 
 #include <stddef.h>
+#include <stdlib.h>
 #include "statistics_config.h"
+
+#include <stdint.h>
+
+static inline float fsqrt(float x) {
+    if (x <= 0.0f) {
+        return x == 0.0f ? 0.0f : (0.0f/0.0f);
+    }
+
+    union { uint32_t i; float f; } u = { .f = x };
+    u.i = (u.i >> 1) + 0x1FC00000u;
+
+    float y = u.f;
+
+    y = 0.5f * (y + x / y);
+    y = 0.5f * (y + x / y);
+    y = 0.5f * (y + x / y);
+
+    return y;
+}
 
 /* Return pointer to the current sample slot. */
 static inline void * fieldPtr(Statistics * stat)
@@ -118,6 +138,25 @@ _type Statistics_Min_##_NameSuffix(Statistics * stat)   \
             min = value;    \
     }   \
     return min;    \
+}   \
+    \
+float Statistics_Variance_##_NameSuffix(Statistics * stat)   \
+{                   \
+    float total = 0;  \
+    float refVariance = 0;  \
+    for (int idx = 0; idx < stat->samplesCnt; idx++) {  \
+        _type value;    \
+        oneLoad(stat, idx, &value); \
+        total += value; \
+        refVariance += value * value; \
+    }   \
+    float cv = (refVariance - total * total / stat->samplesCnt) / (stat->samplesCnt - 1);    \
+    return cv;  \
+}   \
+    \
+float Statistics_Stdev_##_NameSuffix(Statistics * stat)   \
+{   \
+    return fsqrt(Statistics_Variance_##_NameSuffix(stat));  \
 }   \
 
 /* Currently supported typed averages. Extend as needed. */
