@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; Statistics  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Statistics documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Statistics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv410Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics10samplesCntE"><code class="docutils literal notranslate"><span class="pre">samplesCnt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics9sampleIdxE"><code class="docutils literal notranslate"><span class="pre">sampleIdx</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics8itemSizeE"><code class="docutils literal notranslate"><span class="pre">itemSize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics7samplesE"><code class="docutils literal notranslate"><span class="pre">samples</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#c._STAT_SUPPORT_TYPE"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t"><code class="docutils literal notranslate"><span class="pre">Statistics_Init()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv415Statistics_FreeP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_Free()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv420Statistics_AddSampleP10StatisticsPKv"><code class="docutils literal notranslate"><span class="pre">Statistics_AddSample()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv418_STAT_SUPPORT_TYPE7uint8_t2U8"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv418_STAT_SUPPORT_TYPE6int8_t2I8"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv418_STAT_SUPPORT_TYPE8uint16_t3U16"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv418_STAT_SUPPORT_TYPE7int16_t3I16"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv418_STAT_SUPPORT_TYPE8uint32_t3U32"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv418_STAT_SUPPORT_TYPE7int32_t3I32"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv418_STAT_SUPPORT_TYPEf1F"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.statPortMalloc"><code class="docutils literal notranslate"><span class="pre">statPortMalloc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.statPortFree"><code class="docutils literal notranslate"><span class="pre">statPortFree</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.statPortMemcpy"><code class="docutils literal notranslate"><span class="pre">statPortMemcpy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.statPortCalloc"><code class="docutils literal notranslate"><span class="pre">statPortCalloc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.STAT_SUPPORT_TYPE"><code class="docutils literal notranslate"><span class="pre">STAT_SUPPORT_TYPE</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv48fieldPtrP10Statistics"><code class="docutils literal notranslate"><span class="pre">fieldPtr()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv48oneStoreP10StatisticsPKv"><code class="docutils literal notranslate"><span class="pre">oneStore()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv47oneLoadP10Statistics7uint8_tPv"><code class="docutils literal notranslate"><span class="pre">oneLoad()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv417STAT_SUPPORT_TYPE7uint8_t2U8"><code class="docutils literal notranslate"><span class="pre">STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv417STAT_SUPPORT_TYPE6int8_t2I8"><code class="docutils literal notranslate"><span class="pre">STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv417STAT_SUPPORT_TYPE8uint16_t3U16"><code class="docutils literal notranslate"><span class="pre">STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv417STAT_SUPPORT_TYPE7int16_t3I16"><code class="docutils literal notranslate"><span class="pre">STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv417STAT_SUPPORT_TYPE8uint32_t3U32"><code class="docutils literal notranslate"><span class="pre">STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv417STAT_SUPPORT_TYPE7int32_t3I32"><code class="docutils literal notranslate"><span class="pre">STAT_SUPPORT_TYPE()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv417STAT_SUPPORT_TYPEf1F"><code class="docutils literal notranslate"><span class="pre">STAT_SUPPORT_TYPE()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Statistics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv410Statistics">
+<span id="_CPPv310Statistics"></span><span id="_CPPv210Statistics"></span><span id="Statistics"></span><span class="target" id="structStatistics"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics</span></span></span><a class="headerlink" href="#_CPPv410Statistics" title="Link to this definition"></a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10Statistics10samplesCntE">
+<span id="_CPPv3N10Statistics10samplesCntE"></span><span id="_CPPv2N10Statistics10samplesCntE"></span><span id="Statistics::samplesCnt__uint32_t"></span><span class="target" id="structStatistics_1a9e89d31e64718f2b336959ece47dbada"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">samplesCnt</span></span></span><a class="headerlink" href="#_CPPv4N10Statistics10samplesCntE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10Statistics9sampleIdxE">
+<span id="_CPPv3N10Statistics9sampleIdxE"></span><span id="_CPPv2N10Statistics9sampleIdxE"></span><span id="Statistics::sampleIdx__uint32_t"></span><span class="target" id="structStatistics_1a727d79f195047fdcb2785deb3d9abe93"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sampleIdx</span></span></span><a class="headerlink" href="#_CPPv4N10Statistics9sampleIdxE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10Statistics8itemSizeE">
+<span id="_CPPv3N10Statistics8itemSizeE"></span><span id="_CPPv2N10Statistics8itemSizeE"></span><span id="Statistics::itemSize__uint8_t"></span><span class="target" id="structStatistics_1a55227e6c4c0a16fb674b91ceb83dcdab"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itemSize</span></span></span><a class="headerlink" href="#_CPPv4N10Statistics8itemSizeE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10Statistics7samplesE">
+<span id="_CPPv3N10Statistics7samplesE"></span><span id="_CPPv2N10Statistics7samplesE"></span><span id="Statistics::samples__uint8_tP"></span><span class="target" id="structStatistics_1acf546e72ab1276b62f6489abea7c2cb8"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">samples</span></span></span><a class="headerlink" href="#_CPPv4N10Statistics7samplesE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="statistics_8h"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">statistics.h</span></span></dt>
+<dd><div class="docutils container">
+<em>#include &lt;stdint.h&gt;</em></div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c._STAT_SUPPORT_TYPE">
+<span class="target" id="statistics_8h_1a45b63279cee42cca00cacd7a4bc9ae53"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_type</span></span>, <span class="n"><span class="pre">_NameSuffix</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c._STAT_SUPPORT_TYPE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t">
+<span id="_CPPv315Statistics_InitP10Statistics7uint8_t8uint32_t"></span><span id="_CPPv215Statistics_InitP10Statistics7uint8_t8uint32_t"></span><span id="Statistics_Init__StatisticsP.uint8_t.uint32_t"></span><span class="target" id="statistics_8h_1adf2f0b2a9423754ec77233cb80c48e9f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">itemSize</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">samplesCount</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415Statistics_FreeP10Statistics">
+<span id="_CPPv315Statistics_FreeP10Statistics"></span><span id="_CPPv215Statistics_FreeP10Statistics"></span><span id="Statistics_Free__StatisticsP"></span><span class="target" id="statistics_8h_1a74eb3f851cab50d9071b962031eac716"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415Statistics_FreeP10Statistics" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420Statistics_AddSampleP10StatisticsPKv">
+<span id="_CPPv320Statistics_AddSampleP10StatisticsPKv"></span><span id="_CPPv220Statistics_AddSampleP10StatisticsPKv"></span><span id="Statistics_AddSample__StatisticsP.voidCP"></span><span class="target" id="statistics_8h_1a2ab7db3233a6442d5ef75ae9e4c6960c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_AddSample</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">sample</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420Statistics_AddSampleP10StatisticsPKv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418_STAT_SUPPORT_TYPE7uint8_t2U8">
+<span id="_CPPv318_STAT_SUPPORT_TYPE7uint8_t2U8"></span><span id="_CPPv218_STAT_SUPPORT_TYPE7uint8_t2U8"></span><span id="_STAT_SUPPORT_TYPE__uint8_t.U8"></span><span class="target" id="statistics_8h_1a411d9e76b69ce0f754098c03a5a903d9"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span>, <span class="n"><span class="pre">U8</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418_STAT_SUPPORT_TYPE7uint8_t2U8" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418_STAT_SUPPORT_TYPE6int8_t2I8">
+<span id="_CPPv318_STAT_SUPPORT_TYPE6int8_t2I8"></span><span id="_CPPv218_STAT_SUPPORT_TYPE6int8_t2I8"></span><span id="_STAT_SUPPORT_TYPE__int8_t.I8"></span><span class="target" id="statistics_8h_1a40b91df8aceaac5132271a0b3f6b6151"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int8_t</span></span>, <span class="n"><span class="pre">I8</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418_STAT_SUPPORT_TYPE6int8_t2I8" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418_STAT_SUPPORT_TYPE8uint16_t3U16">
+<span id="_CPPv318_STAT_SUPPORT_TYPE8uint16_t3U16"></span><span id="_CPPv218_STAT_SUPPORT_TYPE8uint16_t3U16"></span><span id="_STAT_SUPPORT_TYPE__uint16_t.U16"></span><span class="target" id="statistics_8h_1a8e73441ca299b0cdac430663206a353b"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span>, <span class="n"><span class="pre">U16</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418_STAT_SUPPORT_TYPE8uint16_t3U16" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418_STAT_SUPPORT_TYPE7int16_t3I16">
+<span id="_CPPv318_STAT_SUPPORT_TYPE7int16_t3I16"></span><span id="_CPPv218_STAT_SUPPORT_TYPE7int16_t3I16"></span><span id="_STAT_SUPPORT_TYPE__int16_t.I16"></span><span class="target" id="statistics_8h_1a2852ba73ffcc282d62b16c0166db9b5b"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int16_t</span></span>, <span class="n"><span class="pre">I16</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418_STAT_SUPPORT_TYPE7int16_t3I16" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418_STAT_SUPPORT_TYPE8uint32_t3U32">
+<span id="_CPPv318_STAT_SUPPORT_TYPE8uint32_t3U32"></span><span id="_CPPv218_STAT_SUPPORT_TYPE8uint32_t3U32"></span><span id="_STAT_SUPPORT_TYPE__uint32_t.U32"></span><span class="target" id="statistics_8h_1a4f718be95c0743bad5183c4fc7ea944b"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span>, <span class="n"><span class="pre">U32</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418_STAT_SUPPORT_TYPE8uint32_t3U32" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418_STAT_SUPPORT_TYPE7int32_t3I32">
+<span id="_CPPv318_STAT_SUPPORT_TYPE7int32_t3I32"></span><span id="_CPPv218_STAT_SUPPORT_TYPE7int32_t3I32"></span><span id="_STAT_SUPPORT_TYPE__int32_t.I32"></span><span class="target" id="statistics_8h_1aea90e60f59780356478c8b68e34b7510"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int32_t</span></span>, <span class="n"><span class="pre">I32</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418_STAT_SUPPORT_TYPE7int32_t3I32" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418_STAT_SUPPORT_TYPEf1F">
+<span id="_CPPv318_STAT_SUPPORT_TYPEf1F"></span><span id="_CPPv218_STAT_SUPPORT_TYPEf1F"></span><span id="_STAT_SUPPORT_TYPE__float.F"></span><span class="target" id="statistics_8h_1a8664766cfdde75eed38e64591e101bad"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span>, <span class="n"><span class="pre">F</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418_STAT_SUPPORT_TYPEf1F" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="statistics__config_8h"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">statistics_config.h</span></span></dt>
+<dd><div class="docutils container">
+<em>#include &lt;stdlib.h&gt;</em></div>
+<div class="docutils container">
+<em>#include &lt;string.h&gt;</em></div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.statPortMalloc">
+<span class="target" id="statistics__config_8h_1a0026d0cc5e6bf745eaede963a5a48fc9"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortMalloc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortMalloc" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.statPortFree">
+<span class="target" id="statistics__config_8h_1ae530d238b2b735455b5b64cc4d0950c8"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortFree</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortFree" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.statPortMemcpy">
+<span class="target" id="statistics__config_8h_1ac11cc2c6def509c87f1a06355979d168"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortMemcpy</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">dest</span></span>, <span class="n"><span class="pre">src</span></span>, <span class="n"><span class="pre">count</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortMemcpy" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.statPortCalloc">
+<span class="target" id="statistics__config_8h_1a885c6953fd86677561dbafc1c521fd4a"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortCalloc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">num</span></span>, <span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortCalloc" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="statistics_8c"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">statistics.c</span></span></dt>
+<dd><div class="docutils container">
+<em>#include “<a class="reference internal" href="#statistics_8h"><span class="std std-ref">statistics.h</span></a>”</em></div>
+<div class="docutils container">
+<em>#include &lt;stddef.h&gt;</em></div>
+<div class="docutils container">
+<em>#include “<a class="reference internal" href="#statistics__config_8h"><span class="std std-ref">statistics_config.h</span></a>”</em></div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.STAT_SUPPORT_TYPE">
+<span class="target" id="statistics_8c_1af4d2a8406936aa32a600fd26f45766b6"></span><span class="sig-name descname"><span class="n"><span class="pre">STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_type</span></span>, <span class="n"><span class="pre">_NameSuffix</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.STAT_SUPPORT_TYPE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48fieldPtrP10Statistics">
+<span id="_CPPv38fieldPtrP10Statistics"></span><span id="_CPPv28fieldPtrP10Statistics"></span><span id="fieldPtr__StatisticsP"></span><span class="target" id="statistics_8c_1a343a5cc169a8de34813bcb7e8da952cc"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">fieldPtr</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48fieldPtrP10Statistics" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48oneStoreP10StatisticsPKv">
+<span id="_CPPv38oneStoreP10StatisticsPKv"></span><span id="_CPPv28oneStoreP10StatisticsPKv"></span><span id="oneStore__StatisticsP.voidCP"></span><span class="target" id="statistics_8c_1a8c8ca96fce80d15014446b6051b5d7b2"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">oneStore</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48oneStoreP10StatisticsPKv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv47oneLoadP10Statistics7uint8_tPv">
+<span id="_CPPv37oneLoadP10Statistics7uint8_tPv"></span><span id="_CPPv27oneLoadP10Statistics7uint8_tPv"></span><span id="oneLoad__StatisticsP.uint8_t.voidP"></span><span class="target" id="statistics_8c_1a41caaefb30d52e9969d8bd7b25497d86"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">oneLoad</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">idx</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47oneLoadP10Statistics7uint8_tPv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="statistics_8c_1adf2f0b2a9423754ec77233cb80c48e9f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">itemSize</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">samplesCount</span></span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="statistics_8c_1a74eb3f851cab50d9071b962031eac716"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="statistics_8c_1a5d4982795bf511d9408699453576c4cf"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_AddSample</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417STAT_SUPPORT_TYPE7uint8_t2U8">
+<span id="_CPPv317STAT_SUPPORT_TYPE7uint8_t2U8"></span><span id="_CPPv217STAT_SUPPORT_TYPE7uint8_t2U8"></span><span id="STAT_SUPPORT_TYPE__uint8_t.U8"></span><span class="target" id="statistics_8c_1a7a68ccf579558e7cdf679105741a4a89"></span><span class="sig-name descname"><span class="n"><span class="pre">STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span>, <span class="n"><span class="pre">U8</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417STAT_SUPPORT_TYPE7uint8_t2U8" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417STAT_SUPPORT_TYPE6int8_t2I8">
+<span id="_CPPv317STAT_SUPPORT_TYPE6int8_t2I8"></span><span id="_CPPv217STAT_SUPPORT_TYPE6int8_t2I8"></span><span id="STAT_SUPPORT_TYPE__int8_t.I8"></span><span class="target" id="statistics_8c_1ac68ed24ef475ec2379a1e9af7bc3c516"></span><span class="sig-name descname"><span class="n"><span class="pre">STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int8_t</span></span>, <span class="n"><span class="pre">I8</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417STAT_SUPPORT_TYPE6int8_t2I8" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417STAT_SUPPORT_TYPE8uint16_t3U16">
+<span id="_CPPv317STAT_SUPPORT_TYPE8uint16_t3U16"></span><span id="_CPPv217STAT_SUPPORT_TYPE8uint16_t3U16"></span><span id="STAT_SUPPORT_TYPE__uint16_t.U16"></span><span class="target" id="statistics_8c_1a0313561d55a55235620319a39e8a197a"></span><span class="sig-name descname"><span class="n"><span class="pre">STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint16_t</span></span>, <span class="n"><span class="pre">U16</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417STAT_SUPPORT_TYPE8uint16_t3U16" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417STAT_SUPPORT_TYPE7int16_t3I16">
+<span id="_CPPv317STAT_SUPPORT_TYPE7int16_t3I16"></span><span id="_CPPv217STAT_SUPPORT_TYPE7int16_t3I16"></span><span id="STAT_SUPPORT_TYPE__int16_t.I16"></span><span class="target" id="statistics_8c_1a493b161c1677ec3d01dc317ebe7d6690"></span><span class="sig-name descname"><span class="n"><span class="pre">STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int16_t</span></span>, <span class="n"><span class="pre">I16</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417STAT_SUPPORT_TYPE7int16_t3I16" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417STAT_SUPPORT_TYPE8uint32_t3U32">
+<span id="_CPPv317STAT_SUPPORT_TYPE8uint32_t3U32"></span><span id="_CPPv217STAT_SUPPORT_TYPE8uint32_t3U32"></span><span id="STAT_SUPPORT_TYPE__uint32_t.U32"></span><span class="target" id="statistics_8c_1a9f7bddd206f5ff65241b1bd6c77dab95"></span><span class="sig-name descname"><span class="n"><span class="pre">STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span>, <span class="n"><span class="pre">U32</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417STAT_SUPPORT_TYPE8uint32_t3U32" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417STAT_SUPPORT_TYPE7int32_t3I32">
+<span id="_CPPv317STAT_SUPPORT_TYPE7int32_t3I32"></span><span id="_CPPv217STAT_SUPPORT_TYPE7int32_t3I32"></span><span id="STAT_SUPPORT_TYPE__int32_t.I32"></span><span class="target" id="statistics_8c_1a0f1302bb3f837b7fcb4fff39d0cffe78"></span><span class="sig-name descname"><span class="n"><span class="pre">STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int32_t</span></span>, <span class="n"><span class="pre">I32</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417STAT_SUPPORT_TYPE7int32_t3I32" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417STAT_SUPPORT_TYPEf1F">
+<span id="_CPPv317STAT_SUPPORT_TYPEf1F"></span><span id="_CPPv217STAT_SUPPORT_TYPEf1F"></span><span id="STAT_SUPPORT_TYPE__float.F"></span><span class="target" id="statistics_8c_1a1950cb60dbae16d128470c91acd07a36"></span><span class="sig-name descname"><span class="n"><span class="pre">STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span>, <span class="n"><span class="pre">F</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417STAT_SUPPORT_TYPEf1F" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="dir_d44c64559bbebec7f509842c48db8b23"></span><em><span class="pre">dir</span></em> <span class="sig-name descname"><span class="pre">/home/runner/work/statistics/statistics/include</span></span></dt>
+<dd></dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="dir_68267d1309a1af8e8297ef4c3efbcdba"></span><em><span class="pre">dir</span></em> <span class="sig-name descname"><span class="pre">/home/runner/work/statistics/statistics/src</span></span></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Statistics documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Richard Kubíček.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
