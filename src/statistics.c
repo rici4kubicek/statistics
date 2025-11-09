@@ -74,6 +74,7 @@ void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
     stat->samplesCnt = samplesCount;
     stat->sampleIdx = 0;
     stat->samples = statPortMalloc(samplesCount * stat->itemSize);
+    stat->enoughSamples = false;
 }
 
 /* Free resources associated with statistics instance. */
@@ -81,6 +82,7 @@ void Statistics_Free(Statistics * stat)
 {
     statPortFree(stat->samples);
     stat->sampleIdx = 0;
+    stat->enoughSamples = false;
 }
 
 /*
@@ -96,9 +98,18 @@ void Statistics_AddSample(Statistics * stat, const void * data)
             stat->sampleIdx++;
             if (stat->sampleIdx >= stat->samplesCnt) {
                 stat->sampleIdx = 0;
+                stat->enoughSamples = true;
             }
         }
     }
+}
+
+/*
+ * Check whether there are enough samples for statistics calculations
+ */
+bool Statistics_HaveEnoughSamples(Statistics * stat)
+{
+    return stat->enoughSamples;
 }
 
 /*
