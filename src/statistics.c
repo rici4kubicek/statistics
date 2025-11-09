@@ -81,6 +81,7 @@ void Statistics_Free(Statistics * stat)
 {
     statPortFree(stat->samples);
     stat->sampleIdx = 0;
+    stat->enoughSamples = false;
 }
 
 /*
@@ -96,9 +97,18 @@ void Statistics_AddSample(Statistics * stat, const void * data)
             stat->sampleIdx++;
             if (stat->sampleIdx >= stat->samplesCnt) {
                 stat->sampleIdx = 0;
+                stat->enoughSamples = true;
             }
         }
     }
+}
+
+/*
+ * Check whatever there is encough sampeles for some math
+ */
+bool Statistics_HaveEnoughSamples(Statistics * stat)
+{
+    return stat->enoughSamples;
 }
 
 /*

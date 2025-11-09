@@ -14,6 +14,7 @@
 extern "C" {
 #endif
 
+#include <stdbool.h>
 #include <stdint.h>
 
 /*
@@ -23,17 +24,20 @@ extern "C" {
  *              project-specific)
  * - itemSize: size of a single sample in bytes
  * - samples: pointer to contiguous storage of samplesCnt * itemSize bytes
+ * - enoughSamples: flag for necessary samples count indication
  */
 typedef struct {
     uint32_t samplesCnt;
     uint32_t sampleIdx;
     uint8_t itemSize;
     uint8_t * samples;
+    bool enoughSamples;
 } Statistics;
 
 void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount);
 void Statistics_Free(Statistics * stat);
 void Statistics_AddSample(Statistics * stat, const void * sample);
+bool Statistics_HaveEnoughSamples(Statistics * stat);
 
 #define _STAT_SUPPORT_TYPE(_type, _NameSuffix)    \
 _type Statistics_Mean_##_NameSuffix(Statistics * stat);   \
