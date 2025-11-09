@@ -49,12 +49,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics9sampleIdxE"><code class="docutils literal notranslate"><span class="pre">sampleIdx</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics8itemSizeE"><code class="docutils literal notranslate"><span class="pre">itemSize</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics7samplesE"><code class="docutils literal notranslate"><span class="pre">samples</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics13enoughSamplesE"><code class="docutils literal notranslate"><span class="pre">enoughSamples</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#c._STAT_SUPPORT_TYPE"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t"><code class="docutils literal notranslate"><span class="pre">Statistics_Init()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#_CPPv415Statistics_FreeP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_Free()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#_CPPv420Statistics_AddSampleP10StatisticsPKv"><code class="docutils literal notranslate"><span class="pre">Statistics_AddSample()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv428Statistics_HaveEnoughSamplesP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_HaveEnoughSamples()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#_CPPv418_STAT_SUPPORT_TYPE7uint8_t2U8"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#_CPPv418_STAT_SUPPORT_TYPE6int8_t2I8"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#_CPPv418_STAT_SUPPORT_TYPE8uint16_t3U16"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE()</span></code></a></li>
@@ -133,6 +135,11 @@
 <span id="_CPPv3N10Statistics7samplesE"></span><span id="_CPPv2N10Statistics7samplesE"></span><span id="Statistics::samples__uint8_tP"></span><span class="target" id="structStatistics_1acf546e72ab1276b62f6489abea7c2cb8"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">samples</span></span></span><a class="headerlink" href="#_CPPv4N10Statistics7samplesE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N10Statistics13enoughSamplesE">
+<span id="_CPPv3N10Statistics13enoughSamplesE"></span><span id="_CPPv2N10Statistics13enoughSamplesE"></span><span id="Statistics::enoughSamples__b"></span><span class="target" id="structStatistics_1a9c943b26a4d9e061bc7dd2cf81a878f4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enoughSamples</span></span></span><a class="headerlink" href="#_CPPv4N10Statistics13enoughSamplesE" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
 </div>
 </dd></dl>
 
@@ -140,6 +147,8 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="statistics_8h"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">statistics.h</span></span></dt>
 <dd><div class="docutils container">
+<em>#include &lt;stdbool.h&gt;</em></div>
+<div class="docutils container">
 <em>#include &lt;stdint.h&gt;</em></div>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
@@ -164,6 +173,11 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv420Statistics_AddSampleP10StatisticsPKv">
 <span id="_CPPv320Statistics_AddSampleP10StatisticsPKv"></span><span id="_CPPv220Statistics_AddSampleP10StatisticsPKv"></span><span id="Statistics_AddSample__StatisticsP.voidCP"></span><span class="target" id="statistics_8h_1a2ab7db3233a6442d5ef75ae9e4c6960c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_AddSample</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">sample</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420Statistics_AddSampleP10StatisticsPKv" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv428Statistics_HaveEnoughSamplesP10Statistics">
+<span id="_CPPv328Statistics_HaveEnoughSamplesP10Statistics"></span><span id="_CPPv228Statistics_HaveEnoughSamplesP10Statistics"></span><span id="Statistics_HaveEnoughSamples__StatisticsP"></span><span class="target" id="statistics_8h_1ab6be1e2998f7a3b1efac4161140b03a0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_HaveEnoughSamples</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428Statistics_HaveEnoughSamplesP10Statistics" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
@@ -292,6 +306,11 @@
 <dl class="cpp function">
 <dt class="sig sig-object cpp">
 <span class="target" id="statistics_8c_1a5d4982795bf511d9408699453576c4cf"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_AddSample</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="statistics_8c_1ab6be1e2998f7a3b1efac4161140b03a0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_HaveEnoughSamples</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp function">
