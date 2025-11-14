@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference &mdash; Statistics  documentation</title>
+  <title>API reference &mdash; Statistics - Documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Statistics documentation" href="index.html" /> 
+    <link rel="prev" title="User configuration" href="user_configuration.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,38 +41,44 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#_CPPv410Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics10samplesCntE"><code class="docutils literal notranslate"><span class="pre">samplesCnt</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics9sampleIdxE"><code class="docutils literal notranslate"><span class="pre">sampleIdx</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics8itemSizeE"><code class="docutils literal notranslate"><span class="pre">itemSize</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics7samplesE"><code class="docutils literal notranslate"><span class="pre">samples</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#_CPPv4N10Statistics13enoughSamplesE"><code class="docutils literal notranslate"><span class="pre">enoughSamples</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation-and-project-integration">Installation and project integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#quick-usage-example">Quick usage example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#configuring-supported-types">Configuring supported types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#further-reading">Further reading</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#c._STAT_SUPPORT_TYPE"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t"><code class="docutils literal notranslate"><span class="pre">Statistics_Init()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#_CPPv415Statistics_FreeP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_Free()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#_CPPv420Statistics_AddSampleP10StatisticsPKv"><code class="docutils literal notranslate"><span class="pre">Statistics_AddSample()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#_CPPv428Statistics_HaveEnoughSamplesP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_HaveEnoughSamples()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.statPortMalloc"><code class="docutils literal notranslate"><span class="pre">statPortMalloc</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.statPortFree"><code class="docutils literal notranslate"><span class="pre">statPortFree</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.statPortMemcpy"><code class="docutils literal notranslate"><span class="pre">statPortMemcpy</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.statPortCalloc"><code class="docutils literal notranslate"><span class="pre">statPortCalloc</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_U8_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_U8_ENABLED</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_I8_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_I8_ENABLED</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_U16_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_U16_ENABLED</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_I16_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_I16_ENABLED</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_U32_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_U32_ENABLED</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_I32_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_I32_ENABLED</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_FLOAT_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_FLOAT_ENABLED</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#c.STAT_SUPPORT_TYPE"><code class="docutils literal notranslate"><span class="pre">STAT_SUPPORT_TYPE</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#_CPPv45fsqrtf"><code class="docutils literal notranslate"><span class="pre">fsqrt()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#_CPPv48fieldPtrP10Statistics"><code class="docutils literal notranslate"><span class="pre">fieldPtr()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#_CPPv48oneStoreP10StatisticsPKv"><code class="docutils literal notranslate"><span class="pre">oneStore()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="#_CPPv47oneLoadP10Statistics7uint8_tPv"><code class="docutils literal notranslate"><span class="pre">oneLoad()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_configuration.html">User configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#type-support-toggles">Type support toggles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#port-layer-custom-allocators-memcpy">Port layer (custom allocators/memcpy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#runtime-window-configuration">Runtime window configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#build-system-quick-reference">Build system quick reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#safety-and-constraints">Safety and constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#groups">Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#c._STAT_SUPPORT_TYPE"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv410samplesCnt"><code class="docutils literal notranslate"><span class="pre">samplesCnt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv49sampleIdx"><code class="docutils literal notranslate"><span class="pre">sampleIdx</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv48itemSize"><code class="docutils literal notranslate"><span class="pre">itemSize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv47samples"><code class="docutils literal notranslate"><span class="pre">samples</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv413enoughSamples"><code class="docutils literal notranslate"><span class="pre">enoughSamples</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t"><code class="docutils literal notranslate"><span class="pre">Statistics_Init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv415Statistics_FreeP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_Free()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv420Statistics_AddSampleP10StatisticsPKv"><code class="docutils literal notranslate"><span class="pre">Statistics_AddSample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv428Statistics_HaveEnoughSamplesP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_HaveEnoughSamples()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv410Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#main-structure">Main structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#header-file">Header file</a></li>
 </ul>
 </li>
 </ul>
@@ -87,11 +93,11 @@
       </nav>
 
       <div class="wy-nav-content">
-        <div class="rst-content">
+        <div class="rst-content style-external-links">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">API Reference</li>
+      <li class="breadcrumb-item active">API reference</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -102,232 +108,202 @@
            <div itemprop="articleBody">
              
   <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
-<dl class="cpp struct">
-<dt class="sig sig-object cpp" id="_CPPv410Statistics">
-<span id="_CPPv310Statistics"></span><span id="_CPPv210Statistics"></span><span id="Statistics"></span><span class="target" id="structStatistics"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics</span></span></span><a class="headerlink" href="#_CPPv410Statistics" title="Link to this definition"></a><br /></dt>
-<dd><div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Statistics10samplesCntE">
-<span id="_CPPv3N10Statistics10samplesCntE"></span><span id="_CPPv2N10Statistics10samplesCntE"></span><span id="Statistics::samplesCnt__uint32_t"></span><span class="target" id="structStatistics_1a9e89d31e64718f2b336959ece47dbada"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">samplesCnt</span></span></span><a class="headerlink" href="#_CPPv4N10Statistics10samplesCntE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Statistics9sampleIdxE">
-<span id="_CPPv3N10Statistics9sampleIdxE"></span><span id="_CPPv2N10Statistics9sampleIdxE"></span><span id="Statistics::sampleIdx__uint32_t"></span><span class="target" id="structStatistics_1a727d79f195047fdcb2785deb3d9abe93"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sampleIdx</span></span></span><a class="headerlink" href="#_CPPv4N10Statistics9sampleIdxE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Statistics8itemSizeE">
-<span id="_CPPv3N10Statistics8itemSizeE"></span><span id="_CPPv2N10Statistics8itemSizeE"></span><span id="Statistics::itemSize__uint8_t"></span><span class="target" id="structStatistics_1a55227e6c4c0a16fb674b91ceb83dcdab"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itemSize</span></span></span><a class="headerlink" href="#_CPPv4N10Statistics8itemSizeE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Statistics7samplesE">
-<span id="_CPPv3N10Statistics7samplesE"></span><span id="_CPPv2N10Statistics7samplesE"></span><span id="Statistics::samples__uint8_tP"></span><span class="target" id="structStatistics_1acf546e72ab1276b62f6489abea7c2cb8"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">samples</span></span></span><a class="headerlink" href="#_CPPv4N10Statistics7samplesE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp var">
-<dt class="sig sig-object cpp" id="_CPPv4N10Statistics13enoughSamplesE">
-<span id="_CPPv3N10Statistics13enoughSamplesE"></span><span id="_CPPv2N10Statistics13enoughSamplesE"></span><span id="Statistics::enoughSamples__b"></span><span class="target" id="structStatistics_1a9c943b26a4d9e061bc7dd2cf81a878f4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enoughSamples</span></span></span><a class="headerlink" href="#_CPPv4N10Statistics13enoughSamplesE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-</div>
-</dd></dl>
-
-<dl>
-<dt class="sig sig-object cpp">
-<span class="target" id="statistics_8h"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">statistics.h</span></span></dt>
-<dd><div class="docutils container">
-<em>#include &lt;<a class="reference internal" href="#statistics__config_8h"><span class="std std-ref">statistics_config.h</span></a>&gt;</em></div>
-<div class="docutils container">
-<em>#include &lt;stdbool.h&gt;</em></div>
-<div class="docutils container">
-<em>#include &lt;stdint.h&gt;</em></div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<h1>API reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<p>This section documents the public C API of the library. The documentation is
+extracted from header comments and grouped using Doxygen.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Core structures and functions live in the <code class="docutils literal notranslate"><span class="pre">statistics_core</span></code> group.</p></li>
+<li><p>Main header file: <code class="docutils literal notranslate"><span class="pre">include/statistics.h</span></code>.</p></li>
+</ul>
+</section>
+<section id="groups">
+<h2>Groups<a class="headerlink" href="#groups" title="Link to this heading"></a></h2>
 <dl class="cpp macro">
 <dt class="sig sig-object cpp" id="c._STAT_SUPPORT_TYPE">
-<span class="target" id="statistics_8h_1a45b63279cee42cca00cacd7a4bc9ae53"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_type</span></span>, <span class="n"><span class="pre">_NameSuffix</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c._STAT_SUPPORT_TYPE" title="Link to this definition"></a><br /></dt>
+<span class="target" id="group__statistics__core_1ga45b63279cee42cca00cacd7a4bc9ae53"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_type</span></span>, <span class="n"><span class="pre">_NameSuffix</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c._STAT_SUPPORT_TYPE" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv410samplesCnt">
+<span id="_CPPv310samplesCnt"></span><span id="_CPPv210samplesCnt"></span><span id="samplesCnt__uint32_t"></span><span class="target" id="group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">samplesCnt</span></span></span><a class="headerlink" href="#_CPPv410samplesCnt" title="Link to this definition"></a><br /></dt>
+<dd><p>Number of samples allocated in the buffer. Total capacity (number of items). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv49sampleIdx">
+<span id="_CPPv39sampleIdx"></span><span id="_CPPv29sampleIdx"></span><span id="sampleIdx__uint32_t"></span><span class="target" id="group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sampleIdx</span></span></span><a class="headerlink" href="#_CPPv49sampleIdx" title="Link to this definition"></a><br /></dt>
+<dd><p>Index of the current write position in the buffer. Current write index [0..samplesCnt-1]. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv48itemSize">
+<span id="_CPPv38itemSize"></span><span id="_CPPv28itemSize"></span><span id="itemSize__uint8_t"></span><span class="target" id="group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itemSize</span></span></span><a class="headerlink" href="#_CPPv48itemSize" title="Link to this definition"></a><br /></dt>
+<dd><p>Size of a single sample in bytes. Bytes per sample. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv47samples">
+<span id="_CPPv37samples"></span><span id="_CPPv27samples"></span><span id="samples__uint8_tP"></span><span class="target" id="group__statistics__core_1gacf546e72ab1276b62f6489abea7c2cb8"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">samples</span></span></span><a class="headerlink" href="#_CPPv47samples" title="Link to this definition"></a><br /></dt>
+<dd><p>Pointer to contiguous storage of size <code class="docutils literal notranslate"><span class="pre">samplesCnt</span></code> * <code class="docutils literal notranslate"><span class="pre">itemSize</span></code>. Backing storage pointer. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv413enoughSamples">
+<span id="_CPPv313enoughSamples"></span><span id="_CPPv213enoughSamples"></span><span id="enoughSamples__b"></span><span class="target" id="group__statistics__core_1ga9c943b26a4d9e061bc7dd2cf81a878f4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enoughSamples</span></span></span><a class="headerlink" href="#_CPPv413enoughSamples" title="Link to this definition"></a><br /></dt>
+<dd><p>Flag indicating that at least <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> samples have been written, i.e., a full cycle completed and statistics are meaningful for the full window. </p>
+</dd></dl>
+
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t">
-<span id="_CPPv315Statistics_InitP10Statistics7uint8_t8uint32_t"></span><span id="_CPPv215Statistics_InitP10Statistics7uint8_t8uint32_t"></span><span id="Statistics_Init__StatisticsP.uint8_t.uint32_t"></span><span class="target" id="statistics_8h_1adf2f0b2a9423754ec77233cb80c48e9f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">itemSize</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">samplesCount</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
+<span id="_CPPv315Statistics_InitP10Statistics7uint8_t8uint32_t"></span><span id="_CPPv215Statistics_InitP10Statistics7uint8_t8uint32_t"></span><span id="Statistics_Init__StatisticsP.uint8_t.uint32_t"></span><span class="target" id="group__statistics__core_1gadf2f0b2a9423754ec77233cb80c48e9f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">itemSize</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">samplesCount</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Initialize a statistics instance. </p>
+<p>Allocates internal storage for <code class="docutils literal notranslate"><span class="pre">samplesCount</span></code> elements of <code class="docutils literal notranslate"><span class="pre">itemSize</span></code> bytes each and resets internal indices.</p>
+<p>
+Initialize a statistics instance.</p>
+<p>Allocates internal storage for <code class="docutils literal notranslate"><span class="pre">samplesCount</span></code> elements of <code class="docutils literal notranslate"><span class="pre">itemSize</span></code> bytes each and resets internal indices.</p>
+<p>
+Initialize a statistics instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stat</strong> – <strong>[out]</strong> Pointer to the instance to initialize. </p></li>
+<li><p><strong>itemSize</strong> – Size of a single sample in bytes. </p></li>
+<li><p><strong>samplesCount</strong> – Number of samples in the window (capacity).</p></li>
+<li><p><strong>stat</strong> – <strong>[out]</strong> Pointer to the instance to initialize. </p></li>
+<li><p><strong>itemSize</strong> – Size of a single sample in bytes. </p></li>
+<li><p><strong>samplesCount</strong> – Number of samples in the window (capacity).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv415Statistics_FreeP10Statistics">
-<span id="_CPPv315Statistics_FreeP10Statistics"></span><span id="_CPPv215Statistics_FreeP10Statistics"></span><span id="Statistics_Free__StatisticsP"></span><span class="target" id="statistics_8h_1a74eb3f851cab50d9071b962031eac716"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415Statistics_FreeP10Statistics" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
+<span id="_CPPv315Statistics_FreeP10Statistics"></span><span id="_CPPv215Statistics_FreeP10Statistics"></span><span id="Statistics_Free__StatisticsP"></span><span class="target" id="group__statistics__core_1ga74eb3f851cab50d9071b962031eac716"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415Statistics_FreeP10Statistics" title="Link to this definition"></a><br /></dt>
+<dd><p>Release resources held by a statistics instance. </p>
+<p>
+Release resources held by a statistics instance.</p>
+<p>
+Release resources held by a statistics instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stat</strong> – Pointer to the instance to deinitialize.</p></li>
+<li><p><strong>stat</strong> – Pointer to the instance to deinitialize.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv420Statistics_AddSampleP10StatisticsPKv">
-<span id="_CPPv320Statistics_AddSampleP10StatisticsPKv"></span><span id="_CPPv220Statistics_AddSampleP10StatisticsPKv"></span><span id="Statistics_AddSample__StatisticsP.voidCP"></span><span class="target" id="statistics_8h_1a2ab7db3233a6442d5ef75ae9e4c6960c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_AddSample</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">sample</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420Statistics_AddSampleP10StatisticsPKv" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
+<span id="_CPPv320Statistics_AddSampleP10StatisticsPKv"></span><span id="_CPPv220Statistics_AddSampleP10StatisticsPKv"></span><span id="Statistics_AddSample__StatisticsP.voidCP"></span><span class="target" id="group__statistics__core_1ga2ab7db3233a6442d5ef75ae9e4c6960c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_AddSample</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">sample</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420Statistics_AddSampleP10StatisticsPKv" title="Link to this definition"></a><br /></dt>
+<dd><p>Append a single sample to the buffer at the current write index. </p>
+<p>The data at <code class="docutils literal notranslate"><span class="pre">sample</span></code> must point to <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">Statistics::itemSize</span></a> bytes. After storing, the write index advances and wraps when it reaches capacity.</p>
+<p>
+Append a single sample to the buffer at the current write index.</p>
+<p>The data at <code class="docutils literal notranslate"><span class="pre">sample</span></code> must point to <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">Statistics::itemSize</span></a> bytes. After storing, the write index advances and wraps when it reaches capacity.</p>
+<p>
+Append a single sample to the buffer at the current write index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stat</strong> – Pointer to the instance. </p></li>
+<li><p><strong>sample</strong> – Pointer to the sample data to store.</p></li>
+<li><p><strong>stat</strong> – Pointer to the instance. </p></li>
+<li><p><strong>sample</strong> – Pointer to the sample data to store.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv428Statistics_HaveEnoughSamplesP10Statistics">
-<span id="_CPPv328Statistics_HaveEnoughSamplesP10Statistics"></span><span id="_CPPv228Statistics_HaveEnoughSamplesP10Statistics"></span><span id="Statistics_HaveEnoughSamples__StatisticsP"></span><span class="target" id="statistics_8h_1ab6be1e2998f7a3b1efac4161140b03a0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_HaveEnoughSamples</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428Statistics_HaveEnoughSamplesP10Statistics" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-</div>
+<span id="_CPPv328Statistics_HaveEnoughSamplesP10Statistics"></span><span id="_CPPv228Statistics_HaveEnoughSamplesP10Statistics"></span><span id="Statistics_HaveEnoughSamples__StatisticsP"></span><span class="target" id="group__statistics__core_1gab6be1e2998f7a3b1efac4161140b03a0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_HaveEnoughSamples</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428Statistics_HaveEnoughSamplesP10Statistics" title="Link to this definition"></a><br /></dt>
+<dd><p>Indicate whether a full window of samples has been collected. </p>
+<p>
+Indicate whether a full window of samples has been collected.</p>
+<p>
+Indicate whether a full window of samples has been collected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stat</strong> – Pointer to the instance. </p></li>
+<li><p><strong>stat</strong> – Pointer to the instance. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if at least <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">Statistics::samplesCnt</span></a> samples have been written (i.e., a wrap-around occurred), false otherwise.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>true if at least <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">Statistics::samplesCnt</span></a> samples have been written (i.e., a wrap-around occurred), false otherwise.</p>
+</dd>
+</dl>
 </dd></dl>
 
-<dl>
-<dt class="sig sig-object cpp">
-<span class="target" id="statistics__config_8h"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">statistics_config.h</span></span></dt>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv410Statistics">
+<span id="_CPPv310Statistics"></span><span id="_CPPv210Statistics"></span><span id="Statistics"></span><span class="target" id="structStatistics"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics</span></span></span><a class="headerlink" href="#_CPPv410Statistics" title="Link to this definition"></a><br /></dt>
 <dd><div class="docutils container">
-<em>#include &lt;stdlib.h&gt;</em></div>
-<div class="docutils container">
-<em>#include &lt;string.h&gt;</em></div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.statPortMalloc">
-<span class="target" id="statistics__config_8h_1a0026d0cc5e6bf745eaede963a5a48fc9"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortMalloc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortMalloc" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.statPortFree">
-<span class="target" id="statistics__config_8h_1ae530d238b2b735455b5b64cc4d0950c8"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortFree</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortFree" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.statPortMemcpy">
-<span class="target" id="statistics__config_8h_1ac11cc2c6def509c87f1a06355979d168"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortMemcpy</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">dest</span></span>, <span class="n"><span class="pre">src</span></span>, <span class="n"><span class="pre">count</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortMemcpy" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.statPortCalloc">
-<span class="target" id="statistics__config_8h_1a885c6953fd86677561dbafc1c521fd4a"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortCalloc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">num</span></span>, <span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortCalloc" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.STATISTICS_U8_ENABLED">
-<span class="target" id="statistics__config_8h_1a36a83db57280d72c44e02fc0db8c3592"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_U8_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_U8_ENABLED" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.STATISTICS_I8_ENABLED">
-<span class="target" id="statistics__config_8h_1a356d04e0ef6e1faa16e5fd40c04eaddc"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_I8_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_I8_ENABLED" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.STATISTICS_U16_ENABLED">
-<span class="target" id="statistics__config_8h_1a04df440159c69fa68a490f53da59470e"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_U16_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_U16_ENABLED" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.STATISTICS_I16_ENABLED">
-<span class="target" id="statistics__config_8h_1a9e6d85436c05b04305a4bf08a750be37"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_I16_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_I16_ENABLED" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.STATISTICS_U32_ENABLED">
-<span class="target" id="statistics__config_8h_1ad2387ea766d7ad4fe0ab98215f6ef749"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_U32_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_U32_ENABLED" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.STATISTICS_I32_ENABLED">
-<span class="target" id="statistics__config_8h_1a6f4f649d63ec27f724be7ebdac2851e6"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_I32_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_I32_ENABLED" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.STATISTICS_FLOAT_ENABLED">
-<span class="target" id="statistics__config_8h_1acba0298aa72e1633e4e5ab6a0bd39b24"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_FLOAT_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_FLOAT_ENABLED" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-</div>
+<em>#include &lt;statistics.h&gt;</em></div>
+<p>Statistics buffer descriptor. </p>
+<p>The structure describes a ring-like buffer that stores <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> elements each of size <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">itemSize</span></a> bytes. New samples are written at <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">sampleIdx</span></a> and the index is advanced with wrap-around. </p>
 </dd></dl>
 
-<dl>
+</section>
+<section id="main-structure">
+<h2>Main structure<a class="headerlink" href="#main-structure" title="Link to this heading"></a></h2>
+<dl class="cpp struct">
 <dt class="sig sig-object cpp">
-<span class="target" id="statistics_8c"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">statistics.c</span></span></dt>
+<span class="target" id="structStatistics"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics</span></span></span><br /></dt>
+<dd><p>Statistics buffer descriptor. </p>
+<p>The structure describes a ring-like buffer that stores <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> elements each of size <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">itemSize</span></a> bytes. New samples are written at <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">sampleIdx</span></a> and the index is advanced with wrap-around. </p>
+</dd></dl>
+
+</section>
+<section id="header-file">
+<h2>Header file<a class="headerlink" href="#header-file" title="Link to this heading"></a></h2>
+<p>Public API for a lightweight statistics helper working with fixed-size samples. </p>
+<p>This header exposes a small C API to collect samples of arbitrary, fixed size and compute basic statistics for a set of supported scalar types.</p>
+<p>Design highlights<ul class="simple">
+<li><p>The storage is a raw contiguous byte buffer; the size of one sample is given by <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">Statistics::itemSize</span></a>.</p></li>
+<li><p>Sample rotation policy is intentionally minimal: the write position is controlled by <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">Statistics::sampleIdx</span></a> and wraps to 0 when the configured capacity is reached. When a full wrap occurs, <a class="reference internal" href="#group__statistics__core_1ga9c943b26a4d9e061bc7dd2cf81a878f4"><span class="std std-ref">Statistics::enoughSamples</span></a> is set to true.</p></li>
+<li><p>Memory primitives are provided by the port layer in statistics_config.h.</p></li>
+</ul>
+</p>
+<p>See statistics.c for the implementation details. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-type-specific-statistic-functions">Type-specific statistic functions</p>
+<p>For each enabled scalar type, a set of functions is generated. Replace &lt;T&gt; with one of: U8, I8, U16, I16, U32, I32, F (float).</p>
+<p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Mean_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Max_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Min_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Variance_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Stdev_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+</ul>
+</p>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span></code> is the underlying C type for &lt;T&gt; (e.g., <code class="docutils literal notranslate"><span class="pre">uint16_t</span></code> for U16). </p>
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp">
+<span class="target" id="structStatistics"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics</span></span></span><br /></dt>
 <dd><div class="docutils container">
-<em>#include “<a class="reference internal" href="#statistics_8h"><span class="std std-ref">statistics.h</span></a>”</em></div>
-<div class="docutils container">
-<em>#include “<a class="reference internal" href="#statistics__config_8h"><span class="std std-ref">statistics_config.h</span></a>”</em></div>
-<div class="docutils container">
-<em>#include &lt;stddef.h&gt;</em></div>
-<div class="docutils container">
-<em>#include &lt;stdlib.h&gt;</em></div>
-<div class="docutils container">
-<em>#include &lt;stdint.h&gt;</em></div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.STAT_SUPPORT_TYPE">
-<span class="target" id="statistics_8c_1af4d2a8406936aa32a600fd26f45766b6"></span><span class="sig-name descname"><span class="n"><span class="pre">STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_type</span></span>, <span class="n"><span class="pre">_NameSuffix</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.STAT_SUPPORT_TYPE" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv45fsqrtf">
-<span id="_CPPv35fsqrtf"></span><span id="_CPPv25fsqrtf"></span><span id="fsqrt__float"></span><span class="target" id="statistics_8c_1a9ca3fa13ca52cc57b69e3b5af75e6a63"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fsqrt</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv45fsqrtf" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv48fieldPtrP10Statistics">
-<span id="_CPPv38fieldPtrP10Statistics"></span><span id="_CPPv28fieldPtrP10Statistics"></span><span id="fieldPtr__StatisticsP"></span><span class="target" id="statistics_8c_1a343a5cc169a8de34813bcb7e8da952cc"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">fieldPtr</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48fieldPtrP10Statistics" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv48oneStoreP10StatisticsPKv">
-<span id="_CPPv38oneStoreP10StatisticsPKv"></span><span id="_CPPv28oneStoreP10StatisticsPKv"></span><span id="oneStore__StatisticsP.voidCP"></span><span class="target" id="statistics_8c_1a8c8ca96fce80d15014446b6051b5d7b2"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">oneStore</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48oneStoreP10StatisticsPKv" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv47oneLoadP10Statistics7uint8_tPv">
-<span id="_CPPv37oneLoadP10Statistics7uint8_tPv"></span><span id="_CPPv27oneLoadP10Statistics7uint8_tPv"></span><span id="oneLoad__StatisticsP.uint8_t.voidP"></span><span class="target" id="statistics_8c_1a41caaefb30d52e9969d8bd7b25497d86"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">oneLoad</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">idx</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv47oneLoadP10Statistics7uint8_tPv" title="Link to this definition"></a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="statistics_8c_1adf2f0b2a9423754ec77233cb80c48e9f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">itemSize</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">samplesCount</span></span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="statistics_8c_1a74eb3f851cab50d9071b962031eac716"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="statistics_8c_1a5d4982795bf511d9408699453576c4cf"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_AddSample</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp">
-<span class="target" id="statistics_8c_1ab6be1e2998f7a3b1efac4161140b03a0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_HaveEnoughSamples</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><br /></dt>
-<dd></dd></dl>
-
-</div>
+<em>#include &lt;statistics.h&gt;</em></div>
+<p>Statistics buffer descriptor. </p>
+<p>The structure describes a ring-like buffer that stores <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> elements each of size <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">itemSize</span></a> bytes. New samples are written at <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">sampleIdx</span></a> and the index is advanced with wrap-around. </p>
 </dd></dl>
 
-<dl>
-<dt class="sig sig-object cpp">
-<span class="target" id="dir_d44c64559bbebec7f509842c48db8b23"></span><em><span class="pre">dir</span></em> <span class="sig-name descname"><span class="pre">/home/runner/work/statistics/statistics/include</span></span></dt>
-<dd></dd></dl>
-
-<dl>
-<dt class="sig sig-object cpp">
-<span class="target" id="dir_68267d1309a1af8e8297ef4c3efbcdba"></span><em><span class="pre">dir</span></em> <span class="sig-name descname"><span class="pre">/home/runner/work/statistics/statistics/src</span></span></dt>
-<dd></dd></dl>
-
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Statistics documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user_configuration.html" class="btn btn-neutral float-left" title="User configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
