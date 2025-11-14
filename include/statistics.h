@@ -47,31 +47,31 @@ _type Statistics_Min_##_NameSuffix(Statistics * stat);  \
 float Statistics_Variance_##_NameSuffix(Statistics * stat); \
 float Statistics_Stdev_##_NameSuffix(Statistics * stat);    \
 
-#if STATISTICS_U8_ENABLED == true
+#if STATISTICS_U8_ENABLED
     _STAT_SUPPORT_TYPE(uint8_t, U8);
 #endif
 
-#if STATISTICS_I8_ENABLED == true
+#if STATISTICS_I8_ENABLED
     _STAT_SUPPORT_TYPE(int8_t, I8);
 #endif
 
-#if STATISTICS_U16_ENABLED == true
+#if STATISTICS_U16_ENABLED
     _STAT_SUPPORT_TYPE(uint16_t, U16);
 #endif
 
-#if STATISTICS_I16_ENABLED == true
+#if STATISTICS_I16_ENABLED
     _STAT_SUPPORT_TYPE(int16_t, I16);
 #endif
 
-#if STATISTICS_U32_ENABLED == true
+#if STATISTICS_U32_ENABLED
     _STAT_SUPPORT_TYPE(uint32_t, U32);
 #endif
 
-#if STATISTICS_I32_ENABLED == true
+#if STATISTICS_I32_ENABLED
     _STAT_SUPPORT_TYPE(int32_t, I32);
 #endif
 
-#if STATISTICS_FLOAT_ENABLED == true
+#if STATISTICS_FLOAT_ENABLED
     _STAT_SUPPORT_TYPE(float, F);
 #endif
 
