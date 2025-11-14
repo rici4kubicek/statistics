@@ -74,13 +74,25 @@ static void oneLoad(Statistics * stat, uint32_t idx, void * data)
  */
 void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
 {
+    if (!stat) {
+        return;
+    }
+
     stat->itemSize = itemSize;
     stat->samplesCnt = samplesCount;
     stat->sampleIdx = 0;
-    stat->samples = statPortMalloc(samplesCount * stat->itemSize);
     stat->enoughSamples = false;
-    if (!stat->samples) {
+    stat->valid = false;
+
+    stat->samples = statPortMalloc((size_t) samplesCount * (size_t) stat->itemSize);
+    if (stat->samples) {
+        stat->valid = true;
+    } else {
+        // Allocation failed: leave fields in a safe state so callers can detect invalid instance
         stat->samplesCnt = 0;
+        stat->sampleIdx = 0;
+        stat->enoughSamples = false;
+        stat->valid = false;
     }
 }
 
@@ -89,13 +101,18 @@ void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
  */
 void Statistics_Free(Statistics * stat)
 {
+    if (!stat) {
+        return;
+    }
     if (stat->samples) {
         statPortFree(stat->samples);
         stat->samples = NULL;
     }
-    statPortFree(stat->samples);
+    stat->samplesCnt = 0;
     stat->sampleIdx = 0;
     stat->enoughSamples = false;
+    stat->itemSize = 0;
+    stat->valid = false;
 }
 
 /**
@@ -103,7 +120,7 @@ void Statistics_Free(Statistics * stat)
  */
 void Statistics_AddSample(Statistics * stat, const void * data)
 {
-    if (stat->samples) {
+    if (stat && stat->valid && stat->samples && stat->itemSize > 0) {
         oneStore(stat, data);
         // Advance write index with rotation when reaching capacity
         if (stat->samplesCnt) {
@@ -121,7 +138,15 @@ void Statistics_AddSample(Statistics * stat, const void * data)
  */
 bool Statistics_HaveEnoughSamples(Statistics * stat)
 {
-    return stat->enoughSamples;
+    return (stat && stat->valid) ? stat->enoughSamples : false;
+}
+
+/**
+ * @copydoc Statistics_IsValid
+ */
+bool Statistics_IsValid(const Statistics * stat)
+{
+    return (stat != NULL) && stat->valid && (stat->samples != NULL) && (stat->samplesCnt > 0) && (stat->itemSize > 0);
 }
 
 /*
@@ -130,19 +155,26 @@ bool Statistics_HaveEnoughSamples(Statistics * stat)
 #define STAT_SUPPORT_TYPE(_type, _NameSuffix) \
     _type Statistics_Mean_##_NameSuffix(Statistics * stat) \
     { \
-        float avg = 0; \
-        for (int idx = 0; idx < stat->samplesCnt; idx++) { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
+            return (_type) 0; \
+        } \
+        float avg = 0.0f; \
+        for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
             _type value; \
             oneLoad(stat, idx, &value); \
-            avg += value; \
+            avg += (float) value; \
         } \
-        return avg / stat->samplesCnt; \
+        return (_type) (avg / (float) stat->samplesCnt); \
     } \
 \
     _type Statistics_Max_##_NameSuffix(Statistics * stat) \
     { \
-        _type max = 0; \
-        for (int idx = 0; idx < stat->samplesCnt; idx++) { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
+            return (_type) 0; \
+        } \
+        _type max; \
+        oneLoad(stat, 0, &max); \
+        for (uint32_t idx = 1; idx < stat->samplesCnt; idx++) { \
             _type value; \
             oneLoad(stat, idx, &value); \
             if (value > max) \
@@ -153,8 +185,12 @@ bool Statistics_HaveEnoughSamples(Statistics * stat)
 \
     _type Statistics_Min_##_NameSuffix(Statistics * stat) \
     { \
-        _type min = (_type) 0xffffffffff; \
-        for (int idx = 0; idx < stat->samplesCnt; idx++) { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
+            return (_type) 0; \
+        } \
+        _type min; \
+        oneLoad(stat, 0, &min); \
+        for (uint32_t idx = 1; idx < stat->samplesCnt; idx++) { \
             _type value; \
             oneLoad(stat, idx, &value); \
             if (value < min) \
@@ -165,21 +201,27 @@ bool Statistics_HaveEnoughSamples(Statistics * stat)
 \
     float Statistics_Variance_##_NameSuffix(Statistics * stat) \
     { \
-        float total = 0; \
-        float refVariance = 0; \
-        for (int idx = 0; idx < stat->samplesCnt; idx++) { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 1)) { \
+            return 0.0f / 0.0f; /* NaN */ \
+        } \
+        float total = 0.0f; \
+        float refVariance = 0.0f; \
+        for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
             _type value; \
             oneLoad(stat, idx, &value); \
-            total += value; \
-            refVariance += value * value; \
+            float fv = (float) value; \
+            total += fv; \
+            refVariance += fv * fv; \
         } \
-        float cv = (refVariance - total * total / stat->samplesCnt) / (stat->samplesCnt - 1); \
+        float n = (float) stat->samplesCnt; \
+        float cv = (refVariance - (total * total) / n) / (n - 1.0f); \
         return cv; \
     } \
 \
     float Statistics_Stdev_##_NameSuffix(Statistics * stat) \
     { \
-        return fsqrt(Statistics_Variance_##_NameSuffix(stat)); \
+        float v = Statistics_Variance_##_NameSuffix(stat); \
+        return fsqrt(v); \
     }
 
 /**
