@@ -54,6 +54,12 @@ typedef struct {
      * i.e., a full cycle completed and statistics are meaningful for the full window.
      */
     bool enoughSamples;
+    /**
+     * Internal validity flag. Set to true only if initialization allocated
+     * the samples buffer successfully. Public callers can query this via
+     * @ref Statistics_IsValid and must not call statistic functions if false.
+     */
+    bool valid;
 } Statistics;
 
 /**
@@ -93,6 +99,17 @@ void Statistics_AddSample(Statistics * stat, const void * sample);
  *         written (i.e., a wrap-around occurred), false otherwise.
  */
 bool Statistics_HaveEnoughSamples(Statistics * stat);
+
+/**
+ * @brief Check whether the statistics instance has been initialized successfully.
+ *
+ * This becomes false if memory allocation during @ref Statistics_Init failed or
+ * after @ref Statistics_Free.
+ *
+ * @param stat Pointer to the instance.
+ * @return true if the instance is valid and ready to use, false otherwise.
+ */
+bool Statistics_IsValid(const Statistics * stat);
 
 /**
  * @name Type-specific statistic functions
