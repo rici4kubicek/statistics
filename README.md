@@ -9,32 +9,32 @@ Implementation of simple statistics functionality for embedded systems.
 
 The library allows you to enable/disable support for individual data types at compile time. This helps minimize the binary size and shorten build times on embedded targets.
 
-Configuration is done via preprocessor directives in `include/statistics_config.h` or via compiler switches (recommended). If the directives are not defined by the user, their default value is `true` (enabled).
+Configuration is done via preprocessor directives in `include/statistics_config.h` or via compiler switches (recommended). If the directives are not defined by the user, their default value is `1` (enabled).
 
 Supported directives:
 
-- `STATISTICS_U8_ENABLED` — enables the API for `uint8_t`. Default: `true`.
-- `STATISTICS_I8_ENABLED` — enables the API for `int8_t`. Default: `true`.
-- `STATISTICS_U16_ENABLED` — enables the API for `uint16_t`. Default: `true`.
-- `STATISTICS_I16_ENABLED` — enables the API for `int16_t`. Default: `true`.
-- `STATISTICS_U32_ENABLED` — enables the API for `uint32_t`. Default: `true`.
-- `STATISTICS_I32_ENABLED` — enables the API for `int32_t`. Default: `true`.
-- `STATISTICS_FLOAT_ENABLED` — enables the API for `float`. Default: `true`.
+- `STATISTICS_U8_ENABLED` — enables the API for `uint8_t`. Default: `1`.
+- `STATISTICS_I8_ENABLED` — enables the API for `int8_t`. Default: `1`.
+- `STATISTICS_U16_ENABLED` — enables the API for `uint16_t`. Default: `1`.
+- `STATISTICS_I16_ENABLED` — enables the API for `int16_t`. Default: `1`.
+- `STATISTICS_U32_ENABLED` — enables the API for `uint32_t`. Default: `1`.
+- `STATISTICS_I32_ENABLED` — enables the API for `int32_t`. Default: `1`.
+- `STATISTICS_FLOAT_ENABLED` — enables the API for `float`. Default: `1`.
 
 How to disable specific types:
 
 - Makefile / GCC/Clang:
-  - Add `-DSTATISTICS_U16_ENABLED=false -DSTATISTICS_FLOAT_ENABLED=false` to `CFLAGS`/`CPPFLAGS`.
-  - Example: `CFLAGS += -DSTATISTICS_U16_ENABLED=false -DSTATISTICS_FLOAT_ENABLED=false`
+  - Add `-DSTATISTICS_U16_ENABLED=0 -DSTATISTICS_FLOAT_ENABLED=0` to `CFLAGS`/`CPPFLAGS`.
+  - Example: `CFLAGS += -DSTATISTICS_U16_ENABLED=0 -DSTATISTICS_FLOAT_ENABLED=0`
 
 - CMake:
-  - `target_compile_definitions(your_target PRIVATE STATISTICS_U16_ENABLED=false STATISTICS_FLOAT_ENABLED=false)`
+  - `target_compile_definitions(your_target PRIVATE STATISTICS_U16_ENABLED=0 STATISTICS_FLOAT_ENABLED=0)`
 
 - PlatformIO (`platformio.ini`):
-  - `build_flags = -DSTATISTICS_U16_ENABLED=false -DSTATISTICS_FLOAT_ENABLED=false`
+  - `build_flags = -DSTATISTICS_U16_ENABLED=0 -DSTATISTICS_FLOAT_ENABLED=0`
 
 Notes:
 
-- Use plain preprocessor literals `true`/`false` (without quotes).
+- Use integer preprocessor literals `1`/`0` (without quotes).
 - If your application doesn’t use a given type, disabling it will reduce the resulting code size and may lower memory footprint.
 - To fully control the port layer (memory allocation, etc.), define `STATISTICS_PORT_USER` at compile time and provide the macros described in the `statistics_config.h` header.
