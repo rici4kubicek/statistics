@@ -33,6 +33,7 @@ void test_Statistics_InitAndFree(void)
     Statistics st = {0};
 
     Statistics_Init(&st, sizeof(uint8_t), 4);
+    TEST_ASSERT_TRUE(Statistics_IsValid(&st));
 
     TEST_ASSERT_EQUAL_UINT8(sizeof(uint8_t), st.itemSize);
     TEST_ASSERT_EQUAL_UINT32(4, st.samplesCnt);
@@ -48,6 +49,7 @@ void test_Statistics_Mean_U8(void)
 {
     Statistics st = {0};
     Statistics_Init(&st, sizeof(uint8_t), 5);
+    TEST_ASSERT_TRUE(Statistics_IsValid(&st));
 
     const uint8_t data[5] = {10, 20, 30, 40, 50};
     fill_u8(&st, data, 5);
@@ -69,6 +71,7 @@ void test_Statistics_Mean_U16(void)
 {
     Statistics st = {0};
     Statistics_Init(&st, sizeof(uint16_t), 4);
+    TEST_ASSERT_TRUE(Statistics_IsValid(&st));
 
     const uint16_t data[4] = {1000, 2000, 3000, 4000};
     fill_u16(&st, data, 4);
@@ -83,6 +86,7 @@ void test_Statistics_Mean_Float(void)
 {
     Statistics st = {0};
     Statistics_Init(&st, sizeof(float), 4);
+    TEST_ASSERT_TRUE(Statistics_IsValid(&st));
 
     const float data[4] = {1.0f, 2.0f, 3.0f, 4.0f};
     fill_f(&st, data);
@@ -97,6 +101,7 @@ void test_Statistics_AddSample_WritesToCurrentIndex(void)
 {
     Statistics st = {0};
     Statistics_Init(&st, sizeof(uint8_t), 5);
+    TEST_ASSERT_TRUE(Statistics_IsValid(&st));
 
     // Initialize all samples to 0 first
     uint8_t zeros[5] = {0};
