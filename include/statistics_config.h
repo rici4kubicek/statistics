@@ -28,6 +28,34 @@ extern "C" {
     #define statPortCalloc(num, size) calloc(num, size)
 #endif
 
+#ifndef STATISTICS_U8_ENABLED
+    #define STATISTICS_U8_ENABLED   true
+#endif
+
+#ifndef STATISTICS_I8_ENABLED
+    #define STATISTICS_I8_ENABLED   true
+#endif
+
+#ifndef STATISTICS_U16_ENABLED
+    #define STATISTICS_U16_ENABLED   true
+#endif
+
+#ifndef STATISTICS_I16_ENABLED
+    #define STATISTICS_I16_ENABLED   true
+#endif
+
+#ifndef STATISTICS_U32_ENABLED
+    #define STATISTICS_U32_ENABLED   true
+#endif
+
+#ifndef STATISTICS_I32_ENABLED
+    #define STATISTICS_I32_ENABLED   true
+#endif
+
+#ifndef STATISTICS_FLOAT_ENABLED
+    #define STATISTICS_FLOAT_ENABLED   true
+#endif
+
     #ifdef __cplusplus
 }
 #endif

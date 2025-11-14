@@ -16,6 +16,7 @@ extern "C" {
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <statistics_config.h>
 
 /*
  * Opaque-like structure describing a statistics buffer.
@@ -46,13 +47,33 @@ _type Statistics_Min_##_NameSuffix(Statistics * stat);  \
 float Statistics_Variance_##_NameSuffix(Statistics * stat); \
 float Statistics_Stdev_##_NameSuffix(Statistics * stat);    \
 
-_STAT_SUPPORT_TYPE(uint8_t, U8);
-_STAT_SUPPORT_TYPE(int8_t, I8);
-_STAT_SUPPORT_TYPE(uint16_t, U16);
-_STAT_SUPPORT_TYPE(int16_t, I16);
-_STAT_SUPPORT_TYPE(uint32_t, U32);
-_STAT_SUPPORT_TYPE(int32_t, I32);
-_STAT_SUPPORT_TYPE(float, F);
+#if STATISTICS_U8_ENABLED == true
+    _STAT_SUPPORT_TYPE(uint8_t, U8);
+#endif
+
+#if STATISTICS_I8_ENABLED == true
+    _STAT_SUPPORT_TYPE(int8_t, I8);
+#endif
+
+#if STATISTICS_U16_ENABLED == true
+    _STAT_SUPPORT_TYPE(uint16_t, U16);
+#endif
+
+#if STATISTICS_I16_ENABLED == true
+    _STAT_SUPPORT_TYPE(int16_t, I16);
+#endif
+
+#if STATISTICS_U32_ENABLED == true
+    _STAT_SUPPORT_TYPE(uint32_t, U32);
+#endif
+
+#if STATISTICS_I32_ENABLED == true
+    _STAT_SUPPORT_TYPE(int32_t, I32);
+#endif
+
+#if STATISTICS_FLOAT_ENABLED == true
+    _STAT_SUPPORT_TYPE(float, F);
+#endif
 
 #ifdef __cplusplus
 }
