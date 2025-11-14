@@ -28,31 +28,44 @@ extern "C" {
     #define statPortCalloc(num, size) calloc(num, size)
 #endif
 
-#ifndef STATISTICS_U8_ENABLED
+/*
+ * Data type support switches
+ * --------------------------
+ * Use the following compile-time directives to enable/disable the API for
+ * individual data types. If not defined by the user, the default value is
+ * `true` (enabled).
+ *
+ * How to change values:
+ *  - Compiler (recommended):
+ *      -DSTATISTICS_U8_ENABLED=false -DSTATISTICS_FLOAT_ENABLED=false
+ *  - Or define before including this header: #define STATISTICS_U8_ENABLED false
+ */
+
+#ifndef STATISTICS_U8_ENABLED   /* Enable API for uint8_t */
     #define STATISTICS_U8_ENABLED   true
 #endif
 
-#ifndef STATISTICS_I8_ENABLED
+#ifndef STATISTICS_I8_ENABLED   /* Enable API for int8_t */
     #define STATISTICS_I8_ENABLED   true
 #endif
 
-#ifndef STATISTICS_U16_ENABLED
+#ifndef STATISTICS_U16_ENABLED  /* Enable API for uint16_t */
     #define STATISTICS_U16_ENABLED   true
 #endif
 
-#ifndef STATISTICS_I16_ENABLED
+#ifndef STATISTICS_I16_ENABLED  /* Enable API for int16_t */
     #define STATISTICS_I16_ENABLED   true
 #endif
 
-#ifndef STATISTICS_U32_ENABLED
+#ifndef STATISTICS_U32_ENABLED  /* Enable API for uint32_t */
     #define STATISTICS_U32_ENABLED   true
 #endif
 
-#ifndef STATISTICS_I32_ENABLED
+#ifndef STATISTICS_I32_ENABLED  /* Enable API for int32_t */
     #define STATISTICS_I32_ENABLED   true
 #endif
 
-#ifndef STATISTICS_FLOAT_ENABLED
+#ifndef STATISTICS_FLOAT_ENABLED /* Enable API for float */
     #define STATISTICS_FLOAT_ENABLED   true
 #endif
 
