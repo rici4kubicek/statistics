@@ -61,7 +61,7 @@ static void oneStore(Statistics * stat, const void * data)
 }
 
 /* Load a single sample at index idx into user-provided buffer. */
-static void oneLoad(Statistics * stat, uint8_t idx, void * data)
+static void oneLoad(Statistics * stat, uint32_t idx, void * data)
 {
     uint8_t * field = &stat->samples[idx * stat->itemSize];
 
@@ -79,6 +79,9 @@ void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
     stat->sampleIdx = 0;
     stat->samples = statPortMalloc(samplesCount * stat->itemSize);
     stat->enoughSamples = false;
+    if (!stat->samples) {
+        stat->samplesCnt = 0;
+    }
 }
 
 /**
@@ -86,6 +89,10 @@ void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
  */
 void Statistics_Free(Statistics * stat)
 {
+    if (stat->samples) {
+        statPortFree(stat->samples);
+        stat->samples = NULL;
+    }
     statPortFree(stat->samples);
     stat->sampleIdx = 0;
     stat->enoughSamples = false;
