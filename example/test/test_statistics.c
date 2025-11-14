@@ -4,24 +4,24 @@
 
 #include "statistics.h"
 
-#include <string.h>
 #include <stdio.h>
+#include <string.h>
 
-static void fill_u8(Statistics *stat, const uint8_t *vals, uint8_t len)
+static void fill_u8(Statistics * stat, const uint8_t * vals, uint8_t len)
 {
     for (uint32_t i = 0; i < len; i++) {
         Statistics_AddSample(stat, &vals[i]);
     }
 }
 
-static void fill_u16(Statistics *stat, const uint16_t *vals, uint8_t len)
+static void fill_u16(Statistics * stat, const uint16_t * vals, uint8_t len)
 {
     for (uint32_t i = 0; i < len; i++) {
         Statistics_AddSample(stat, &vals[i]);
     }
 }
 
-static void fill_f(Statistics *stat, const float *vals)
+static void fill_f(Statistics * stat, const float * vals)
 {
     for (uint32_t i = 0; i < stat->samplesCnt; i++) {
         Statistics_AddSample(stat, &vals[i]);

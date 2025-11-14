@@ -18,19 +18,23 @@
 
 #include "statistics.h"
 
+#include "statistics_config.h"
 #include <stddef.h>
 #include <stdlib.h>
-#include "statistics_config.h"
 
 #include <stdint.h>
 
 /** @cond INTERNAL */
-static inline float fsqrt(float x) {
+static inline float fsqrt(float x)
+{
     if (x <= 0.0f) {
-        return x == 0.0f ? 0.0f : (0.0f/0.0f);
+        return x == 0.0f ? 0.0f : (0.0f / 0.0f);
     }
 
-    union { uint32_t i; float f; } u = { .f = x };
+    union {
+        uint32_t i;
+        float f;
+    } u = {.f = x};
     u.i = (u.i >> 1) + 0x1FC00000u;
 
     float y = u.f;
@@ -116,60 +120,60 @@ bool Statistics_HaveEnoughSamples(Statistics * stat)
 /*
  * Macro to generate typed functions.
  */
-#define STAT_SUPPORT_TYPE(_type, _NameSuffix)    \
-_type Statistics_Mean_##_NameSuffix(Statistics * stat)   \
-{                   \
-    float avg = 0;  \
-    for (int idx = 0; idx < stat->samplesCnt; idx++) {  \
-        _type value;    \
-        oneLoad(stat, idx, &value); \
-        avg += value;   \
-    }   \
-    return avg/stat->samplesCnt;    \
-}   \
-    \
-_type Statistics_Max_##_NameSuffix(Statistics * stat)   \
-{                   \
-    _type max = 0;  \
-    for (int idx = 0; idx < stat->samplesCnt; idx++) {  \
-        _type value;    \
-        oneLoad(stat, idx, &value); \
-        if (value > max)   \
-            max = value;    \
-    }   \
-    return max;    \
-}   \
-    \
-_type Statistics_Min_##_NameSuffix(Statistics * stat)   \
-{                   \
-    _type min = (_type) 0xffffffffff;  \
-    for (int idx = 0; idx < stat->samplesCnt; idx++) {  \
-        _type value;    \
-        oneLoad(stat, idx, &value); \
-        if (value < min)   \
-            min = value;    \
-    }   \
-    return min;    \
-}   \
-    \
-float Statistics_Variance_##_NameSuffix(Statistics * stat)   \
-{                   \
-    float total = 0;  \
-    float refVariance = 0;  \
-    for (int idx = 0; idx < stat->samplesCnt; idx++) {  \
-        _type value;    \
-        oneLoad(stat, idx, &value); \
-        total += value; \
-        refVariance += value * value; \
-    }   \
-    float cv = (refVariance - total * total / stat->samplesCnt) / (stat->samplesCnt - 1);    \
-    return cv;  \
-}   \
-    \
-float Statistics_Stdev_##_NameSuffix(Statistics * stat)   \
-{   \
-    return fsqrt(Statistics_Variance_##_NameSuffix(stat));  \
-}   \
+#define STAT_SUPPORT_TYPE(_type, _NameSuffix) \
+    _type Statistics_Mean_##_NameSuffix(Statistics * stat) \
+    { \
+        float avg = 0; \
+        for (int idx = 0; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            avg += value; \
+        } \
+        return avg / stat->samplesCnt; \
+    } \
+\
+    _type Statistics_Max_##_NameSuffix(Statistics * stat) \
+    { \
+        _type max = 0; \
+        for (int idx = 0; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            if (value > max) \
+                max = value; \
+        } \
+        return max; \
+    } \
+\
+    _type Statistics_Min_##_NameSuffix(Statistics * stat) \
+    { \
+        _type min = (_type) 0xffffffffff; \
+        for (int idx = 0; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            if (value < min) \
+                min = value; \
+        } \
+        return min; \
+    } \
+\
+    float Statistics_Variance_##_NameSuffix(Statistics * stat) \
+    { \
+        float total = 0; \
+        float refVariance = 0; \
+        for (int idx = 0; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            total += value; \
+            refVariance += value * value; \
+        } \
+        float cv = (refVariance - total * total / stat->samplesCnt) / (stat->samplesCnt - 1); \
+        return cv; \
+    } \
+\
+    float Statistics_Stdev_##_NameSuffix(Statistics * stat) \
+    { \
+        return fsqrt(Statistics_Variance_##_NameSuffix(stat)); \
+    }
 
 /**
  * @name Generated typed functions
@@ -177,30 +181,30 @@ float Statistics_Stdev_##_NameSuffix(Statistics * stat)   \
  * @see _STAT_SUPPORT_TYPE
  * @{ */
 #if STATISTICS_U8_ENABLED
-    STAT_SUPPORT_TYPE(uint8_t, U8);
+STAT_SUPPORT_TYPE(uint8_t, U8);
 #endif
 
 #if STATISTICS_I8_ENABLED
-    STAT_SUPPORT_TYPE(int8_t, I8);
+STAT_SUPPORT_TYPE(int8_t, I8);
 #endif
 
 #if STATISTICS_U16_ENABLED
-    STAT_SUPPORT_TYPE(uint16_t, U16);
+STAT_SUPPORT_TYPE(uint16_t, U16);
 #endif
 
 #if STATISTICS_I16_ENABLED
-    STAT_SUPPORT_TYPE(int16_t, I16);
+STAT_SUPPORT_TYPE(int16_t, I16);
 #endif
 
 #if STATISTICS_U32_ENABLED
-    STAT_SUPPORT_TYPE(uint32_t, U32);
+STAT_SUPPORT_TYPE(uint32_t, U32);
 #endif
 
 #if STATISTICS_I32_ENABLED
-    STAT_SUPPORT_TYPE(int32_t, I32);
+STAT_SUPPORT_TYPE(int32_t, I32);
 #endif
 
 #if STATISTICS_FLOAT_ENABLED
-    STAT_SUPPORT_TYPE(float, F);
+STAT_SUPPORT_TYPE(float, F);
 #endif
 /** @} */
