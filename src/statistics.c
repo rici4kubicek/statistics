@@ -1,19 +1,19 @@
-/*
- * statistics.c
- *
- * Simple, minimalistic statistics helper for fixed-size samples.
+/**
+ * @file statistics.c
+ * @brief Implementation of the lightweight statistics helper.
  *
  * This module provides:
  *  - Initialization and deinitialization of a samples buffer
  *  - Appending a new sample into the buffer
- *  - Computing average for specific, supported types via macro-generated functions
+ *  - Computing basic statistics for specific, supported types via
+ *    macro-generated functions
  *
  * Notes:
  *  - Memory functions (malloc/free/memcpy/calloc) are abstracted by the port layer
- *    in statistics_config.h so the project can replace them if needed.
- *  - The storage is a raw byte buffer; itemSize defines the size of a single sample.
- *  - Sample indexing/rotation policy is project-specific; current code writes to
- *    the position indicated by sampleIdx.
+ *    in @ref statistics_config.h so the project can replace them if needed.
+ *  - The storage is a raw byte buffer; @ref Statistics::itemSize defines the size of a single sample.
+ *  - Sample indexing/rotation policy is intentionally minimal and write position is
+ *    controlled by @ref Statistics::sampleIdx.
  */
 
 #include "statistics.h"
@@ -24,6 +24,7 @@
 
 #include <stdint.h>
 
+/** @cond INTERNAL */
 static inline float fsqrt(float x) {
     if (x <= 0.0f) {
         return x == 0.0f ? 0.0f : (0.0f/0.0f);
@@ -62,11 +63,10 @@ static void oneLoad(Statistics * stat, uint8_t idx, void * data)
 
     statPortMemcpy(data, field, stat->itemSize);
 }
+/** @endcond */
 
-/*
- * Initialize statistics instance.
- *  - itemSize: size of one sample in bytes
- *  - samplesCount: number of samples to allocate space for
+/**
+ * @copydoc Statistics_Init
  */
 void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
 {
@@ -77,7 +77,9 @@ void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
     stat->enoughSamples = false;
 }
 
-/* Free resources associated with statistics instance. */
+/**
+ * @copydoc Statistics_Free
+ */
 void Statistics_Free(Statistics * stat)
 {
     statPortFree(stat->samples);
@@ -85,9 +87,8 @@ void Statistics_Free(Statistics * stat)
     stat->enoughSamples = false;
 }
 
-/*
- * Append a sample to the buffer (writes to current index).
- * Caller provides a pointer to data of size itemSize.
+/**
+ * @copydoc Statistics_AddSample
  */
 void Statistics_AddSample(Statistics * stat, const void * data)
 {
@@ -104,8 +105,8 @@ void Statistics_AddSample(Statistics * stat, const void * data)
     }
 }
 
-/*
- * Check whether there are enough samples for statistics calculations
+/**
+ * @copydoc Statistics_HaveEnoughSamples
  */
 bool Statistics_HaveEnoughSamples(Statistics * stat)
 {
@@ -170,7 +171,11 @@ float Statistics_Stdev_##_NameSuffix(Statistics * stat)   \
     return fsqrt(Statistics_Variance_##_NameSuffix(stat));  \
 }   \
 
-/* Currently supported typed averages. Extend as needed. */
+/**
+ * @name Generated typed functions
+ * @brief Definitions of type-specific statistic functions declared in statistics.h.
+ * @see _STAT_SUPPORT_TYPE
+ * @{ */
 #if STATISTICS_U8_ENABLED
     STAT_SUPPORT_TYPE(uint8_t, U8);
 #endif
@@ -198,3 +203,4 @@ float Statistics_Stdev_##_NameSuffix(Statistics * stat)   \
 #if STATISTICS_FLOAT_ENABLED
     STAT_SUPPORT_TYPE(float, F);
 #endif
+/** @} */

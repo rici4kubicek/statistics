@@ -20,18 +20,39 @@ author = 'Richard Kubíček'
 extensions = [
     'breathe',
     'sphinx.ext.viewcode',
+    'sphinx.ext.todo',
+    'sphinx.ext.autosectionlabel',
 ]
 
 templates_path = ['_templates']
 exclude_patterns = []
+
+# Localization
+language = 'en'
+
+# Zamezí kolizím názvů sekcí mezi soubory
+autosectionlabel_prefix_document = True
 
 breathe_projects = {
     "Statistics": os.path.abspath('../build/doxygen/xml')
 }
 breathe_default_project = "Statistics"
 
+# -- HTML --------------------------------------------------------------------
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "sphinx_rtd_theme"
 html_static_path = ['_static']
+
+# Header and small theme tweaks
+html_title = "Statistics – Documentation"
+html_theme_options = {
+    "collapse_navigation": False,
+    "navigation_depth": 3,
+    "style_external_links": True,
+}
+
+# Extensions – TODO
+todo_include_todos = True
