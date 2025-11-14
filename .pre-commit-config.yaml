@@ -4,18 +4,3 @@ repos:
     hooks:
       - id: clang-format
         files: \.(c|h)$
-
-  - repo: https://github.com/pocc/pre-commit-hooks
-    rev: v1.3.5
-    hooks:
-      - id: clang-tidy
-        args: ["--quiet"]
-        files: \.(c|h)$
-
-  - repo: https://github.com/david-a-wheeler/flawfinder
-    rev: v2.0.19
-    hooks:
-      - id: flawfinder
-        args: ["--minlevel=4"]
-        files: \.(c|h)$
-

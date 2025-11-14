@@ -1,10 +1,11 @@
-#include <stdio.h>
 #include "statistics.h"
+#include <stdio.h>
 #include <time.h>
 
 Statistics stat;
 
-int main() {
+int main()
+{
     printf("Hello, world!\n");
     fflush(stdout);
 
