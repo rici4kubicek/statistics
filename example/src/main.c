@@ -10,6 +10,10 @@ int main()
     fflush(stdout);
 
     Statistics_Init(&stat, sizeof(uint8_t), 4);
+    if (!Statistics_IsValid(&stat)) {
+        fprintf(stderr, "Statistics init failed: out of memory or invalid parameters.\n");
+        return 1;
+    }
 
     uint8_t v = 1;
     Statistics_AddSample(&stat, &v);
