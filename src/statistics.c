@@ -171,10 +171,30 @@ float Statistics_Stdev_##_NameSuffix(Statistics * stat)   \
 }   \
 
 /* Currently supported typed averages. Extend as needed. */
-STAT_SUPPORT_TYPE(uint8_t, U8);
-STAT_SUPPORT_TYPE(int8_t, I8);
-STAT_SUPPORT_TYPE(uint16_t, U16);
-STAT_SUPPORT_TYPE(int16_t, I16);
-STAT_SUPPORT_TYPE(uint32_t, U32);
-STAT_SUPPORT_TYPE(int32_t, I32);
-STAT_SUPPORT_TYPE(float, F);
+#if STATISTICS_U8_ENABLED
+    STAT_SUPPORT_TYPE(uint8_t, U8);
+#endif
+
+#if STATISTICS_I8_ENABLED
+    STAT_SUPPORT_TYPE(int8_t, I8);
+#endif
+
+#if STATISTICS_U16_ENABLED
+    STAT_SUPPORT_TYPE(uint16_t, U16);
+#endif
+
+#if STATISTICS_I16_ENABLED
+    STAT_SUPPORT_TYPE(int16_t, I16);
+#endif
+
+#if STATISTICS_U32_ENABLED
+    STAT_SUPPORT_TYPE(uint32_t, U32);
+#endif
+
+#if STATISTICS_I32_ENABLED
+    STAT_SUPPORT_TYPE(int32_t, I32);
+#endif
+
+#if STATISTICS_FLOAT_ENABLED
+    STAT_SUPPORT_TYPE(float, F);
+#endif
