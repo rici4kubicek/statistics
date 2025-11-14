@@ -12,7 +12,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-    #endif
+#endif
 
 /**
  * @defgroup statistics_port Port layer
@@ -32,10 +32,10 @@ extern "C" {
     #include <stdlib.h>
     #include <string.h>
 
-    #define statPortMalloc(size) malloc(size)
-    #define statPortFree(ptr) free(ptr)
+    #define statPortMalloc(size)             malloc(size)
+    #define statPortFree(ptr)                free(ptr)
     #define statPortMemcpy(dest, src, count) memcpy(dest, src, count)
-    #define statPortCalloc(num, size) calloc(num, size)
+    #define statPortCalloc(num, size)        calloc(num, size)
 #endif
 
 /** @} */
@@ -55,39 +55,38 @@ extern "C" {
  *   `#define STATISTICS_U8_ENABLED 0`
  * @{ */
 
-#ifndef STATISTICS_U8_ENABLED   /* Enable API for uint8_t */
-    #define STATISTICS_U8_ENABLED   1
+#ifndef STATISTICS_U8_ENABLED /* Enable API for uint8_t */
+    #define STATISTICS_U8_ENABLED 1
 #endif
 
-#ifndef STATISTICS_I8_ENABLED   /* Enable API for int8_t */
-    #define STATISTICS_I8_ENABLED   1
+#ifndef STATISTICS_I8_ENABLED /* Enable API for int8_t */
+    #define STATISTICS_I8_ENABLED 1
 #endif
 
-#ifndef STATISTICS_U16_ENABLED  /* Enable API for uint16_t */
-    #define STATISTICS_U16_ENABLED   1
+#ifndef STATISTICS_U16_ENABLED /* Enable API for uint16_t */
+    #define STATISTICS_U16_ENABLED 1
 #endif
 
-#ifndef STATISTICS_I16_ENABLED  /* Enable API for int16_t */
-    #define STATISTICS_I16_ENABLED   1
+#ifndef STATISTICS_I16_ENABLED /* Enable API for int16_t */
+    #define STATISTICS_I16_ENABLED 1
 #endif
 
-#ifndef STATISTICS_U32_ENABLED  /* Enable API for uint32_t */
-    #define STATISTICS_U32_ENABLED   1
+#ifndef STATISTICS_U32_ENABLED /* Enable API for uint32_t */
+    #define STATISTICS_U32_ENABLED 1
 #endif
 
-#ifndef STATISTICS_I32_ENABLED  /* Enable API for int32_t */
-    #define STATISTICS_I32_ENABLED   1
+#ifndef STATISTICS_I32_ENABLED /* Enable API for int32_t */
+    #define STATISTICS_I32_ENABLED 1
 #endif
 
 #ifndef STATISTICS_FLOAT_ENABLED /* Enable API for float */
-    #define STATISTICS_FLOAT_ENABLED   1
+    #define STATISTICS_FLOAT_ENABLED 1
 #endif
 
 /** @} */ /* end of statistics_types */
 
-    #ifdef __cplusplus
+#ifdef __cplusplus
 }
 #endif
 
 #endif /* STATISTICS_CONFIG_H */
-

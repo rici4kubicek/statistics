@@ -24,9 +24,9 @@
 extern "C" {
 #endif
 
+#include <statistics_config.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include <statistics_config.h>
 
 /**
  * @defgroup statistics_core Core API
@@ -42,18 +42,18 @@ extern "C" {
  */
 typedef struct {
     /** Number of samples allocated in the buffer. */
-    uint32_t samplesCnt;       /**< Total capacity (number of items). */
+    uint32_t samplesCnt; /**< Total capacity (number of items). */
     /** Index of the current write position in the buffer. */
-    uint32_t sampleIdx;        /**< Current write index [0..samplesCnt-1]. */
+    uint32_t sampleIdx; /**< Current write index [0..samplesCnt-1]. */
     /** Size of a single sample in bytes. */
-    uint8_t  itemSize;         /**< Bytes per sample. */
+    uint8_t itemSize; /**< Bytes per sample. */
     /** Pointer to contiguous storage of size @c samplesCnt * @c itemSize. */
-    uint8_t* samples;          /**< Backing storage pointer. */
+    uint8_t * samples; /**< Backing storage pointer. */
     /**
      * Flag indicating that at least @ref samplesCnt samples have been written,
      * i.e., a full cycle completed and statistics are meaningful for the full window.
      */
-    bool     enoughSamples;
+    bool enoughSamples;
 } Statistics;
 
 /**
@@ -108,40 +108,40 @@ bool Statistics_HaveEnoughSamples(Statistics * stat);
  *
  * Where `<base>` is the underlying C type for <T> (e.g., `uint16_t` for U16).
  * @{ */
-#define _STAT_SUPPORT_TYPE(_type, _NameSuffix)    \
-_type Statistics_Mean_##_NameSuffix(Statistics * stat);   \
-_type Statistics_Max_##_NameSuffix(Statistics * stat);    \
-_type Statistics_Min_##_NameSuffix(Statistics * stat);    \
-float Statistics_Variance_##_NameSuffix(Statistics * stat); \
-float Statistics_Stdev_##_NameSuffix(Statistics * stat);    \
-/** @} */
+#define _STAT_SUPPORT_TYPE(_type, _NameSuffix) \
+    _type Statistics_Mean_##_NameSuffix(Statistics * stat); \
+    _type Statistics_Max_##_NameSuffix(Statistics * stat); \
+    _type Statistics_Min_##_NameSuffix(Statistics * stat); \
+    float Statistics_Variance_##_NameSuffix(Statistics * stat); \
+    float Statistics_Stdev_##_NameSuffix(Statistics * stat); \
+    /** @} */
 
 #if STATISTICS_U8_ENABLED
-    _STAT_SUPPORT_TYPE(uint8_t, U8);
+_STAT_SUPPORT_TYPE(uint8_t, U8);
 #endif
 
 #if STATISTICS_I8_ENABLED
-    _STAT_SUPPORT_TYPE(int8_t, I8);
+_STAT_SUPPORT_TYPE(int8_t, I8);
 #endif
 
 #if STATISTICS_U16_ENABLED
-    _STAT_SUPPORT_TYPE(uint16_t, U16);
+_STAT_SUPPORT_TYPE(uint16_t, U16);
 #endif
 
 #if STATISTICS_I16_ENABLED
-    _STAT_SUPPORT_TYPE(int16_t, I16);
+_STAT_SUPPORT_TYPE(int16_t, I16);
 #endif
 
 #if STATISTICS_U32_ENABLED
-    _STAT_SUPPORT_TYPE(uint32_t, U32);
+_STAT_SUPPORT_TYPE(uint32_t, U32);
 #endif
 
 #if STATISTICS_I32_ENABLED
-    _STAT_SUPPORT_TYPE(int32_t, I32);
+_STAT_SUPPORT_TYPE(int32_t, I32);
 #endif
 
 #if STATISTICS_FLOAT_ENABLED
-    _STAT_SUPPORT_TYPE(float, F);
+_STAT_SUPPORT_TYPE(float, F);
 #endif
 
 /** @} */ /* end of statistics_core */
@@ -150,4 +150,4 @@ float Statistics_Stdev_##_NameSuffix(Statistics * stat);    \
 }
 #endif
 
-#endif //STATISTICS_H
+#endif // STATISTICS_H
