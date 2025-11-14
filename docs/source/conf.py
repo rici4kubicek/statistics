@@ -47,12 +47,12 @@ html_theme = "sphinx_rtd_theme"
 html_static_path = ['_static']
 
 # Header and small theme tweaks
-html_title = "Statistics – Documentation"
+html_title = "Statistics - Documentation"
 html_theme_options = {
     "collapse_navigation": False,
     "navigation_depth": 3,
     "style_external_links": True,
 }
 
-# Extensions – TODO
+# Extensions - TODO
 todo_include_todos = True
