@@ -122,8 +122,8 @@ and the implementation in <code class="docutils literal notranslate"><span class
 Installation page:
 <a class="reference external" href="https://registry.platformio.org/libraries/rici4kubicek/Statistics/installation">https://registry.platformio.org/libraries/rici4kubicek/Statistics/installation</a></p>
 <ul>
-<li><p>PlatformIO (recommended)
-1. Add the dependency to your <code class="docutils literal notranslate"><span class="pre">platformio.ini</span></code>:</p>
+<li><dl>
+<dt>PlatformIO (recommended)</dt><dd><p>Add the dependency to your <code class="docutils literal notranslate"><span class="pre">platformio.ini</span></code>:</p>
 <blockquote>
 <div><div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[env:your_env]</span>
 <span class="na">platform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">...</span>
@@ -136,6 +136,8 @@ Installation page:
 <p>Note: you can pin the version as needed. The latest version is listed on
 the library page in the PlatformIO registry.</p>
 </div></blockquote>
+</dd>
+</dl>
 </li>
 <li><p>PlatformIO (install directly from the registry via CLI)</p>
 <p>Run in the project root:</p>
@@ -143,10 +145,10 @@ the library page in the PlatformIO registry.</p>
 </pre></div>
 </div>
 </li>
-<li><p>CMake / manual integration (without PlatformIO)
-1. Add the source files to your build system:</p>
-<blockquote>
-<div><ul class="simple">
+<li><p>CMake / manual integration (without PlatformIO)</p>
+<ol class="arabic">
+<li><p>Add the source files to your build system:</p>
+<ul class="simple">
 <li><p>Add <code class="docutils literal notranslate"><span class="pre">src/statistics.c</span></code> to your compilation.</p></li>
 <li><p>Make sure the <code class="docutils literal notranslate"><span class="pre">include</span></code> directory is on the include path.</p></li>
 </ul>
@@ -160,8 +162,7 @@ the library page in the PlatformIO registry.</p>
 <span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">my_app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">Statistics</span><span class="p">)</span>
 </pre></div>
 </div>
-</div></blockquote>
-<ol class="arabic simple" start="2">
+</li>
 <li><p>Adjust the configuration in <code class="docutils literal notranslate"><span class="pre">include/statistics_config.h</span></code> as needed
 (enabled data types, window sizes, etc.).</p></li>
 </ol>
