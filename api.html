@@ -44,7 +44,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation-and-project-integration">Installation and project integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation-and-integration-into-a-project">Installation and integration into a project</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#quick-usage-example">Quick usage example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#notes">Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#configuring-supported-types">Configuring supported types</a></li>
@@ -168,20 +168,12 @@ extracted from header comments and grouped using Doxygen.</p>
 <span id="_CPPv315Statistics_InitP10Statistics7uint8_t8uint32_t"></span><span id="_CPPv215Statistics_InitP10Statistics7uint8_t8uint32_t"></span><span id="Statistics_Init__StatisticsP.uint8_t.uint32_t"></span><span class="target" id="group__statistics__core_1gadf2f0b2a9423754ec77233cb80c48e9f"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">itemSize</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">samplesCount</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t" title="Link to this definition"></a><br /></dt>
 <dd><p>Initialize a statistics instance. </p>
 <p>Allocates internal storage for <code class="docutils literal notranslate"><span class="pre">samplesCount</span></code> elements of <code class="docutils literal notranslate"><span class="pre">itemSize</span></code> bytes each and resets internal indices.</p>
-<p>
-Initialize a statistics instance.</p>
-<p>Allocates internal storage for <code class="docutils literal notranslate"><span class="pre">samplesCount</span></code> elements of <code class="docutils literal notranslate"><span class="pre">itemSize</span></code> bytes each and resets internal indices.</p>
-<p>
-Initialize a statistics instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>stat</strong> – <strong>[out]</strong> Pointer to the instance to initialize. </p></li>
 <li><p><strong>itemSize</strong> – Size of a single sample in bytes. </p></li>
-<li><p><strong>samplesCount</strong> – Number of samples in the window (capacity).</p></li>
-<li><p><strong>stat</strong> – <strong>[out]</strong> Pointer to the instance to initialize. </p></li>
-<li><p><strong>itemSize</strong> – Size of a single sample in bytes. </p></li>
-<li><p><strong>samplesCount</strong> – Number of samples in the window (capacity).</p></li>
+<li><p><strong>samplesCount</strong> – Number of samples in the window (capacity). </p></li>
 </ul>
 </dd>
 </dl>
@@ -191,16 +183,9 @@ Initialize a statistics instance.</p>
 <dt class="sig sig-object cpp" id="_CPPv415Statistics_FreeP10Statistics">
 <span id="_CPPv315Statistics_FreeP10Statistics"></span><span id="_CPPv215Statistics_FreeP10Statistics"></span><span id="Statistics_Free__StatisticsP"></span><span class="target" id="group__statistics__core_1ga74eb3f851cab50d9071b962031eac716"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Free</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415Statistics_FreeP10Statistics" title="Link to this definition"></a><br /></dt>
 <dd><p>Release resources held by a statistics instance. </p>
-<p>
-Release resources held by a statistics instance.</p>
-<p>
-Release resources held by a statistics instance.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>stat</strong> – Pointer to the instance to deinitialize.</p></li>
-<li><p><strong>stat</strong> – Pointer to the instance to deinitialize.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>stat</strong> – Pointer to the instance to deinitialize. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -210,18 +195,11 @@ Release resources held by a statistics instance.</p>
 <span id="_CPPv320Statistics_AddSampleP10StatisticsPKv"></span><span id="_CPPv220Statistics_AddSampleP10StatisticsPKv"></span><span id="Statistics_AddSample__StatisticsP.voidCP"></span><span class="target" id="group__statistics__core_1ga2ab7db3233a6442d5ef75ae9e4c6960c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_AddSample</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">sample</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420Statistics_AddSampleP10StatisticsPKv" title="Link to this definition"></a><br /></dt>
 <dd><p>Append a single sample to the buffer at the current write index. </p>
 <p>The data at <code class="docutils literal notranslate"><span class="pre">sample</span></code> must point to <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">Statistics::itemSize</span></a> bytes. After storing, the write index advances and wraps when it reaches capacity.</p>
-<p>
-Append a single sample to the buffer at the current write index.</p>
-<p>The data at <code class="docutils literal notranslate"><span class="pre">sample</span></code> must point to <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">Statistics::itemSize</span></a> bytes. After storing, the write index advances and wraps when it reaches capacity.</p>
-<p>
-Append a single sample to the buffer at the current write index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>stat</strong> – Pointer to the instance. </p></li>
-<li><p><strong>sample</strong> – Pointer to the sample data to store.</p></li>
-<li><p><strong>stat</strong> – Pointer to the instance. </p></li>
-<li><p><strong>sample</strong> – Pointer to the sample data to store.</p></li>
+<li><p><strong>sample</strong> – Pointer to the sample data to store. </p></li>
 </ul>
 </dd>
 </dl>
@@ -231,22 +209,12 @@ Append a single sample to the buffer at the current write index.</p>
 <dt class="sig sig-object cpp" id="_CPPv428Statistics_HaveEnoughSamplesP10Statistics">
 <span id="_CPPv328Statistics_HaveEnoughSamplesP10Statistics"></span><span id="_CPPv228Statistics_HaveEnoughSamplesP10Statistics"></span><span id="Statistics_HaveEnoughSamples__StatisticsP"></span><span class="target" id="group__statistics__core_1gab6be1e2998f7a3b1efac4161140b03a0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_HaveEnoughSamples</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428Statistics_HaveEnoughSamplesP10Statistics" title="Link to this definition"></a><br /></dt>
 <dd><p>Indicate whether a full window of samples has been collected. </p>
-<p>
-Indicate whether a full window of samples has been collected.</p>
-<p>
-Indicate whether a full window of samples has been collected.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>stat</strong> – Pointer to the instance. </p></li>
-<li><p><strong>stat</strong> – Pointer to the instance. </p></li>
-</ul>
+<dd class="field-odd"><p><strong>stat</strong> – Pointer to the instance. </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>true if at least <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">Statistics::samplesCnt</span></a> samples have been written (i.e., a wrap-around occurred), false otherwise.</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>true if at least <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">Statistics::samplesCnt</span></a> samples have been written (i.e., a wrap-around occurred), false otherwise.</p>
+<dd class="field-even"><p>true if at least <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">Statistics::samplesCnt</span></a> samples have been written (i.e., a wrap-around occurred), false otherwise. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -256,23 +224,12 @@ Indicate whether a full window of samples has been collected.</p>
 <span id="_CPPv318Statistics_IsValidPK10Statistics"></span><span id="_CPPv218Statistics_IsValidPK10Statistics"></span><span id="Statistics_IsValid__StatisticsCP"></span><span class="target" id="group__statistics__core_1ga4b2ff2dff6086c87c3abce91c9906ef8"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_IsValid</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418Statistics_IsValidPK10Statistics" title="Link to this definition"></a><br /></dt>
 <dd><p>Check whether the statistics instance has been initialized successfully. </p>
 <p>This becomes false if memory allocation during <a class="reference internal" href="#group__statistics__core_1gadf2f0b2a9423754ec77233cb80c48e9f"><span class="std std-ref">Statistics_Init</span></a> failed or after <a class="reference internal" href="#group__statistics__core_1ga74eb3f851cab50d9071b962031eac716"><span class="std std-ref">Statistics_Free</span></a>.</p>
-<p>
-Check whether the statistics instance has been initialized successfully.</p>
-<p>This becomes false if memory allocation during <a class="reference internal" href="#group__statistics__core_1gadf2f0b2a9423754ec77233cb80c48e9f"><span class="std std-ref">Statistics_Init</span></a> failed or after <a class="reference internal" href="#group__statistics__core_1ga74eb3f851cab50d9071b962031eac716"><span class="std std-ref">Statistics_Free</span></a>.</p>
-<p>
-Check whether the statistics instance has been initialized successfully.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>stat</strong> – Pointer to the instance. </p></li>
-<li><p><strong>stat</strong> – Pointer to the instance. </p></li>
-</ul>
+<dd class="field-odd"><p><strong>stat</strong> – Pointer to the instance. </p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>true if the instance is valid and ready to use, false otherwise.</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>true if the instance is valid and ready to use, false otherwise.</p>
+<dd class="field-even"><p>true if the instance is valid and ready to use, false otherwise. </p>
 </dd>
 </dl>
 </dd></dl>
