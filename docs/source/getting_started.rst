@@ -15,7 +15,7 @@ Installation page:
 https://registry.platformio.org/libraries/rici4kubicek/Statistics/installation
 
 - PlatformIO (recommended)
-  1. Add the dependency to your ``platformio.ini``:
+    Add the dependency to your ``platformio.ini``:
 
      .. code-block:: ini
 
@@ -38,6 +38,7 @@ https://registry.platformio.org/libraries/rici4kubicek/Statistics/installation
      pio lib install "rici4kubicek/Statistics"
 
 - CMake / manual integration (without PlatformIO)
+
   1. Add the source files to your build system:
 
      - Add ``src/statistics.c`` to your compilation.
