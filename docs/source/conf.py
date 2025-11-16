@@ -30,7 +30,6 @@ exclude_patterns = []
 # Localization
 language = 'en'
 
-# Zamezí kolizím názvů sekcí mezi soubory
 autosectionlabel_prefix_document = True
 
 breathe_projects = {
