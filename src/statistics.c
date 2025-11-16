@@ -69,9 +69,6 @@ static void oneLoad(Statistics * stat, uint32_t idx, void * data)
 }
 /** @endcond */
 
-/**
- * @copydoc Statistics_Init
- */
 void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
 {
     if (!stat) {
@@ -96,9 +93,6 @@ void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
     }
 }
 
-/**
- * @copydoc Statistics_Free
- */
 void Statistics_Free(Statistics * stat)
 {
     if (!stat) {
@@ -115,9 +109,6 @@ void Statistics_Free(Statistics * stat)
     stat->valid = false;
 }
 
-/**
- * @copydoc Statistics_AddSample
- */
 void Statistics_AddSample(Statistics * stat, const void * data)
 {
     if (stat && stat->valid && stat->samples && stat->itemSize > 0) {
@@ -133,17 +124,11 @@ void Statistics_AddSample(Statistics * stat, const void * data)
     }
 }
 
-/**
- * @copydoc Statistics_HaveEnoughSamples
- */
 bool Statistics_HaveEnoughSamples(Statistics * stat)
 {
     return (stat && stat->valid) ? stat->enoughSamples : false;
 }
 
-/**
- * @copydoc Statistics_IsValid
- */
 bool Statistics_IsValid(const Statistics * stat)
 {
     return (stat != NULL) && stat->valid && (stat->samples != NULL) && (stat->samplesCnt > 0) && (stat->itemSize > 0);
