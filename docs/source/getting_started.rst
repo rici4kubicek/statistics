@@ -3,13 +3,69 @@ Getting started
 
 This page walks you through the basic usage of the library.
 
-Installation and project integration
-------------------------------------
+Installation and integration into a project
+------------------------------------------
 
 The library is written in C and consists of the header ``include/statistics.h``
-and its implementation in ``src/statistics.c``. To integrate it, include these
-files in your build and make sure the configuration header
-``include/statistics_config.h`` is available.
+and the implementation in ``src/statistics.c``. Configuration is controlled via
+``include/statistics_config.h``.
+
+Below are the recommended installation methods, similar to the PlatformIO
+Installation page:
+https://registry.platformio.org/libraries/rici4kubicek/Statistics/installation
+
+- PlatformIO (recommended)
+  1. Add the dependency to your ``platformio.ini``:
+
+     .. code-block:: ini
+
+        [env:your_env]
+        platform = ...
+        board = ...
+        framework = ...
+        lib_deps =
+            rici4kubicek/Statistics@^1.0.0
+
+     Note: you can pin the version as needed. The latest version is listed on
+     the library page in the PlatformIO registry.
+
+- PlatformIO (install directly from the registry via CLI)
+  
+  Run in the project root:
+
+  .. code-block:: bash
+
+     pio lib install "rici4kubicek/Statistics"
+
+- CMake / manual integration (without PlatformIO)
+  1. Add the source files to your build system:
+
+     - Add ``src/statistics.c`` to your compilation.
+     - Make sure the ``include`` directory is on the include path.
+
+     Example for CMake:
+
+     .. code-block:: cmake
+
+        add_library(Statistics STATIC
+            ${CMAKE_CURRENT_LIST_DIR}/src/statistics.c)
+        target_include_directories(Statistics PUBLIC
+            ${CMAKE_CURRENT_LIST_DIR}/include)
+
+        # optional: your targets that use the library
+        target_link_libraries(my_app PRIVATE Statistics)
+
+  2. Adjust the configuration in ``include/statistics_config.h`` as needed
+     (enabled data types, window sizes, etc.).
+
+- As a git submodule
+  
+  .. code-block:: bash
+
+     git submodule add https://github.com/rici4kubicek/statistics.git external/statistics
+
+  Then add the source and include paths (see the CMake example above) to your
+  build.
 
 Quick usage example
 -------------------
