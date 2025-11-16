@@ -1,8 +1,7 @@
 Getting started
 ===============
 
-This page walks you through the basic usage of the library and explains how to
-generate the documentation locally (Doxygen → Sphinx).
+This page walks you through the basic usage of the library.
 
 Installation and project integration
 ------------------------------------
