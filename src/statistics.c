@@ -94,6 +94,18 @@ void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
     }
 }
 
+void Statistics_Reset(Statistics * stat)
+{
+    if (!stat) {
+        return;
+    }
+    if (stat->samples) {
+        statPortMemset(stat->samples, 0, (size_t) stat->samplesCnt * (size_t) stat->itemSize);
+        stat->sampleIdx = 0;
+        stat->enoughSamples = false;
+    }
+}
+
 void Statistics_Free(Statistics * stat)
 {
     if (!stat) {

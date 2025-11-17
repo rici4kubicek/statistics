@@ -75,6 +75,19 @@ typedef struct {
 void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount);
 
 /**
+ * Resets the statistical data contained in the provided Statistics structure.
+ *
+ * This function clears all sample data stored in the Statistics instance, resets
+ * the sample index, and indicates that not enough samples are available to calculate
+ * meaningful statistics. It safely handles a null pointer by exiting early without
+ * performing any operations.
+ *
+ * @param stat A pointer to the Statistics structure to reset. If the pointer is null,
+ *             the function will safely exit without performing any operations.
+ */
+void Statistics_Reset(Statistics * stat);
+
+/**
  * @brief Release resources held by a statistics instance.
  * @param stat Pointer to the instance to deinitialize.
  */
