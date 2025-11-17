@@ -72,6 +72,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv413enoughSamples"><code class="docutils literal notranslate"><span class="pre">enoughSamples</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv45valid"><code class="docutils literal notranslate"><span class="pre">valid</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t"><code class="docutils literal notranslate"><span class="pre">Statistics_Init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv416Statistics_ResetP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_Reset()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv415Statistics_FreeP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_Free()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv420Statistics_AddSampleP10StatisticsPKv"><code class="docutils literal notranslate"><span class="pre">Statistics_AddSample()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv428Statistics_HaveEnoughSamplesP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_HaveEnoughSamples()</span></code></a></li>
@@ -175,6 +176,18 @@ extracted from header comments and grouped using Doxygen.</p>
 <li><p><strong>itemSize</strong> – Size of a single sample in bytes. </p></li>
 <li><p><strong>samplesCount</strong> – Number of samples in the window (capacity). </p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416Statistics_ResetP10Statistics">
+<span id="_CPPv316Statistics_ResetP10Statistics"></span><span id="_CPPv216Statistics_ResetP10Statistics"></span><span id="Statistics_Reset__StatisticsP"></span><span class="target" id="group__statistics__core_1ga61668e25db16d9af341bd187e15ed163"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Reset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416Statistics_ResetP10Statistics" title="Link to this definition"></a><br /></dt>
+<dd><p>Resets the statistical data contained in the provided Statistics structure.</p>
+<p>This function clears all sample data stored in the Statistics instance, resets the sample index, and indicates that not enough samples are available to calculate meaningful statistics. It safely handles a null pointer by exiting early without performing any operations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stat</strong> – A pointer to the Statistics structure to reset. If the pointer is null, the function will safely exit without performing any operations. </p>
 </dd>
 </dl>
 </dd></dl>
