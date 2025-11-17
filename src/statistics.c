@@ -83,6 +83,7 @@ void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
 
     stat->samples = statPortMalloc((size_t) samplesCount * (size_t) stat->itemSize);
     if (stat->samples) {
+        statPortMemset(stat->samples, 0, (size_t) samplesCount * (size_t) stat->itemSize);
         stat->valid = true;
     } else {
         // Allocation failed: leave fields in a safe state so callers can detect invalid instance
