@@ -67,7 +67,21 @@ static void oneLoad(Statistics * stat, uint32_t idx, void * data)
 
     statPortMemcpy(data, field, stat->itemSize);
 }
-/** @endcond */
+/**
+ * Initialize a Statistics object and allocate a zero-filled sample buffer.
+ *
+ * Sets the object's item size and capacity, resets internal indices and flags,
+ * attempts to allocate a contiguous buffer for samples, and marks the object
+ * valid only if allocation succeeds. If allocation fails the object is left
+ * in a safe, invalid state (samples pointer NULL, samplesCnt set to 0,
+ * sampleIdx reset to 0, enoughSamples false, valid false).
+ *
+ * Passing a NULL `stat` is a no-op.
+ *
+ * @param stat Pointer to the Statistics instance to initialize.
+ * @param itemSize Size in bytes of a single sample.
+ * @param samplesCount Number of samples to allocate space for (buffer capacity).
+ */
 
 void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
 {
@@ -94,6 +108,14 @@ void Statistics_Init(Statistics * stat, uint8_t itemSize, uint32_t samplesCount)
     }
 }
 
+/**
+ * Reset the statistics instance to an initial empty state.
+ *
+ * If `stat` is non-NULL and has an allocated samples buffer, zeroes the buffer,
+ * sets the write index to 0, and clears the enough-samples flag.
+ *
+ * @param stat Pointer to the Statistics instance to reset. If NULL, the function does nothing.
+ */
 void Statistics_Reset(Statistics * stat)
 {
     if (!stat) {
@@ -106,6 +128,13 @@ void Statistics_Reset(Statistics * stat)
     }
 }
 
+/**
+ * Release internal resources of a Statistics instance and mark it invalid.
+ *
+ * Frees the internal samples buffer if present, resets buffer pointer, counts, item size, write index, and the enoughSamples flag, and marks the instance as invalid. Safe to call with a NULL pointer.
+ *
+ * @param stat Pointer to the Statistics instance to free; no action is taken if NULL.
+ */
 void Statistics_Free(Statistics * stat)
 {
     if (!stat) {
