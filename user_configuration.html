@@ -203,15 +203,17 @@ provide compatible macros before including <code class="docutils literal notrans
 <li><p><code class="docutils literal notranslate"><span class="pre">statPortCalloc(num,</span> <span class="pre">size)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">statPortFree(ptr)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">statPortMemcpy(dest,</span> <span class="pre">src,</span> <span class="pre">count)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">statPortMemset(ptr,</span> <span class="pre">val,</span> <span class="pre">count)</span></code></p></li>
 </ul>
 <p>Example (wrapping a custom allocator):</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define STATISTICS_PORT_USER 1</span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;my_allocator.h&gt;</span>
 
-<span class="cp">#define statPortMalloc(sz)        my_malloc(sz)</span>
-<span class="cp">#define statPortCalloc(n, sz)     my_calloc(n, sz)</span>
-<span class="cp">#define statPortFree(p)           my_free(p)</span>
-<span class="cp">#define statPortMemcpy(d, s, n)   my_memcpy(d, s, n)</span>
+<span class="cp">#define statPortMalloc(sz)               my_malloc(sz)</span>
+<span class="cp">#define statPortCalloc(n, sz)            my_calloc(n, sz)</span>
+<span class="cp">#define statPortFree(p)                  my_free(p)</span>
+<span class="cp">#define statPortMemcpy(d, s, n)          my_memcpy(d, s, n)</span>
+<span class="cp">#define statPortMemset(ptr, val, count)  memset(ptr, val, count)</span>
 
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;statistics.h&gt;</span>
 </pre></div>
