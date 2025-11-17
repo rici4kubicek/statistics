@@ -2,39 +2,13 @@
 
 ![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/rici4kubicek/statistics?utm_source=oss&utm_medium=github&utm_campaign=rici4kubicek%2Fstatistics&labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit+Reviews)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/rici4kubicek/statistics/main.svg)](https://results.pre-commit.ci/latest/github/rici4kubicek/statistics/main)
+[![PlatformIO Registry](https://badges.registry.platformio.org/packages/rici4kubicek/library/Statistics.svg)](https://registry.platformio.org/libraries/rici4kubicek/Statistics)
 
-Implementation of simple statistics functionality for embedded systems.
+A lightweight C library for collecting fixed-size samples and computing basic
+statistics (mean, min, max, variance, and standard deviation) for selected
+scalar types. The documentation is generated with Doxygen and Sphinx (Breathe).
 
-## Configuration directives (STATISTICS_*_ENABLED)
-
-The library allows you to enable/disable support for individual data types at compile time. This helps minimize the binary size and shorten build times on embedded targets.
-
-Configuration is done via preprocessor directives in `include/statistics_config.h` or via compiler switches (recommended). If the directives are not defined by the user, their default value is `1` (enabled).
-
-Supported directives:
-
-- `STATISTICS_U8_ENABLED` — enables the API for `uint8_t`. Default: `1`.
-- `STATISTICS_I8_ENABLED` — enables the API for `int8_t`. Default: `1`.
-- `STATISTICS_U16_ENABLED` — enables the API for `uint16_t`. Default: `1`.
-- `STATISTICS_I16_ENABLED` — enables the API for `int16_t`. Default: `1`.
-- `STATISTICS_U32_ENABLED` — enables the API for `uint32_t`. Default: `1`.
-- `STATISTICS_I32_ENABLED` — enables the API for `int32_t`. Default: `1`.
-- `STATISTICS_FLOAT_ENABLED` — enables the API for `float`. Default: `1`.
-
-How to disable specific types:
-
-- Makefile / GCC/Clang:
-  - Add `-DSTATISTICS_U16_ENABLED=0 -DSTATISTICS_FLOAT_ENABLED=0` to `CFLAGS`/`CPPFLAGS`.
-  - Example: `CFLAGS += -DSTATISTICS_U16_ENABLED=0 -DSTATISTICS_FLOAT_ENABLED=0`
-
-- CMake:
-  - `target_compile_definitions(your_target PRIVATE STATISTICS_U16_ENABLED=0 STATISTICS_FLOAT_ENABLED=0)`
-
-- PlatformIO (`platformio.ini`):
-  - `build_flags = -DSTATISTICS_U16_ENABLED=0 -DSTATISTICS_FLOAT_ENABLED=0`
-
-Notes:
-
-- Use integer preprocessor literals `1`/`0` (without quotes).
-- If your application doesn’t use a given type, disabling it will reduce the resulting code size and may lower memory footprint.
-- To fully control the port layer (memory allocation, etc.), define `STATISTICS_PORT_USER` at compile time and provide the macros described in the `statistics_config.h` header.
+## Key features
+- minimal dependencies, small API surface
+- ring buffer with an indicator of “enough” samples collected
+- type-specific functions generated based on configuration
