@@ -97,6 +97,7 @@ Required macros when using a custom port:
 - ``statPortCalloc(num, size)``
 - ``statPortFree(ptr)``
 - ``statPortMemcpy(dest, src, count)``
+- ``statPortMemset(ptr, val, count)``
 
 Example (wrapping a custom allocator):
 
@@ -105,10 +106,11 @@ Example (wrapping a custom allocator):
    #define STATISTICS_PORT_USER 1
    #include <my_allocator.h>
 
-   #define statPortMalloc(sz)        my_malloc(sz)
-   #define statPortCalloc(n, sz)     my_calloc(n, sz)
-   #define statPortFree(p)           my_free(p)
-   #define statPortMemcpy(d, s, n)   my_memcpy(d, s, n)
+   #define statPortMalloc(sz)               my_malloc(sz)
+   #define statPortCalloc(n, sz)            my_calloc(n, sz)
+   #define statPortFree(p)                  my_free(p)
+   #define statPortMemcpy(d, s, n)          my_memcpy(d, s, n)
+   #define statPortMemset(ptr, val, count)  memset(ptr, val, count)
 
    #include <statistics.h>
 

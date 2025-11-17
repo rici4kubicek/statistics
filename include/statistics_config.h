@@ -36,6 +36,7 @@ extern "C" {
     #define statPortFree(ptr)                free(ptr)
     #define statPortMemcpy(dest, src, count) memcpy(dest, src, count)
     #define statPortCalloc(num, size)        calloc(num, size)
+    #define statPortMemset(ptr, val, count)  memset(ptr, val, count)
 #endif
 
 /** @} */
