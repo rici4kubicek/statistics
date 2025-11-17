@@ -36,7 +36,16 @@ extern "C" {
     #define statPortFree(ptr)                free(ptr)
     #define statPortMemcpy(dest, src, count) memcpy(dest, src, count)
     #define statPortCalloc(num, size)        calloc(num, size)
-    #define statPortMemset(ptr, val, count)  memset(ptr, val, count)
+  * Define `STATISTICS_PORT_USER` at compile time and provide compatible
+  * implementations of the following macros prior to including this header if
+  * you need to map them to a platform-specific allocator:
+  * - `statPortMalloc(size)`
+  * - `statPortFree(ptr)`
+  * - `statPortMemcpy(dest, src, count)`
+  * - `statPortCalloc(num, size)`
+  * - `statPortMemset(ptr, val, count)`
+  *
+  * @{ */
 #endif
 
 /** @} */
