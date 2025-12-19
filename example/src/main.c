@@ -1,4 +1,5 @@
 #include "statistics.h"
+#include <inttypes.h>
 #include <stdio.h>
 #include <time.h>
 
@@ -31,8 +32,11 @@ int main()
     printf("Max: %d\n", Statistics_Max_U8(&stat));
     printf("Min: %d\n", Statistics_Min_U8(&stat));
     printf("Mean: %d\n", Statistics_Mean_U8(&stat));
-    printf("Variance: %f\n", Statistics_Variance_U8(&stat));
-    printf("Stdev: %f\n", Statistics_Stdev_U8(&stat));
+
+    int64_t variance = Statistics_Variance_U8(&stat);
+    int64_t stdev = Statistics_Stdev_U8(&stat);
+    printf("Variance: %" PRId64 " (actual: %" PRId64 ".%03" PRId64 ")\n", variance, variance / 1000, variance % 1000);
+    printf("Stdev: %" PRId64 " (actual: %" PRId64 ".%03" PRId64 ")\n", stdev, stdev / 1000, stdev % 1000);
 
     return 0;
 }
