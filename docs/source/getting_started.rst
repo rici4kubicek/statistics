@@ -95,11 +95,13 @@ computing statistics for ``uint16_t`` (adjust according to the enabled types in
            uint16_t maxv = Statistics_Max_U16(&stat);
            int64_t var = Statistics_Variance_U16(&stat);
            int64_t sd = Statistics_Stdev_U16(&stat);
+
+           // Use llabs for fractional part to handle negative values correctly
            printf("mean=%lld.%03lld min=%u max=%u var=%lld.%03lld sd=%lld.%03lld\n",
-                  (long long)(mean / 1000), (long long)(mean % 1000),
+                  (long long)(mean / 1000), llabs(mean % 1000),
                   minv, maxv,
-                  (long long)(var / 1000), (long long)(var % 1000),
-                  (long long)(sd / 1000), (long long)(sd % 1000));
+                  (long long)(var / 1000), llabs(var % 1000),
+                  (long long)(sd / 1000), llabs(sd % 1000));
        }
 
        Statistics_Free(&stat);

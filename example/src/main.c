@@ -1,6 +1,7 @@
 #include "statistics.h"
 #include <inttypes.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 Statistics stat;
@@ -36,9 +37,10 @@ int main()
     int64_t variance = Statistics_Variance_U8(&stat);
     int64_t stdev = Statistics_Stdev_U8(&stat);
 
-    printf("Mean: %" PRId64 " (actual: %" PRId64 ".%03" PRId64 ")\n", mean, mean / 1000, mean % 1000);
-    printf("Variance: %" PRId64 " (actual: %" PRId64 ".%03" PRId64 ")\n", variance, variance / 1000, variance % 1000);
-    printf("Stdev: %" PRId64 " (actual: %" PRId64 ".%03" PRId64 ")\n", stdev, stdev / 1000, stdev % 1000);
+    // Use llabs for fractional part to handle negative values correctly
+    printf("Mean: %" PRId64 " (actual: %" PRId64 ".%03lld)\n", mean, mean / 1000, llabs(mean % 1000));
+    printf("Variance: %" PRId64 " (actual: %" PRId64 ".%03lld)\n", variance, variance / 1000, llabs(variance % 1000));
+    printf("Stdev: %" PRId64 " (actual: %" PRId64 ".%03lld)\n", stdev, stdev / 1000, llabs(stdev % 1000));
 
     printf("\n--- Testing Float type ---\n");
     Statistics statF;
