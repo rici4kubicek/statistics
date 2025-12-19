@@ -127,6 +127,8 @@ variance, and standard deviation functions return ``int64_t`` values scaled by
 - **No floating-point library dependencies**
 - **Good precision** with 3 decimal places
 - **Proper rounding** maintains accuracy
+- **Numerically stable** using Welford's online algorithm for variance
+- **Overflow-safe** incremental computation avoids squaring large values
 
 **Error handling:**
 

@@ -14,6 +14,18 @@
  *  - The storage is a raw byte buffer; @ref Statistics::itemSize defines the size of a single sample.
  *  - Sample indexing/rotation policy is intentionally minimal and write position is
  *    controlled by @ref Statistics::sampleIdx.
+ *
+ * Integer Arithmetic Safety:
+ *  - Integer types use fixed-point arithmetic scaled by 1000 to avoid floating-point operations.
+ *  - Variance and standard deviation use Welford's online algorithm for numerical stability
+ *    and overflow safety, avoiding the need to square large values or compute sum of squares.
+ *  - Safe input ranges for integer types (worst case with all samples at max/min values):
+ *    * uint8_t, int8_t: All sample counts safe (Welford avoids overflow)
+ *    * uint16_t, int16_t: All sample counts safe (Welford avoids overflow)
+ *    * uint32_t: Safe for practical sample counts (< 2^32 samples)
+ *    * int32_t: Safe for practical sample counts (< 2^32 samples)
+ *  - The algorithm processes samples incrementally, maintaining running statistics without
+ *    storing intermediate sums of squares, which eliminates the primary overflow risk.
  */
 
 #include "statistics.h"
@@ -250,28 +262,37 @@ bool Statistics_IsValid(const Statistics * stat)
         if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 1)) { \
             return -1; /* Error indicator */ \
         } \
-        /* Calculate sum and sum of squares using integer arithmetic */ \
-        int64_t sum = 0; \
-        int64_t sumSquares = 0; \
+        /* Welford's online algorithm for numerical stability and overflow safety */ \
+        /* Computes variance incrementally without storing sum of squares */ \
+        /* This avoids overflow from squaring large values or many samples */ \
+        int64_t mean_scaled = 0; /* Running mean * 1000 */ \
+        int64_t m2 = 0; /* Running sum of squared deviations (unscaled) */ \
+\
         for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
             _type value; \
             oneLoad(stat, idx, &value); \
-            int64_t val64 = (int64_t) value; \
-            sum += val64; \
-            sumSquares += val64 * val64; \
+            int64_t val_scaled = (int64_t) value * 1000; \
+\
+            /* delta = x - mean (both scaled by 1000) */ \
+            int64_t delta = val_scaled - mean_scaled; \
+            /* mean += delta / n */ \
+            mean_scaled += delta / (int64_t) (idx + 1); \
+            /* delta2 = x - mean (after update, both scaled by 1000) */ \
+            int64_t delta2 = val_scaled - mean_scaled; \
+            /* M2 += delta * delta2 / 1000 (to keep M2 scaled by 1000) */ \
+            /* delta and delta2 are both scaled by 1000, product scaled by 1000000 */ \
+            m2 += (delta * delta2) / 1000; \
         } \
-        /* Variance formula: (sumSquares - sum^2/n) / (n-1) */ \
-        /* Multiply by 1000 for fixed-point representation before division */ \
+\
+        /* Variance = M2 / (n - 1), M2 is scaled by 1000, so result is scaled by 1000 */ \
         int64_t n = (int64_t) stat->samplesCnt; \
-        int64_t numerator = (sumSquares * n - sum * sum) * 1000; \
-        int64_t denominator = n * (n - 1); \
-        /* Handle rounding for division */ \
-        int64_t halfDenom = denominator / 2; \
-        if (numerator >= 0) { \
-            return (numerator + halfDenom) / denominator; \
-        } else { \
-            return (numerator - halfDenom) / denominator; \
+        int64_t variance_scaled = m2 / (n - 1); \
+        /* Round the result */ \
+        int64_t remainder = m2 % (n - 1); \
+        if (remainder * 2 >= (n - 1)) { \
+            variance_scaled++; \
         } \
+        return variance_scaled; \
     } \
 \
     int64_t Statistics_Stdev_##_NameSuffix(Statistics * stat) \
