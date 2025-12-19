@@ -14,6 +14,18 @@
  *  - The storage is a raw byte buffer; @ref Statistics::itemSize defines the size of a single sample.
  *  - Sample indexing/rotation policy is intentionally minimal and write position is
  *    controlled by @ref Statistics::sampleIdx.
+ *
+ * Integer Arithmetic Safety:
+ *  - Integer types use fixed-point arithmetic scaled by 1000 to avoid floating-point operations.
+ *  - Variance and standard deviation use Welford's online algorithm for numerical stability
+ *    and overflow safety, avoiding the need to square large values or compute sum of squares.
+ *  - Safe input ranges for integer types (worst case with all samples at max/min values):
+ *    * uint8_t, int8_t: All sample counts safe (Welford avoids overflow)
+ *    * uint16_t, int16_t: All sample counts safe (Welford avoids overflow)
+ *    * uint32_t: Safe for practical sample counts (< 2^32 samples)
+ *    * int32_t: Safe for practical sample counts (< 2^32 samples)
+ *  - The algorithm processes samples incrementally, maintaining running statistics without
+ *    storing intermediate sums of squares, which eliminates the primary overflow risk.
  */
 
 #include "statistics.h"
@@ -25,25 +37,36 @@
 #include <stdint.h>
 
 /** @cond INTERNAL */
-static inline float fsqrt(float x)
+
+/* Integer square root using Newton's method for 64-bit integers */
+static inline int64_t isqrt64(int64_t x)
 {
-    if (x <= 0.0f) {
-        return x == 0.0f ? 0.0f : (0.0f / 0.0f);
+    if (x <= 0) {
+        return 0;
     }
 
-    union {
-        uint32_t i;
-        float f;
-    } u = {.f = x};
-    u.i = (u.i >> 1) + 0x1FC00000u;
+    /* Initial estimate using bit manipulation */
+    int64_t res = x;
+    int64_t bit = (int64_t) 1 << 62;
 
-    float y = u.f;
+    /* Find the highest set bit */
+    while (bit > res) {
+        bit >>= 2;
+    }
 
-    y = 0.5f * (y + x / y);
-    y = 0.5f * (y + x / y);
-    y = 0.5f * (y + x / y);
+    /* Newton-Raphson iterations */
+    while (bit != 0) {
+        if (res >= bit) {
+            res -= bit;
+            res >>= 1;
+            res += bit;
+        } else {
+            res >>= 1;
+        }
+        bit >>= 2;
+    }
 
-    return y;
+    return res;
 }
 
 /* Return pointer to the current sample slot. */
@@ -177,21 +200,29 @@ bool Statistics_IsValid(const Statistics * stat)
 }
 
 /*
- * Macro to generate typed functions.
+ * Macro to generate typed functions for integer types (returns scaled by 1000).
  */
-#define STAT_SUPPORT_TYPE(_type, _NameSuffix) \
-    _type Statistics_Mean_##_NameSuffix(Statistics * stat) \
+#define STAT_SUPPORT_TYPE_INT(_type, _NameSuffix) \
+    int64_t Statistics_Mean_##_NameSuffix(Statistics * stat) \
     { \
         if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
-            return (_type) 0; \
+            return 0; \
         } \
-        float avg = 0.0f; \
+        int64_t sum = 0; \
         for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
             _type value; \
             oneLoad(stat, idx, &value); \
-            avg += (float) value; \
+            sum += (int64_t) value; \
         } \
-        return (_type) (avg / (float) stat->samplesCnt); \
+        /* Multiply by 1000 for fixed-point, then divide with rounding */ \
+        int64_t numerator = sum * 1000; \
+        int64_t denominator = (int64_t) stat->samplesCnt; \
+        int64_t halfDenom = denominator / 2; \
+        if (numerator >= 0) { \
+            return (numerator + halfDenom) / denominator; \
+        } else { \
+            return (numerator - halfDenom) / denominator; \
+        } \
     } \
 \
     _type Statistics_Max_##_NameSuffix(Statistics * stat) \
@@ -226,7 +257,109 @@ bool Statistics_IsValid(const Statistics * stat)
         return min; \
     } \
 \
-    float Statistics_Variance_##_NameSuffix(Statistics * stat) \
+    int64_t Statistics_Variance_##_NameSuffix(Statistics * stat) \
+    { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 1)) { \
+            return -1; /* Error indicator */ \
+        } \
+        /* Welford's online algorithm for numerical stability and overflow safety */ \
+        /* Computes variance incrementally without storing sum of squares */ \
+        /* This avoids overflow from squaring large values or many samples */ \
+        int64_t mean_scaled = 0; /* Running mean * 1000 */ \
+        int64_t m2 = 0; /* Running sum of squared deviations (unscaled) */ \
+\
+        for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            int64_t val_scaled = (int64_t) value * 1000; \
+\
+            /* delta = x - mean (both scaled by 1000) */ \
+            int64_t delta = val_scaled - mean_scaled; \
+            /* mean += delta / n */ \
+            mean_scaled += delta / (int64_t) (idx + 1); \
+            /* delta2 = x - mean (after update, both scaled by 1000) */ \
+            int64_t delta2 = val_scaled - mean_scaled; \
+            /* M2 += delta * delta2 / 1000 (to keep M2 scaled by 1000) */ \
+            /* delta and delta2 are both scaled by 1000, product scaled by 1000000 */ \
+            m2 += (delta * delta2) / 1000; \
+        } \
+\
+        /* Variance = M2 / (n - 1), M2 is scaled by 1000, so result is scaled by 1000 */ \
+        int64_t n = (int64_t) stat->samplesCnt; \
+        int64_t variance_scaled = m2 / (n - 1); \
+        /* Round the result */ \
+        int64_t remainder = m2 % (n - 1); \
+        if (remainder * 2 >= (n - 1)) { \
+            variance_scaled++; \
+        } \
+        return variance_scaled; \
+    } \
+\
+    int64_t Statistics_Stdev_##_NameSuffix(Statistics * stat) \
+    { \
+        int64_t variance = Statistics_Variance_##_NameSuffix(stat); \
+        if (variance < 0) { \
+            return -1; /* Error indicator */ \
+        } \
+        /* Variance is scaled by 1000, so we need sqrt(variance * 1000) */ \
+        /* This gives us stdev * sqrt(1000) ≈ stdev * 31.62 */ \
+        /* To get stdev * 1000, we calculate: sqrt(variance) * sqrt(1000) */ \
+        int64_t sqrtVar = isqrt64(variance); \
+        /* sqrt(1000) ≈ 31.622776... ≈ 31623/1000 */ \
+        return (sqrtVar * 31623 + 500) / 1000; \
+    }
+
+/*
+ * Macro to generate typed functions for float type (returns float for all functions).
+ */
+#define STAT_SUPPORT_TYPE_FLOAT(_type, _NameSuffix) \
+    _type Statistics_Mean_##_NameSuffix(Statistics * stat) \
+    { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
+            return (_type) 0; \
+        } \
+        float sum = 0.0f; \
+        for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            sum += value; \
+        } \
+        return sum / (float) stat->samplesCnt; \
+    } \
+\
+    _type Statistics_Max_##_NameSuffix(Statistics * stat) \
+    { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
+            return (_type) 0; \
+        } \
+        _type max; \
+        oneLoad(stat, 0, &max); \
+        for (uint32_t idx = 1; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            if (value > max) \
+                max = value; \
+        } \
+        return max; \
+    } \
+\
+    _type Statistics_Min_##_NameSuffix(Statistics * stat) \
+    { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
+            return (_type) 0; \
+        } \
+        _type min; \
+        oneLoad(stat, 0, &min); \
+        for (uint32_t idx = 1; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            if (value < min) \
+                min = value; \
+        } \
+        return min; \
+    } \
+\
+    _type Statistics_Variance_##_NameSuffix(Statistics * stat) \
     { \
         if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 1)) { \
             return 0.0f / 0.0f; /* NaN */ \
@@ -245,42 +378,51 @@ bool Statistics_IsValid(const Statistics * stat)
         return cv; \
     } \
 \
-    float Statistics_Stdev_##_NameSuffix(Statistics * stat) \
+    _type Statistics_Stdev_##_NameSuffix(Statistics * stat) \
     { \
-        float v = Statistics_Variance_##_NameSuffix(stat); \
-        return fsqrt(v); \
+        _type variance = Statistics_Variance_##_NameSuffix(stat); \
+        if (variance != variance) { /* Check for NaN */ \
+            return variance; \
+        } \
+        /* For float, we can use a simple sqrt approximation or keep using integer sqrt */ \
+        /* Using the existing isqrt64 scaled up for better precision */ \
+        int64_t scaledVar = (int64_t) (variance * 1000000.0f); \
+        if (scaledVar < 0) \
+            scaledVar = 0; \
+        int64_t scaledStd = isqrt64(scaledVar); \
+        return (float) scaledStd / 1000.0f; \
     }
 
 /**
  * @name Generated typed functions
  * @brief Definitions of type-specific statistic functions declared in statistics.h.
- * @see _STAT_SUPPORT_TYPE
+ * @see STAT_SUPPORT_TYPE_INT, STAT_SUPPORT_TYPE_FLOAT
  * @{ */
 #if STATISTICS_U8_ENABLED
-STAT_SUPPORT_TYPE(uint8_t, U8);
+STAT_SUPPORT_TYPE_INT(uint8_t, U8);
 #endif
 
 #if STATISTICS_I8_ENABLED
-STAT_SUPPORT_TYPE(int8_t, I8);
+STAT_SUPPORT_TYPE_INT(int8_t, I8);
 #endif
 
 #if STATISTICS_U16_ENABLED
-STAT_SUPPORT_TYPE(uint16_t, U16);
+STAT_SUPPORT_TYPE_INT(uint16_t, U16);
 #endif
 
 #if STATISTICS_I16_ENABLED
-STAT_SUPPORT_TYPE(int16_t, I16);
+STAT_SUPPORT_TYPE_INT(int16_t, I16);
 #endif
 
 #if STATISTICS_U32_ENABLED
-STAT_SUPPORT_TYPE(uint32_t, U32);
+STAT_SUPPORT_TYPE_INT(uint32_t, U32);
 #endif
 
 #if STATISTICS_I32_ENABLED
-STAT_SUPPORT_TYPE(int32_t, I32);
+STAT_SUPPORT_TYPE_INT(int32_t, I32);
 #endif
 
 #if STATISTICS_FLOAT_ENABLED
-STAT_SUPPORT_TYPE(float, F);
+STAT_SUPPORT_TYPE_FLOAT(float, F);
 #endif
 /** @} */

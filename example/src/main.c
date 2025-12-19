@@ -1,5 +1,7 @@
 #include "statistics.h"
+#include <inttypes.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 Statistics stat;
@@ -30,9 +32,39 @@ int main()
 
     printf("Max: %d\n", Statistics_Max_U8(&stat));
     printf("Min: %d\n", Statistics_Min_U8(&stat));
-    printf("Mean: %d\n", Statistics_Mean_U8(&stat));
-    printf("Variance: %f\n", Statistics_Variance_U8(&stat));
-    printf("Stdev: %f\n", Statistics_Stdev_U8(&stat));
 
+    int64_t mean = Statistics_Mean_U8(&stat);
+    int64_t variance = Statistics_Variance_U8(&stat);
+    int64_t stdev = Statistics_Stdev_U8(&stat);
+
+    // Use llabs for fractional part to handle negative values correctly
+    printf("Mean: %" PRId64 " (actual: %" PRId64 ".%03lld)\n", mean, mean / 1000, llabs(mean % 1000));
+    printf("Variance: %" PRId64 " (actual: %" PRId64 ".%03lld)\n", variance, variance / 1000, llabs(variance % 1000));
+    printf("Stdev: %" PRId64 " (actual: %" PRId64 ".%03lld)\n", stdev, stdev / 1000, llabs(stdev % 1000));
+
+    printf("\n--- Testing Float type ---\n");
+    Statistics statF;
+    Statistics_Init(&statF, sizeof(float), 4);
+    if (!Statistics_IsValid(&statF)) {
+        fprintf(stderr, "Statistics init failed: out of memory or invalid parameters.\n");
+        return 1;
+    }
+    float fv = 1.5f;
+    Statistics_AddSample(&statF, &fv);
+    fv = 21.3f;
+    Statistics_AddSample(&statF, &fv);
+    fv = 79.7f;
+    Statistics_AddSample(&statF, &fv);
+    fv = 100.2f;
+    Statistics_AddSample(&statF, &fv);
+
+    printf("Max: %.2f\n", Statistics_Max_F(&statF));
+    printf("Min: %.2f\n", Statistics_Min_F(&statF));
+    printf("Mean: %.2f\n", Statistics_Mean_F(&statF));
+    printf("Variance: %.2f\n", Statistics_Variance_F(&statF));
+    printf("Stdev: %.2f\n", Statistics_Stdev_F(&statF));
+
+    Statistics_Free(&statF);
+    Statistics_Free(&stat);
     return 0;
 }

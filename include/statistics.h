@@ -130,48 +130,68 @@ bool Statistics_IsValid(const Statistics * stat);
  * For each enabled scalar type, a set of functions is generated. Replace
  * <T> with one of: U8, I8, U16, I16, U32, I32, F (float).
  *
- * - `<base> Statistics_Mean_<T>(Statistics* stat)`
+ * **Integer types (U8, I8, U16, I16, U32, I32):**
+ * - `int64_t Statistics_Mean_<T>(Statistics* stat)` - Returns mean * 1000
  * - `<base> Statistics_Max_<T>(Statistics* stat)`
  * - `<base> Statistics_Min_<T>(Statistics* stat)`
- * - `float Statistics_Variance_<T>(Statistics* stat)`
- * - `float Statistics_Stdev_<T>(Statistics* stat)`
+ * - `int64_t Statistics_Variance_<T>(Statistics* stat)` - Returns variance * 1000
+ * - `int64_t Statistics_Stdev_<T>(Statistics* stat)` - Returns stdev * 1000
+ *
+ * **Float type (F):**
+ * - `float Statistics_Mean_F(Statistics* stat)` - Returns mean as float
+ * - `float Statistics_Max_F(Statistics* stat)`
+ * - `float Statistics_Min_F(Statistics* stat)`
+ * - `float Statistics_Variance_F(Statistics* stat)` - Returns variance as float
+ * - `float Statistics_Stdev_F(Statistics* stat)` - Returns stdev as float
  *
  * Where `<base>` is the underlying C type for <T> (e.g., `uint16_t` for U16).
+ *
+ * **Note:** Integer types use fixed-point arithmetic scaled by 1000 to avoid
+ * floating-point operations. Divide the result by 1000 to get the actual value.
+ * This is much faster on CPUs without FPU (e.g., STM32F0, Cortex-M0).
  * @{ */
-#define _STAT_SUPPORT_TYPE(_type, _NameSuffix) \
+#define _STAT_SUPPORT_TYPE_INT(_type, _NameSuffix) \
+    int64_t Statistics_Mean_##_NameSuffix(Statistics * stat); \
+    _type Statistics_Max_##_NameSuffix(Statistics * stat); \
+    _type Statistics_Min_##_NameSuffix(Statistics * stat); \
+    int64_t Statistics_Variance_##_NameSuffix(Statistics * stat); \
+    int64_t Statistics_Stdev_##_NameSuffix(Statistics * stat); \
+    /** @} */
+
+#define _STAT_SUPPORT_TYPE_FLOAT(_type, _NameSuffix) \
     _type Statistics_Mean_##_NameSuffix(Statistics * stat); \
     _type Statistics_Max_##_NameSuffix(Statistics * stat); \
     _type Statistics_Min_##_NameSuffix(Statistics * stat); \
-    float Statistics_Variance_##_NameSuffix(Statistics * stat); \
-    float Statistics_Stdev_##_NameSuffix(Statistics * stat); \
+    _type Statistics_Variance_##_NameSuffix(Statistics * stat); \
+    _type Statistics_Stdev_##_NameSuffix(Statistics * stat); \
     /** @} */
 
 #if STATISTICS_U8_ENABLED
-_STAT_SUPPORT_TYPE(uint8_t, U8);
+_STAT_SUPPORT_TYPE_INT(uint8_t, U8);
 #endif
 
 #if STATISTICS_I8_ENABLED
-_STAT_SUPPORT_TYPE(int8_t, I8);
+_STAT_SUPPORT_TYPE_INT(int8_t, I8);
 #endif
 
 #if STATISTICS_U16_ENABLED
-_STAT_SUPPORT_TYPE(uint16_t, U16);
+_STAT_SUPPORT_TYPE_INT(uint16_t, U16);
 #endif
 
 #if STATISTICS_I16_ENABLED
-_STAT_SUPPORT_TYPE(int16_t, I16);
+_STAT_SUPPORT_TYPE_INT(int16_t, I16);
 #endif
 
 #if STATISTICS_U32_ENABLED
-_STAT_SUPPORT_TYPE(uint32_t, U32);
+_STAT_SUPPORT_TYPE_INT(uint32_t, U32);
 #endif
 
 #if STATISTICS_I32_ENABLED
-_STAT_SUPPORT_TYPE(int32_t, I32);
+_STAT_SUPPORT_TYPE_INT(int32_t, I32);
 #endif
 
 #if STATISTICS_FLOAT_ENABLED
-_STAT_SUPPORT_TYPE(float, F);
+_STAT_SUPPORT_TYPE_FLOAT(float, F);
 #endif
 
 /** @} */ /* end of statistics_core */
