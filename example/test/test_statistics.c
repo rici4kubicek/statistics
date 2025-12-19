@@ -52,8 +52,9 @@ void test_Statistics_Mean_U8(void)
     const uint8_t data[5] = {10, 20, 30, 40, 50};
     fill_u8(&st, data, 5);
 
-    uint8_t avg = Statistics_Mean_U8(&st);
-    TEST_ASSERT_EQUAL_UINT8(30, avg);
+    int64_t avg = Statistics_Mean_U8(&st);
+    // Mean is now scaled by 1000: (10+20+30+40+50)/5 * 1000 = 30000
+    TEST_ASSERT_EQUAL_INT64(30000, avg);
 
     Statistics_Free(&st);
 }
@@ -73,8 +74,9 @@ void test_Statistics_Mean_U16(void)
     const uint16_t data[4] = {1000, 2000, 3000, 4000};
     fill_u16(&st, data, 4);
 
-    uint16_t avg = Statistics_Mean_U16(&st);
-    TEST_ASSERT_EQUAL_UINT16(2500, avg);
+    int64_t avg = Statistics_Mean_U16(&st);
+    // Mean is now scaled by 1000: (1000+2000+3000+4000)/4 * 1000 = 2500000
+    TEST_ASSERT_EQUAL_INT64(2500000, avg);
 
     Statistics_Free(&st);
 }
@@ -107,9 +109,9 @@ void test_Statistics_AddSample_WritesToCurrentIndex(void)
     st.sampleIdx = 2;
     Statistics_AddSample(&st, &v);
 
-    // Mean should be floor(77 / 5) = 15 with integer division
-    uint8_t avg = Statistics_Mean_U8(&st);
-    TEST_ASSERT_EQUAL_UINT8(77 / 5, avg);
+    // Mean is scaled by 1000: 77/5 * 1000 = 15400
+    int64_t avg = Statistics_Mean_U8(&st);
+    TEST_ASSERT_EQUAL_INT64(15400, avg);
 
     Statistics_Free(&st);
 }
@@ -122,8 +124,8 @@ void test_Statistics_Mean_U8_AllZero(void)
     uint8_t zeros[3] = {0};
     fill_u8(&st, zeros, 3);
 
-    uint8_t avg = Statistics_Mean_U8(&st);
-    TEST_ASSERT_EQUAL_UINT8(0, avg);
+    int64_t avg = Statistics_Mean_U8(&st);
+    TEST_ASSERT_EQUAL_INT64(0, avg);
 
     Statistics_Free(&st);
 }
@@ -151,8 +153,10 @@ void test_Statistics_Mean_U8_Rotation(void)
     const uint8_t first[5] = {10, 20, 30, 40, 50};
     fill_u8(&st, first, 5);
 
-    uint8_t avg = Statistics_Mean_U8(&st);
-    TEST_ASSERT_EQUAL_UINT8(35, avg);
+    // After rotation, buffer contains [50, 20, 30, 40]
+    // Mean: (50+20+30+40)/4 * 1000 = 35000
+    int64_t avg = Statistics_Mean_U8(&st);
+    TEST_ASSERT_EQUAL_INT64(35000, avg);
 
     Statistics_Free(&st);
 }
@@ -165,8 +169,10 @@ void test_Statistics_Mean_U16_Rotation(void)
     const uint16_t data[7] = {1000, 2000, 3000, 4000, 3123, 1234, 8457};
     fill_u16(&st, data, 7);
 
-    uint16_t avg = Statistics_Mean_U16(&st);
-    TEST_ASSERT_EQUAL_UINT16(4203, avg);
+    // After rotation, buffer contains [3123, 1234, 8457, 4000]
+    // Mean: (3123+1234+8457+4000)/4 * 1000 = 4203500
+    int64_t avg = Statistics_Mean_U16(&st);
+    TEST_ASSERT_EQUAL_INT64(4203500, avg);
 
     Statistics_Free(&st);
 }
