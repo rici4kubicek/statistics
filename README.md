@@ -12,5 +12,6 @@ scalar types. The documentation is generated with Doxygen and Sphinx (Breathe).
 - minimal dependencies, small API surface
 - ring buffer with an indicator of "enough" samples collected
 - type-specific functions generated based on configuration
-- **no floating-point operations** - optimized for embedded CPUs without FPU (e.g., STM32F0, Cortex-M0)
-- fixed-point arithmetic for variance and standard deviation (scaled by 1000)
+- **no floating-point operations for integer types** - optimized for embedded CPUs without FPU (e.g., STM32F0, Cortex-M0)
+- fixed-point arithmetic for integer types (mean, variance, stdev scaled by 1000)
+- native float support for float data types

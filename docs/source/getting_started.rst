@@ -136,9 +136,10 @@ return ``-1`` (or ``0`` for mean with no samples) to indicate an error
 
 **Float type:**
 
-For float types (``Statistics_*_F``), the mean function returns ``float``
-directly for maximum precision, while variance and standard deviation still
-use fixed-point ``int64_t`` scaled by 1000.
+For float types (``Statistics_*_F``), all functions return ``float`` directly
+for maximum precision. This maintains compatibility with existing floating-point
+code while still benefiting from the optimized integer implementation for
+integer data types.
 
 Notes
 -----
