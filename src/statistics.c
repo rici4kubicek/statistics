@@ -185,13 +185,19 @@ bool Statistics_IsValid(const Statistics * stat)
         if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
             return (_type) 0; \
         } \
-        float avg = 0.0f; \
+        int64_t sum = 0; \
         for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
             _type value; \
             oneLoad(stat, idx, &value); \
-            avg += (float) value; \
+            sum += (int64_t) value; \
         } \
-        return (_type) (avg / (float) stat->samplesCnt); \
+        /* Integer division with rounding for better accuracy */ \
+        int64_t halfCount = (int64_t) stat->samplesCnt / 2; \
+        if (sum >= 0) { \
+            return (_type) ((sum + halfCount) / (int64_t) stat->samplesCnt); \
+        } else { \
+            return (_type) ((sum - halfCount) / (int64_t) stat->samplesCnt); \
+        } \
     } \
 \
     _type Statistics_Max_##_NameSuffix(Statistics * stat) \
