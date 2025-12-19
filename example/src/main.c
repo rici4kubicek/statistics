@@ -59,5 +59,6 @@ int main()
     printf("Stdev: %.2f\n", Statistics_Stdev_F(&statF));
 
     Statistics_Free(&statF);
+    Statistics_Free(&stat);
     return 0;
 }
