@@ -141,8 +141,8 @@ bool Statistics_IsValid(const Statistics * stat);
  * - `float Statistics_Mean_F(Statistics* stat)` - Returns mean as float
  * - `float Statistics_Max_F(Statistics* stat)`
  * - `float Statistics_Min_F(Statistics* stat)`
- * - `int64_t Statistics_Variance_F(Statistics* stat)` - Returns variance * 1000
- * - `int64_t Statistics_Stdev_F(Statistics* stat)` - Returns stdev * 1000
+ * - `float Statistics_Variance_F(Statistics* stat)` - Returns variance as float
+ * - `float Statistics_Stdev_F(Statistics* stat)` - Returns stdev as float
  *
  * Where `<base>` is the underlying C type for <T> (e.g., `uint16_t` for U16).
  *
@@ -162,8 +162,8 @@ bool Statistics_IsValid(const Statistics * stat);
     _type Statistics_Mean_##_NameSuffix(Statistics * stat); \
     _type Statistics_Max_##_NameSuffix(Statistics * stat); \
     _type Statistics_Min_##_NameSuffix(Statistics * stat); \
-    int64_t Statistics_Variance_##_NameSuffix(Statistics * stat); \
-    int64_t Statistics_Stdev_##_NameSuffix(Statistics * stat); \
+    _type Statistics_Variance_##_NameSuffix(Statistics * stat); \
+    _type Statistics_Stdev_##_NameSuffix(Statistics * stat); \
     /** @} */
 
 #if STATISTICS_U8_ENABLED

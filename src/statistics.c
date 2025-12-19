@@ -289,7 +289,7 @@ bool Statistics_IsValid(const Statistics * stat)
     }
 
 /*
- * Macro to generate typed functions for float type (keeps float for mean).
+ * Macro to generate typed functions for float type (returns float for all functions).
  */
 #define STAT_SUPPORT_TYPE_FLOAT(_type, _NameSuffix) \
     _type Statistics_Mean_##_NameSuffix(Statistics * stat) \
@@ -338,47 +338,38 @@ bool Statistics_IsValid(const Statistics * stat)
         return min; \
     } \
 \
-    int64_t Statistics_Variance_##_NameSuffix(Statistics * stat) \
+    _type Statistics_Variance_##_NameSuffix(Statistics * stat) \
     { \
         if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 1)) { \
-            return -1; /* Error indicator */ \
+            return 0.0f / 0.0f; /* NaN */ \
         } \
-        /* Calculate sum and sum of squares using integer arithmetic */ \
-        int64_t sum = 0; \
-        int64_t sumSquares = 0; \
+        float total = 0.0f; \
+        float refVariance = 0.0f; \
         for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
             _type value; \
             oneLoad(stat, idx, &value); \
-            int64_t val64 = (int64_t) value; \
-            sum += val64; \
-            sumSquares += val64 * val64; \
+            float fv = (float) value; \
+            total += fv; \
+            refVariance += fv * fv; \
         } \
-        /* Variance formula: (sumSquares - sum^2/n) / (n-1) */ \
-        /* Multiply by 1000 for fixed-point representation before division */ \
-        int64_t n = (int64_t) stat->samplesCnt; \
-        int64_t numerator = (sumSquares * n - sum * sum) * 1000; \
-        int64_t denominator = n * (n - 1); \
-        /* Handle rounding for division */ \
-        int64_t halfDenom = denominator / 2; \
-        if (numerator >= 0) { \
-            return (numerator + halfDenom) / denominator; \
-        } else { \
-            return (numerator - halfDenom) / denominator; \
-        } \
+        float n = (float) stat->samplesCnt; \
+        float cv = (refVariance - (total * total) / n) / (n - 1.0f); \
+        return cv; \
     } \
 \
-    int64_t Statistics_Stdev_##_NameSuffix(Statistics * stat) \
+    _type Statistics_Stdev_##_NameSuffix(Statistics * stat) \
     { \
-        int64_t variance = Statistics_Variance_##_NameSuffix(stat); \
-        if (variance < 0) { \
-            return -1; /* Error indicator */ \
+        _type variance = Statistics_Variance_##_NameSuffix(stat); \
+        if (variance != variance) { /* Check for NaN */ \
+            return variance; \
         } \
-        /* Variance is scaled by 1000, so we need sqrt(variance * 1000) */ \
-        /* This gives us stdev * sqrt(1000) ≈ stdev * 31.62 */ \
-        /* To get stdev * 1000, we calculate: sqrt(variance) * sqrt(1000) */ \
-        int64_t sqrtVar = isqrt64(variance); \
-        /* sqrt(1000) ≈ 31.622776... ≈ 31623/1000 */ \
-        return (sqrtVar * 31623 + 500) / 1000; \
+        /* For float, we can use a simple sqrt approximation or keep using integer sqrt */ \
+        /* Using the existing isqrt64 scaled up for better precision */ \
+        int64_t scaledVar = (int64_t) (variance * 1000000.0f); \
+        if (scaledVar < 0) \
+            scaledVar = 0; \
+        int64_t scaledStd = isqrt64(scaledVar); \
+        return (float) scaledStd / 1000.0f; \
     }
 
 /**
