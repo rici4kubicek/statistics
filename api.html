@@ -46,6 +46,7 @@
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#installation-and-integration-into-a-project">Installation and integration into a project</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#quick-usage-example">Quick usage example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html#fixed-point-arithmetic-for-integer-types">Fixed-point arithmetic for integer types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#notes">Notes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#configuring-supported-types">Configuring supported types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="getting_started.html#further-reading">Further reading</a></li>
@@ -64,7 +65,8 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#groups">Groups</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#c._STAT_SUPPORT_TYPE"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c._STAT_SUPPORT_TYPE_INT"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_INT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c._STAT_SUPPORT_TYPE_FLOAT"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_FLOAT</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv410samplesCnt"><code class="docutils literal notranslate"><span class="pre">samplesCnt</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv49sampleIdx"><code class="docutils literal notranslate"><span class="pre">sampleIdx</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv48itemSize"><code class="docutils literal notranslate"><span class="pre">itemSize</span></code></a></li>
@@ -124,8 +126,13 @@ extracted from header comments and grouped using Doxygen.</p>
 <section id="groups">
 <h2>Groups<a class="headerlink" href="#groups" title="Link to this heading"></a></h2>
 <dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c._STAT_SUPPORT_TYPE">
-<span class="target" id="group__statistics__core_1ga45b63279cee42cca00cacd7a4bc9ae53"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_type</span></span>, <span class="n"><span class="pre">_NameSuffix</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c._STAT_SUPPORT_TYPE" title="Link to this definition"></a><br /></dt>
+<dt class="sig sig-object cpp" id="c._STAT_SUPPORT_TYPE_INT">
+<span class="target" id="group__statistics__core_1ga6e5616080d26e783134d321b4b478e24"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE_INT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_type</span></span>, <span class="n"><span class="pre">_NameSuffix</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c._STAT_SUPPORT_TYPE_INT" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c._STAT_SUPPORT_TYPE_FLOAT">
+<span class="target" id="group__statistics__core_1ga4291d6e24e91edcbc36e4b913cb4e5b8"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE_FLOAT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_type</span></span>, <span class="n"><span class="pre">_NameSuffix</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c._STAT_SUPPORT_TYPE_FLOAT" title="Link to this definition"></a><br /></dt>
 <dd></dd></dl>
 
 <dl class="cpp var">
@@ -281,15 +288,24 @@ extracted from header comments and grouped using Doxygen.</p>
 <div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-type-specific-statistic-functions">Type-specific statistic functions</p>
 <p>For each enabled scalar type, a set of functions is generated. Replace &lt;T&gt; with one of: U8, I8, U16, I16, U32, I32, F (float).</p>
-<p><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Mean_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<p><strong>Integer types (U8, I8, U16, I16, U32, I32):</strong><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Mean_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns mean * 1000</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Max_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Min_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Variance_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Stdev_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Variance_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns variance * 1000</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Stdev_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns stdev * 1000</p></li>
 </ul>
 </p>
-<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span></code> is the underlying C type for &lt;T&gt; (e.g., <code class="docutils literal notranslate"><span class="pre">uint16_t</span></code> for U16). </p>
+<p><strong>Float type (F):</strong><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Mean_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns mean as float</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Max_F(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Min_F(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Variance_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns variance as float</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Stdev_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns stdev as float</p></li>
+</ul>
+</p>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span></code> is the underlying C type for &lt;T&gt; (e.g., <code class="docutils literal notranslate"><span class="pre">uint16_t</span></code> for U16).</p>
+<p><strong>Note:</strong> Integer types use fixed-point arithmetic scaled by 1000 to avoid floating-point operations. Divide the result by 1000 to get the actual value. This is much faster on CPUs without FPU (e.g., STM32F0, Cortex-M0). </p>
 </div>
 <dl class="cpp struct">
 <dt class="sig sig-object cpp">
