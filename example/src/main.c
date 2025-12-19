@@ -45,6 +45,10 @@ int main()
     printf("\n--- Testing Float type ---\n");
     Statistics statF;
     Statistics_Init(&statF, sizeof(float), 4);
+    if (!Statistics_IsValid(&statF)) {
+        fprintf(stderr, "Statistics init failed: out of memory or invalid parameters.\n");
+        return 1;
+    }
     float fv = 1.5f;
     Statistics_AddSample(&statF, &fv);
     fv = 21.3f;
