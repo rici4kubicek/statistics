@@ -93,14 +93,43 @@ computing statistics for ``uint16_t`` (adjust according to the enabled types in
            uint16_t mean = Statistics_Mean_U16(&stat);
            uint16_t minv = Statistics_Min_U16(&stat);
            uint16_t maxv = Statistics_Max_U16(&stat);
-           float var = Statistics_Variance_U16(&stat);
-           float sd = Statistics_Stdev_U16(&stat);
-           printf("mean=%u min=%u max=%u var=%.3f sd=%.3f\n", mean, minv, maxv, var, sd);
+           int64_t var = Statistics_Variance_U16(&stat);
+           int64_t sd = Statistics_Stdev_U16(&stat);
+           printf("mean=%u min=%u max=%u var=%lld.%03lld sd=%lld.%03lld\n",
+                  mean, minv, maxv,
+                  (long long)(var / 1000), (long long)(var % 1000),
+                  (long long)(sd / 1000), (long long)(sd % 1000));
        }
 
        Statistics_Free(&stat);
        return 0;
    }
+
+Fixed-point arithmetic for variance and standard deviation
+-----------------------------------------------------------
+
+To optimize performance on embedded systems without a Floating Point Unit (FPU),
+such as STM32F0 or Cortex-M0 processors, the library uses **integer arithmetic
+exclusively**. Variance and standard deviation functions return ``int64_t``
+values scaled by **1000** instead of ``float``.
+
+**Converting fixed-point results:**
+
+- To get the integer part: ``value / 1000``
+- To get the fractional part: ``value % 1000``
+- Example: A return value of ``890250`` represents ``890.250``
+
+**Benefits:**
+
+- **Much faster** on CPUs without FPU (can be 10-100x faster)
+- **No floating-point library dependencies**
+- **Good precision** with 3 decimal places
+- **Proper rounding** maintains accuracy
+
+**Error handling:**
+
+Both ``Statistics_Variance_*`` and ``Statistics_Stdev_*`` return ``-1`` to
+indicate an error (e.g., insufficient samples, invalid statistics object).
 
 Notes
 -----
