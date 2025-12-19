@@ -133,17 +133,20 @@ bool Statistics_IsValid(const Statistics * stat);
  * - `<base> Statistics_Mean_<T>(Statistics* stat)`
  * - `<base> Statistics_Max_<T>(Statistics* stat)`
  * - `<base> Statistics_Min_<T>(Statistics* stat)`
- * - `float Statistics_Variance_<T>(Statistics* stat)`
- * - `float Statistics_Stdev_<T>(Statistics* stat)`
+ * - `int64_t Statistics_Variance_<T>(Statistics* stat)` - Returns variance * 1000
+ * - `int64_t Statistics_Stdev_<T>(Statistics* stat)` - Returns stdev * 1000
  *
  * Where `<base>` is the underlying C type for <T> (e.g., `uint16_t` for U16).
+ *
+ * Note: Variance and standard deviation use fixed-point arithmetic scaled by 1000
+ * to avoid floating-point operations. Divide the result by 1000 to get the actual value.
  * @{ */
 #define _STAT_SUPPORT_TYPE(_type, _NameSuffix) \
     _type Statistics_Mean_##_NameSuffix(Statistics * stat); \
     _type Statistics_Max_##_NameSuffix(Statistics * stat); \
     _type Statistics_Min_##_NameSuffix(Statistics * stat); \
-    float Statistics_Variance_##_NameSuffix(Statistics * stat); \
-    float Statistics_Stdev_##_NameSuffix(Statistics * stat); \
+    int64_t Statistics_Variance_##_NameSuffix(Statistics * stat); \
+    int64_t Statistics_Stdev_##_NameSuffix(Statistics * stat); \
     /** @} */
 
 #if STATISTICS_U8_ENABLED

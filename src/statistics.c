@@ -25,25 +25,36 @@
 #include <stdint.h>
 
 /** @cond INTERNAL */
-static inline float fsqrt(float x)
+
+/* Integer square root using Newton's method for 64-bit integers */
+static inline int64_t isqrt64(int64_t x)
 {
-    if (x <= 0.0f) {
-        return x == 0.0f ? 0.0f : (0.0f / 0.0f);
+    if (x <= 0) {
+        return 0;
     }
 
-    union {
-        uint32_t i;
-        float f;
-    } u = {.f = x};
-    u.i = (u.i >> 1) + 0x1FC00000u;
+    /* Initial estimate using bit manipulation */
+    int64_t res = x;
+    int64_t bit = (int64_t) 1 << 62;
 
-    float y = u.f;
+    /* Find the highest set bit */
+    while (bit > res) {
+        bit >>= 2;
+    }
 
-    y = 0.5f * (y + x / y);
-    y = 0.5f * (y + x / y);
-    y = 0.5f * (y + x / y);
+    /* Newton-Raphson iterations */
+    while (bit != 0) {
+        if (res >= bit) {
+            res -= bit;
+            res >>= 1;
+            res += bit;
+        } else {
+            res >>= 1;
+        }
+        bit >>= 2;
+    }
 
-    return y;
+    return res;
 }
 
 /* Return pointer to the current sample slot. */
@@ -232,29 +243,47 @@ bool Statistics_IsValid(const Statistics * stat)
         return min; \
     } \
 \
-    float Statistics_Variance_##_NameSuffix(Statistics * stat) \
+    int64_t Statistics_Variance_##_NameSuffix(Statistics * stat) \
     { \
         if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 1)) { \
-            return 0.0f / 0.0f; /* NaN */ \
+            return -1; /* Error indicator */ \
         } \
-        float total = 0.0f; \
-        float refVariance = 0.0f; \
+        /* Calculate sum and sum of squares using integer arithmetic */ \
+        int64_t sum = 0; \
+        int64_t sumSquares = 0; \
         for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
             _type value; \
             oneLoad(stat, idx, &value); \
-            float fv = (float) value; \
-            total += fv; \
-            refVariance += fv * fv; \
+            int64_t val64 = (int64_t) value; \
+            sum += val64; \
+            sumSquares += val64 * val64; \
         } \
-        float n = (float) stat->samplesCnt; \
-        float cv = (refVariance - (total * total) / n) / (n - 1.0f); \
-        return cv; \
+        /* Variance formula: (sumSquares - sum^2/n) / (n-1) */ \
+        /* Multiply by 1000 for fixed-point representation before division */ \
+        int64_t n = (int64_t) stat->samplesCnt; \
+        int64_t numerator = (sumSquares * n - sum * sum) * 1000; \
+        int64_t denominator = n * (n - 1); \
+        /* Handle rounding for division */ \
+        int64_t halfDenom = denominator / 2; \
+        if (numerator >= 0) { \
+            return (numerator + halfDenom) / denominator; \
+        } else { \
+            return (numerator - halfDenom) / denominator; \
+        } \
     } \
 \
-    float Statistics_Stdev_##_NameSuffix(Statistics * stat) \
+    int64_t Statistics_Stdev_##_NameSuffix(Statistics * stat) \
     { \
-        float v = Statistics_Variance_##_NameSuffix(stat); \
-        return fsqrt(v); \
+        int64_t variance = Statistics_Variance_##_NameSuffix(stat); \
+        if (variance < 0) { \
+            return -1; /* Error indicator */ \
+        } \
+        /* Variance is scaled by 1000, so we need sqrt(variance * 1000) */ \
+        /* This gives us stdev * sqrt(1000) ≈ stdev * 31.62 */ \
+        /* To get stdev * 1000, we calculate: sqrt(variance) * sqrt(1000) */ \
+        int64_t sqrtVar = isqrt64(variance); \
+        /* sqrt(1000) ≈ 31.622776... ≈ 31623/1000 */ \
+        return (sqrtVar * 31623 + 500) / 1000; \
     }
 
 /**
