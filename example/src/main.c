@@ -40,5 +40,24 @@ int main()
     printf("Variance: %" PRId64 " (actual: %" PRId64 ".%03" PRId64 ")\n", variance, variance / 1000, variance % 1000);
     printf("Stdev: %" PRId64 " (actual: %" PRId64 ".%03" PRId64 ")\n", stdev, stdev / 1000, stdev % 1000);
 
+    printf("\n--- Testing Float type ---\n");
+    Statistics statF;
+    Statistics_Init(&statF, sizeof(float), 4);
+    float fv = 1.5f;
+    Statistics_AddSample(&statF, &fv);
+    fv = 21.3f;
+    Statistics_AddSample(&statF, &fv);
+    fv = 79.7f;
+    Statistics_AddSample(&statF, &fv);
+    fv = 100.2f;
+    Statistics_AddSample(&statF, &fv);
+
+    printf("Max: %.2f\n", Statistics_Max_F(&statF));
+    printf("Min: %.2f\n", Statistics_Min_F(&statF));
+    printf("Mean: %.2f\n", Statistics_Mean_F(&statF));
+    printf("Variance: %.2f\n", Statistics_Variance_F(&statF));
+    printf("Stdev: %.2f\n", Statistics_Stdev_F(&statF));
+
+    Statistics_Free(&statF);
     return 0;
 }
