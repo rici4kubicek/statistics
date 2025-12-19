@@ -188,13 +188,13 @@ bool Statistics_IsValid(const Statistics * stat)
 }
 
 /*
- * Macro to generate typed functions.
+ * Macro to generate typed functions for integer types (returns scaled by 1000).
  */
-#define STAT_SUPPORT_TYPE(_type, _NameSuffix) \
-    _type Statistics_Mean_##_NameSuffix(Statistics * stat) \
+#define STAT_SUPPORT_TYPE_INT(_type, _NameSuffix) \
+    int64_t Statistics_Mean_##_NameSuffix(Statistics * stat) \
     { \
         if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
-            return (_type) 0; \
+            return 0; \
         } \
         int64_t sum = 0; \
         for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
@@ -202,13 +202,108 @@ bool Statistics_IsValid(const Statistics * stat)
             oneLoad(stat, idx, &value); \
             sum += (int64_t) value; \
         } \
-        /* Integer division with rounding for better accuracy */ \
-        int64_t halfCount = (int64_t) stat->samplesCnt / 2; \
-        if (sum >= 0) { \
-            return (_type) ((sum + halfCount) / (int64_t) stat->samplesCnt); \
+        /* Multiply by 1000 for fixed-point, then divide with rounding */ \
+        int64_t numerator = sum * 1000; \
+        int64_t denominator = (int64_t) stat->samplesCnt; \
+        int64_t halfDenom = denominator / 2; \
+        if (numerator >= 0) { \
+            return (numerator + halfDenom) / denominator; \
         } else { \
-            return (_type) ((sum - halfCount) / (int64_t) stat->samplesCnt); \
+            return (numerator - halfDenom) / denominator; \
         } \
+    } \
+\
+    _type Statistics_Max_##_NameSuffix(Statistics * stat) \
+    { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
+            return (_type) 0; \
+        } \
+        _type max; \
+        oneLoad(stat, 0, &max); \
+        for (uint32_t idx = 1; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            if (value > max) \
+                max = value; \
+        } \
+        return max; \
+    } \
+\
+    _type Statistics_Min_##_NameSuffix(Statistics * stat) \
+    { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
+            return (_type) 0; \
+        } \
+        _type min; \
+        oneLoad(stat, 0, &min); \
+        for (uint32_t idx = 1; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            if (value < min) \
+                min = value; \
+        } \
+        return min; \
+    } \
+\
+    int64_t Statistics_Variance_##_NameSuffix(Statistics * stat) \
+    { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 1)) { \
+            return -1; /* Error indicator */ \
+        } \
+        /* Calculate sum and sum of squares using integer arithmetic */ \
+        int64_t sum = 0; \
+        int64_t sumSquares = 0; \
+        for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            int64_t val64 = (int64_t) value; \
+            sum += val64; \
+            sumSquares += val64 * val64; \
+        } \
+        /* Variance formula: (sumSquares - sum^2/n) / (n-1) */ \
+        /* Multiply by 1000 for fixed-point representation before division */ \
+        int64_t n = (int64_t) stat->samplesCnt; \
+        int64_t numerator = (sumSquares * n - sum * sum) * 1000; \
+        int64_t denominator = n * (n - 1); \
+        /* Handle rounding for division */ \
+        int64_t halfDenom = denominator / 2; \
+        if (numerator >= 0) { \
+            return (numerator + halfDenom) / denominator; \
+        } else { \
+            return (numerator - halfDenom) / denominator; \
+        } \
+    } \
+\
+    int64_t Statistics_Stdev_##_NameSuffix(Statistics * stat) \
+    { \
+        int64_t variance = Statistics_Variance_##_NameSuffix(stat); \
+        if (variance < 0) { \
+            return -1; /* Error indicator */ \
+        } \
+        /* Variance is scaled by 1000, so we need sqrt(variance * 1000) */ \
+        /* This gives us stdev * sqrt(1000) ≈ stdev * 31.62 */ \
+        /* To get stdev * 1000, we calculate: sqrt(variance) * sqrt(1000) */ \
+        int64_t sqrtVar = isqrt64(variance); \
+        /* sqrt(1000) ≈ 31.622776... ≈ 31623/1000 */ \
+        return (sqrtVar * 31623 + 500) / 1000; \
+    }
+
+/*
+ * Macro to generate typed functions for float type (keeps float for mean).
+ */
+#define STAT_SUPPORT_TYPE_FLOAT(_type, _NameSuffix) \
+    _type Statistics_Mean_##_NameSuffix(Statistics * stat) \
+    { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 0)) { \
+            return (_type) 0; \
+        } \
+        float sum = 0.0f; \
+        for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            sum += value; \
+        } \
+        return sum / (float) stat->samplesCnt; \
     } \
 \
     _type Statistics_Max_##_NameSuffix(Statistics * stat) \
@@ -289,33 +384,33 @@ bool Statistics_IsValid(const Statistics * stat)
 /**
  * @name Generated typed functions
  * @brief Definitions of type-specific statistic functions declared in statistics.h.
- * @see _STAT_SUPPORT_TYPE
+ * @see STAT_SUPPORT_TYPE_INT, STAT_SUPPORT_TYPE_FLOAT
  * @{ */
 #if STATISTICS_U8_ENABLED
-STAT_SUPPORT_TYPE(uint8_t, U8);
+STAT_SUPPORT_TYPE_INT(uint8_t, U8);
 #endif
 
 #if STATISTICS_I8_ENABLED
-STAT_SUPPORT_TYPE(int8_t, I8);
+STAT_SUPPORT_TYPE_INT(int8_t, I8);
 #endif
 
 #if STATISTICS_U16_ENABLED
-STAT_SUPPORT_TYPE(uint16_t, U16);
+STAT_SUPPORT_TYPE_INT(uint16_t, U16);
 #endif
 
 #if STATISTICS_I16_ENABLED
-STAT_SUPPORT_TYPE(int16_t, I16);
+STAT_SUPPORT_TYPE_INT(int16_t, I16);
 #endif
 
 #if STATISTICS_U32_ENABLED
-STAT_SUPPORT_TYPE(uint32_t, U32);
+STAT_SUPPORT_TYPE_INT(uint32_t, U32);
 #endif
 
 #if STATISTICS_I32_ENABLED
-STAT_SUPPORT_TYPE(int32_t, I32);
+STAT_SUPPORT_TYPE_INT(int32_t, I32);
 #endif
 
 #if STATISTICS_FLOAT_ENABLED
-STAT_SUPPORT_TYPE(float, F);
+STAT_SUPPORT_TYPE_FLOAT(float, F);
 #endif
 /** @} */
