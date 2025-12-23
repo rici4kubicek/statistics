@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; Statistics - Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/version-selector.css?v=16040d73" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/version-selector.js?v=bd7bb5b6"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Statistics documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Statistics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv410Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c._STAT_SUPPORT_TYPE_INT"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_INT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c._STAT_SUPPORT_TYPE_FLOAT"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_FLOAT</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv410samplesCnt"><code class="docutils literal notranslate"><span class="pre">samplesCnt</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv49sampleIdx"><code class="docutils literal notranslate"><span class="pre">sampleIdx</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv48itemSize"><code class="docutils literal notranslate"><span class="pre">itemSize</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv47samples"><code class="docutils literal notranslate"><span class="pre">samples</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv413enoughSamples"><code class="docutils literal notranslate"><span class="pre">enoughSamples</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#_CPPv45valid"><code class="docutils literal notranslate"><span class="pre">valid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.statPortMalloc"><code class="docutils literal notranslate"><span class="pre">statPortMalloc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.statPortFree"><code class="docutils literal notranslate"><span class="pre">statPortFree</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.statPortMemcpy"><code class="docutils literal notranslate"><span class="pre">statPortMemcpy</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.statPortCalloc"><code class="docutils literal notranslate"><span class="pre">statPortCalloc</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.statPortMemset"><code class="docutils literal notranslate"><span class="pre">statPortMemset</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_U8_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_U8_ENABLED</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_I8_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_I8_ENABLED</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_U16_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_U16_ENABLED</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_I16_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_I16_ENABLED</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_U32_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_U32_ENABLED</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_I32_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_I32_ENABLED</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#c.STATISTICS_FLOAT_ENABLED"><code class="docutils literal notranslate"><span class="pre">STATISTICS_FLOAT_ENABLED</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Statistics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/rici4kubicek/statistics/blob/main/docs/source/api.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv410Statistics">
+<span id="_CPPv310Statistics"></span><span id="_CPPv210Statistics"></span><span id="Statistics"></span><span class="target" id="structStatistics"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics</span></span></span><a class="headerlink" href="#_CPPv410Statistics" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;<a class="reference internal" href="#statistics_8h"><span class="std std-ref">statistics.h</span></a>&gt;</em></div>
+<p><a class="reference internal" href="#structStatistics"><span class="std std-ref">Statistics</span></a> buffer descriptor. </p>
+<p>The structure describes a ring-like buffer that stores <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> elements each of size <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">itemSize</span></a> bytes. New samples are written at <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">sampleIdx</span></a> and the index is advanced with wrap-around. </p>
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="statistics_8h"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">statistics.h</span></span></dt>
+<dd><div class="docutils container">
+<em>#include &lt;<a class="reference internal" href="#statistics__config_8h"><span class="std std-ref">statistics_config.h</span></a>&gt;</em></div>
+<div class="docutils container">
+<em>#include &lt;stdbool.h&gt;</em></div>
+<div class="docutils container">
+<em>#include &lt;stdint.h&gt;</em></div>
+<p>Public API for a lightweight statistics helper working with fixed-size samples. </p>
+<p>This header exposes a small C API to collect samples of arbitrary, fixed size and compute basic statistics for a set of supported scalar types.</p>
+<p>Design highlights<ul class="simple">
+<li><p>The storage is a raw contiguous byte buffer; the size of one sample is given by <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">Statistics::itemSize</span></a>.</p></li>
+<li><p>Sample rotation policy is intentionally minimal: the write position is controlled by <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">Statistics::sampleIdx</span></a> and wraps to 0 when the configured capacity is reached. When a full wrap occurs, <a class="reference internal" href="#group__statistics__core_1ga9c943b26a4d9e061bc7dd2cf81a878f4"><span class="std std-ref">Statistics::enoughSamples</span></a> is set to true.</p></li>
+<li><p>Memory primitives are provided by the port layer in <a class="reference internal" href="#statistics__config_8h"><span class="std std-ref">statistics_config.h</span></a>.</p></li>
+</ul>
+</p>
+<p>See <a class="reference internal" href="#statistics_8c"><span class="std std-ref">statistics.c</span></a> for the implementation details. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-type-specific-statistic-functions">Type-specific statistic functions</p>
+<p>For each enabled scalar type, a set of functions is generated. Replace &lt;T&gt; with one of: U8, I8, U16, I16, U32, I32, F (float).</p>
+<p><strong>Integer types (U8, I8, U16, I16, U32, I32):</strong><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Mean_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns mean * 1000</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Max_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Min_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Variance_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns variance * 1000</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Stdev_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns stdev * 1000</p></li>
+</ul>
+</p>
+<p><strong>Float type (F):</strong><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Mean_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns mean as float</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Max_F(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Min_F(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Variance_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns variance as float</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Stdev_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns stdev as float</p></li>
+</ul>
+</p>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span></code> is the underlying C type for &lt;T&gt; (e.g., <code class="docutils literal notranslate"><span class="pre">uint16_t</span></code> for U16).</p>
+<p><strong>Note:</strong> Integer types use fixed-point arithmetic scaled by 1000 to avoid floating-point operations. Divide the result by 1000 to get the actual value. This is much faster on CPUs without FPU (e.g., STM32F0, Cortex-M0). </p>
+</div>
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="statistics__config_8h"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">statistics_config.h</span></span></dt>
+<dd><div class="docutils container">
+<em>#include &lt;stdlib.h&gt;</em></div>
+<div class="docutils container">
+<em>#include &lt;string.h&gt;</em></div>
+<p>Port layer and configuration switches for the statistics module. </p>
+<p>This header provides two things:<ul class="simple">
+<li><p>A thin porting layer for memory and copying primitives (see <a class="reference internal" href="#group__statistics__port"><span class="std std-ref">Port layer</span></a>).</p></li>
+<li><p>Compile-time feature toggles to enable/disable type-specific APIs (see <a class="reference internal" href="#group__statistics__types"><span class="std std-ref">Feature toggles (type support)</span></a>). </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="statistics_8c"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">statistics.c</span></span></dt>
+<dd><div class="docutils container">
+<em>#include “<a class="reference internal" href="#statistics_8h"><span class="std std-ref">statistics.h</span></a>”</em></div>
+<div class="docutils container">
+<em>#include “<a class="reference internal" href="#statistics__config_8h"><span class="std std-ref">statistics_config.h</span></a>”</em></div>
+<div class="docutils container">
+<em>#include &lt;stddef.h&gt;</em></div>
+<div class="docutils container">
+<em>#include &lt;stdlib.h&gt;</em></div>
+<div class="docutils container">
+<em>#include &lt;stdint.h&gt;</em></div>
+<p>Implementation of the lightweight statistics helper. </p>
+<p>This module provides:<ul class="simple">
+<li><p>Initialization and deinitialization of a samples buffer</p></li>
+<li><p>Appending a new sample into the buffer</p></li>
+<li><p>Computing basic statistics for specific, supported types via macro-generated functions</p></li>
+</ul>
+</p>
+<p>Notes:<ul class="simple">
+<li><p>Memory functions (malloc/free/memcpy/calloc) are abstracted by the port layer in <a class="reference internal" href="#statistics__config_8h"><span class="std std-ref">statistics_config.h</span></a> so the project can replace them if needed.</p></li>
+<li><p>The storage is a raw byte buffer; <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">Statistics::itemSize</span></a> defines the size of a single sample.</p></li>
+<li><p>Sample indexing/rotation policy is intentionally minimal and write position is controlled by <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">Statistics::sampleIdx</span></a>.</p></li>
+</ul>
+</p>
+<p>Integer Arithmetic Safety:<ul class="simple">
+<li><p>Integer types use fixed-point arithmetic scaled by 1000 to avoid floating-point operations.</p></li>
+<li><p>Variance and standard deviation use Welford’s online algorithm for numerical stability and overflow safety, avoiding the need to square large values or compute sum of squares.</p></li>
+<li><p>Safe input ranges for integer types (worst case with all samples at max/min values):<ul>
+<li><p>uint8_t, int8_t: All sample counts safe (Welford avoids overflow)</p></li>
+<li><p>uint16_t, int16_t: All sample counts safe (Welford avoids overflow)</p></li>
+<li><p>uint32_t: Safe for practical sample counts (&lt; 2^32 samples)</p></li>
+<li><p>int32_t: Safe for practical sample counts (&lt; 2^32 samples)</p></li>
+</ul>
+</p></li>
+<li><p>The algorithm processes samples incrementally, maintaining running statistics without storing intermediate sums of squares, which eliminates the primary overflow risk. </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__statistics__core"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">Core</span> <span class="pre">API</span></span></dt>
+<dd><p>Core structures and functions to collect samples and compute statistics. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-type-specific-statistic-functions">Type-specific statistic functions</p>
+<p>For each enabled scalar type, a set of functions is generated. Replace &lt;T&gt; with one of: U8, I8, U16, I16, U32, I32, F (float).</p>
+<p><strong>Integer types (U8, I8, U16, I16, U32, I32):</strong><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Mean_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns mean * 1000</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Max_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Min_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Variance_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns variance * 1000</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Stdev_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns stdev * 1000</p></li>
+</ul>
+</p>
+<p><strong>Float type (F):</strong><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Mean_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns mean as float</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Max_F(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Min_F(Statistics*</span> <span class="pre">stat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Variance_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns variance as float</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Stdev_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns stdev as float</p></li>
+</ul>
+</p>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span></code> is the underlying C type for &lt;T&gt; (e.g., <code class="docutils literal notranslate"><span class="pre">uint16_t</span></code> for U16).</p>
+<p><strong>Note:</strong> Integer types use fixed-point arithmetic scaled by 1000 to avoid floating-point operations. Divide the result by 1000 to get the actual value. This is much faster on CPUs without FPU (e.g., STM32F0, Cortex-M0). </p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c._STAT_SUPPORT_TYPE_INT">
+<span class="target" id="group__statistics__core_1ga6e5616080d26e783134d321b4b478e24"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE_INT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_type</span></span>, <span class="n"><span class="pre">_NameSuffix</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c._STAT_SUPPORT_TYPE_INT" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c._STAT_SUPPORT_TYPE_FLOAT">
+<span class="target" id="group__statistics__core_1ga4291d6e24e91edcbc36e4b913cb4e5b8"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE_FLOAT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_type</span></span>, <span class="n"><span class="pre">_NameSuffix</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c._STAT_SUPPORT_TYPE_FLOAT" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv410samplesCnt">
+<span id="_CPPv310samplesCnt"></span><span id="_CPPv210samplesCnt"></span><span id="samplesCnt__uint32_t"></span><span class="target" id="group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">samplesCnt</span></span></span><a class="headerlink" href="#_CPPv410samplesCnt" title="Link to this definition"></a><br /></dt>
+<dd><p>Number of samples allocated in the buffer. Total capacity (number of items). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv49sampleIdx">
+<span id="_CPPv39sampleIdx"></span><span id="_CPPv29sampleIdx"></span><span id="sampleIdx__uint32_t"></span><span class="target" id="group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sampleIdx</span></span></span><a class="headerlink" href="#_CPPv49sampleIdx" title="Link to this definition"></a><br /></dt>
+<dd><p>Index of the current write position in the buffer. Current write index [0..samplesCnt-1]. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv48itemSize">
+<span id="_CPPv38itemSize"></span><span id="_CPPv28itemSize"></span><span id="itemSize__uint8_t"></span><span class="target" id="group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">itemSize</span></span></span><a class="headerlink" href="#_CPPv48itemSize" title="Link to this definition"></a><br /></dt>
+<dd><p>Size of a single sample in bytes. Bytes per sample. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv47samples">
+<span id="_CPPv37samples"></span><span id="_CPPv27samples"></span><span id="samples__uint8_tP"></span><span class="target" id="group__statistics__core_1gacf546e72ab1276b62f6489abea7c2cb8"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">samples</span></span></span><a class="headerlink" href="#_CPPv47samples" title="Link to this definition"></a><br /></dt>
+<dd><p>Pointer to contiguous storage of size <code class="docutils literal notranslate"><span class="pre">samplesCnt</span></code> * <code class="docutils literal notranslate"><span class="pre">itemSize</span></code>. Backing storage pointer. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv413enoughSamples">
+<span id="_CPPv313enoughSamples"></span><span id="_CPPv213enoughSamples"></span><span id="enoughSamples__b"></span><span class="target" id="group__statistics__core_1ga9c943b26a4d9e061bc7dd2cf81a878f4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">enoughSamples</span></span></span><a class="headerlink" href="#_CPPv413enoughSamples" title="Link to this definition"></a><br /></dt>
+<dd><p>Flag indicating that at least <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> samples have been written, i.e., a full cycle completed and statistics are meaningful for the full window. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv45valid">
+<span id="_CPPv35valid"></span><span id="_CPPv25valid"></span><span id="valid__b"></span><span class="target" id="group__statistics__core_1ga3e2ef0905902208954f4f2a6c68923ea"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">valid</span></span></span><a class="headerlink" href="#_CPPv45valid" title="Link to this definition"></a><br /></dt>
+<dd><p>Internal validity flag. Set to true only if initialization allocated the samples buffer successfully. Public callers can query this via Statistics_IsValid and must not call statistic functions if false. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__statistics__port"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">Port</span> <span class="pre">layer</span></span></dt>
+<dd><p>Replaceable memory/copy primitives used by the module. </p>
+<p>Define <code class="docutils literal notranslate"><span class="pre">STATISTICS_PORT_USER</span></code> at compile time and provide compatible implementations of the following macros prior to including this header if you need to map them to a platform-specific allocator:<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">statPortMalloc(size)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">statPortFree(ptr)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">statPortMemcpy(dest,</span> <span class="pre">src,</span> <span class="pre">count)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">statPortCalloc(num,</span> <span class="pre">size)</span></code></p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.statPortMalloc">
+<span class="target" id="group__statistics__port_1ga0026d0cc5e6bf745eaede963a5a48fc9"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortMalloc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortMalloc" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.statPortFree">
+<span class="target" id="group__statistics__port_1gae530d238b2b735455b5b64cc4d0950c8"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortFree</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ptr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortFree" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.statPortMemcpy">
+<span class="target" id="group__statistics__port_1gac11cc2c6def509c87f1a06355979d168"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortMemcpy</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">dest</span></span>, <span class="n"><span class="pre">src</span></span>, <span class="n"><span class="pre">count</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortMemcpy" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.statPortCalloc">
+<span class="target" id="group__statistics__port_1ga885c6953fd86677561dbafc1c521fd4a"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortCalloc</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">num</span></span>, <span class="n"><span class="pre">size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortCalloc" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.statPortMemset">
+<span class="target" id="group__statistics__port_1ga3e8f883daa78cdd92b4923507e3fec26"></span><span class="sig-name descname"><span class="n"><span class="pre">statPortMemset</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">ptr</span></span>, <span class="n"><span class="pre">val</span></span>, <span class="n"><span class="pre">count</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.statPortMemset" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="group__statistics__types"></span><em><span class="pre">group</span></em> <span class="sig-name descname"><span class="pre">Feature</span> <span class="pre">toggles</span> <span class="pre">(type</span> <span class="pre">support)</span></span></dt>
+<dd><p>Enable or disable type-specific statistic functions. </p>
+<p>Use the following compile-time macros to fine-tune which typed functions are available. If a macro is not pre-defined, the default is <code class="docutils literal notranslate"><span class="pre">1</span></code> (enabled). Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable.</p>
+<p>How to change values:<ul class="simple">
+<li><p>Compiler (recommended): <code class="docutils literal notranslate"><span class="pre">-DSTATISTICS_U8_ENABLED=0</span> <span class="pre">-DSTATISTICS_FLOAT_ENABLED=0</span></code></p></li>
+<li><p>Or in code before including this header: <code class="docutils literal notranslate"><span class="pre">#define</span> <span class="pre">STATISTICS_U8_ENABLED</span> <span class="pre">0</span></code></p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.STATISTICS_U8_ENABLED">
+<span class="target" id="group__statistics__types_1ga36a83db57280d72c44e02fc0db8c3592"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_U8_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_U8_ENABLED" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.STATISTICS_I8_ENABLED">
+<span class="target" id="group__statistics__types_1ga356d04e0ef6e1faa16e5fd40c04eaddc"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_I8_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_I8_ENABLED" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.STATISTICS_U16_ENABLED">
+<span class="target" id="group__statistics__types_1ga04df440159c69fa68a490f53da59470e"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_U16_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_U16_ENABLED" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.STATISTICS_I16_ENABLED">
+<span class="target" id="group__statistics__types_1ga9e6d85436c05b04305a4bf08a750be37"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_I16_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_I16_ENABLED" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.STATISTICS_U32_ENABLED">
+<span class="target" id="group__statistics__types_1gad2387ea766d7ad4fe0ab98215f6ef749"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_U32_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_U32_ENABLED" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.STATISTICS_I32_ENABLED">
+<span class="target" id="group__statistics__types_1ga6f4f649d63ec27f724be7ebdac2851e6"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_I32_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_I32_ENABLED" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.STATISTICS_FLOAT_ENABLED">
+<span class="target" id="group__statistics__types_1gacba0298aa72e1633e4e5ab6a0bd39b24"></span><span class="sig-name descname"><span class="n"><span class="pre">STATISTICS_FLOAT_ENABLED</span></span></span><a class="headerlink" href="#c.STATISTICS_FLOAT_ENABLED" title="Link to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="dir_d44c64559bbebec7f509842c48db8b23"></span><em><span class="pre">dir</span></em> <span class="sig-name descname"><span class="pre">/home/runner/work/statistics/statistics/include</span></span></dt>
+<dd></dd></dl>
+
+<dl>
+<dt class="sig sig-object cpp">
+<span class="target" id="dir_68267d1309a1af8e8297ef4c3efbcdba"></span><em><span class="pre">dir</span></em> <span class="sig-name descname"><span class="pre">/home/runner/work/statistics/statistics/src</span></span></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Statistics documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Richard Kubíček.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+   
+
+  <!-- Version selector -->
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Statistics</span>
+      v: v1.0.2
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+        <dd>
+          <a href="../v1.0.0/api.html">v1.0.0</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.0.1/api.html">v1.0.1</a>
+        </dd>
+        
+        <dd class="rtd-current-item">
+          <a href="api.html">v1.0.2</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.0.3/api.html">v1.0.3</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.0.4/api.html">v1.0.4</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.0.5/api.html">v1.0.5</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.1.0/api.html">v1.1.0</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.1.1/api.html">v1.1.1</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.2.0/api.html">v1.2.0</a>
+        </dd>
+        
+        <dd>
+          <a href="../main/api.html">main</a>
+        </dd>
+        
+      </dl>
+    </div>
+  </div>
+  
+
+
+</body>
+</html>

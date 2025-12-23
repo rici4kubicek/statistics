@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; Statistics - Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/version-selector.css?v=16040d73" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/version-selector.js?v=bd7bb5b6"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User configuration" href="user_configuration.html" />
+    <link rel="prev" title="Statistics — Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Statistics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation-and-integration-into-a-project">Installation and integration into a project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#quick-usage-example">Quick usage example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#notes">Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-supported-types">Configuring supported types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_configuration.html">User configuration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#type-support-toggles">Type support toggles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#port-layer-custom-allocators-memcpy">Port layer (custom allocators/memcpy)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#runtime-window-configuration">Runtime window configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#build-system-quick-reference">Build system quick reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#safety-and-constraints">Safety and constraints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_configuration.html#further-reading">Further reading</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#groups">Groups</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api.html#c._STAT_SUPPORT_TYPE_INT"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_INT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#c._STAT_SUPPORT_TYPE_FLOAT"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_FLOAT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv410samplesCnt"><code class="docutils literal notranslate"><span class="pre">samplesCnt</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv49sampleIdx"><code class="docutils literal notranslate"><span class="pre">sampleIdx</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv48itemSize"><code class="docutils literal notranslate"><span class="pre">itemSize</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv47samples"><code class="docutils literal notranslate"><span class="pre">samples</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv413enoughSamples"><code class="docutils literal notranslate"><span class="pre">enoughSamples</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv45valid"><code class="docutils literal notranslate"><span class="pre">valid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv415Statistics_InitP10Statistics7uint8_t8uint32_t"><code class="docutils literal notranslate"><span class="pre">Statistics_Init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv416Statistics_ResetP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_Reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv415Statistics_FreeP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_Free()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv420Statistics_AddSampleP10StatisticsPKv"><code class="docutils literal notranslate"><span class="pre">Statistics_AddSample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv428Statistics_HaveEnoughSamplesP10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_HaveEnoughSamples()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv418Statistics_IsValidPK10Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics_IsValid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv410Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#main-structure">Main structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#header-file">Header file</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Statistics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/rici4kubicek/statistics/blob/main/docs/source/getting_started.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h1>
+<p>This page walks you through the basic usage of the library.</p>
+<section id="installation-and-integration-into-a-project">
+<h2>Installation and integration into a project<a class="headerlink" href="#installation-and-integration-into-a-project" title="Link to this heading"></a></h2>
+<p>The library is written in C and consists of the header <code class="docutils literal notranslate"><span class="pre">include/statistics.h</span></code>
+and the implementation in <code class="docutils literal notranslate"><span class="pre">src/statistics.c</span></code>. Configuration is controlled via
+<code class="docutils literal notranslate"><span class="pre">include/statistics_config.h</span></code>.</p>
+<p>Below are the recommended installation methods, similar to the PlatformIO
+Installation page:
+<a class="reference external" href="https://registry.platformio.org/libraries/rici4kubicek/Statistics/installation">https://registry.platformio.org/libraries/rici4kubicek/Statistics/installation</a></p>
+<ul>
+<li><dl>
+<dt>PlatformIO (recommended)</dt><dd><p>Add the dependency to your <code class="docutils literal notranslate"><span class="pre">platformio.ini</span></code>:</p>
+<blockquote>
+<div><div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[env:your_env]</span>
+<span class="na">platform</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">...</span>
+<span class="na">board</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">...</span>
+<span class="na">framework</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">...</span>
+<span class="na">lib_deps</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">rici4kubicek/Statistics@^1.0.0</span>
+</pre></div>
+</div>
+<p>Note: you can pin the version as needed. The latest version is listed on
+the library page in the PlatformIO registry.</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+<li><p>PlatformIO (install directly from the registry via CLI)</p>
+<p>Run in the project root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pio<span class="w"> </span>lib<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;rici4kubicek/Statistics&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>CMake / manual integration (without PlatformIO)</p>
+<ol class="arabic">
+<li><p>Add the source files to your build system:</p>
+<ul class="simple">
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">src/statistics.c</span></code> to your compilation.</p></li>
+<li><p>Make sure the <code class="docutils literal notranslate"><span class="pre">include</span></code> directory is on the include path.</p></li>
+</ul>
+<p>Example for CMake:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">add_library</span><span class="p">(</span><span class="s">Statistics</span><span class="w"> </span><span class="s">STATIC</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/src/statistics.c</span><span class="p">)</span>
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="s">Statistics</span><span class="w"> </span><span class="s">PUBLIC</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/include</span><span class="p">)</span>
+
+<span class="c"># optional: your targets that use the library</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">my_app</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s">Statistics</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Adjust the configuration in <code class="docutils literal notranslate"><span class="pre">include/statistics_config.h</span></code> as needed
+(enabled data types, window sizes, etc.).</p></li>
+</ol>
+</li>
+<li><p>As a git submodule</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https://github.com/rici4kubicek/statistics.git<span class="w"> </span>external/statistics
+</pre></div>
+</div>
+<p>Then add the source and include paths (see the CMake example above) to your
+build.</p>
+</li>
+</ul>
+</section>
+<section id="quick-usage-example">
+<h2>Quick usage example<a class="headerlink" href="#quick-usage-example" title="Link to this heading"></a></h2>
+<p>The following example demonstrates working with the ring buffer of samples and
+computing statistics for <code class="docutils literal notranslate"><span class="pre">uint16_t</span></code> (adjust according to the enabled types in
+<code class="docutils literal notranslate"><span class="pre">statistics_config.h</span></code>):</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;statistics.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Statistics</span><span class="w"> </span><span class="n">stat</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Statistics_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stat</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">),</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span><span class="w"> </span><span class="c1">// window of 8 samples</span>
+
+<span class="w">    </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">samples</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="p">};</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span><span class="o">/</span><span class="k">sizeof</span><span class="p">(</span><span class="n">samples</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Statistics_AddSample</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stat</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">samples</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Statistics_HaveEnoughSamples</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stat</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">mean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Statistics_Mean_U16</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stat</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">minv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Statistics_Min_U16</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stat</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">maxv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Statistics_Max_U16</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stat</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">var</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Statistics_Variance_U16</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stat</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Statistics_Stdev_U16</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stat</span><span class="p">);</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;mean=%u min=%u max=%u var=%.3f sd=%.3f</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">mean</span><span class="p">,</span><span class="w"> </span><span class="n">minv</span><span class="p">,</span><span class="w"> </span><span class="n">maxv</span><span class="p">,</span><span class="w"> </span><span class="n">var</span><span class="p">,</span><span class="w"> </span><span class="n">sd</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Statistics_Free</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stat</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The path to the Doxygen XML is configured in <code class="docutils literal notranslate"><span class="pre">docs/source/conf.py</span></code> via
+<code class="docutils literal notranslate"><span class="pre">breathe_projects</span></code> and points to <code class="docutils literal notranslate"><span class="pre">../build/doxygen/xml</span></code> (relative to
+<code class="docutils literal notranslate"><span class="pre">docs/source</span></code>).</p></li>
+<li><p>The documentation theme is <code class="docutils literal notranslate"><span class="pre">sphinx_rtd_theme</span></code>.</p></li>
+</ul>
+</section>
+<section id="configuring-supported-types">
+<h2>Configuring supported types<a class="headerlink" href="#configuring-supported-types" title="Link to this heading"></a></h2>
+<p>The public API generates a set of functions (<code class="docutils literal notranslate"><span class="pre">Mean</span></code>, <code class="docutils literal notranslate"><span class="pre">Min</span></code>, <code class="docutils literal notranslate"><span class="pre">Max</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Variance</span></code>, <code class="docutils literal notranslate"><span class="pre">Stdev</span></code>) for selected scalar types. Which types are enabled is
+controlled in <code class="docutils literal notranslate"><span class="pre">include/statistics_config.h</span></code> via the
+<code class="docutils literal notranslate"><span class="pre">STATISTICS_*_ENABLED</span></code> macros.</p>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="api.html"><span class="doc">API reference</span></a> – detailed API reference including Doxygen groups and entities</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/Doxyfile</span></code> – Doxygen configuration</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs/source/conf.py</span></code> – Sphinx and Breathe configuration</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Statistics — Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="user_configuration.html" class="btn btn-neutral float-right" title="User configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Richard Kubíček.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+   
+
+  <!-- Version selector -->
+  
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Statistics</span>
+      v: v1.1.1
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        
+        <dd>
+          <a href="../v1.0.0/index.html">v1.0.0</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.0.1/index.html">v1.0.1</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.0.2/index.html">v1.0.2</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.0.3/index.html">v1.0.3</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.0.4/index.html">v1.0.4</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.0.5/index.html">v1.0.5</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.1.0/getting_started.html">v1.1.0</a>
+        </dd>
+        
+        <dd class="rtd-current-item">
+          <a href="getting_started.html">v1.1.1</a>
+        </dd>
+        
+        <dd>
+          <a href="../v1.2.0/getting_started.html">v1.2.0</a>
+        </dd>
+        
+        <dd>
+          <a href="../main/getting_started.html">main</a>
+        </dd>
+        
+      </dl>
+    </div>
+  </div>
+  
+
+
+</body>
+</html>
