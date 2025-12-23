@@ -36,6 +36,7 @@ jobs:
       
       # Build the HTML docs with Sphinx multiversion
       # Note: Doxygen runs automatically via conf.py setup hook for each version
+      # Note: Version selector files are injected into all versions automatically
       - name: Build Sphinx documentation (all versions)
         run: |
           cd docs

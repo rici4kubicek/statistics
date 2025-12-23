@@ -23,12 +23,17 @@ The Statistics library documentation now includes a native version selector powe
 # From the repository root
 cd docs
 
-# 1. Generate Doxygen XML files (required for Breathe)
-doxygen Doxyfile
-
-# 2. Build documentation for all versions
+# Build documentation for all versions
+# Note: Doxygen runs automatically for each version
+# Note: Version selector is injected into all versions automatically
 make multiversion
 ```
+
+The build process:
+1. **sphinx-multiversion** builds docs for each git tag/branch
+2. **Doxygen** runs automatically for each version (via conf.py hook)
+3. **inject_version_selector.py** copies CSS/JS files to all versions
+4. **Root redirect** is created to point to main branch
 
 The output will be in `docs/build/html/` with the following structure:
 
@@ -72,7 +77,12 @@ smv_remote_whitelist = r'^origin$'
 2. For each matched ref, it checks out that version and builds the documentation
 3. All versions are built into separate directories under `build/html/`
 4. The version selector template injects a list of available versions into each page
-5. Users can click the selector to see and switch between all available versions
+5. **inject_version_selector.py** copies current CSS/JS files to all built versions (including old versions)
+6. Users can click the selector to see and switch between all available versions
+
+### Why Injection is Needed
+
+When sphinx-multiversion builds old versions (like v1.0.0), it checks out that git tag which may not have the version selector files. The injection script ensures all versions get the current version selector implementation, making it work consistently across all versions.
 
 ## Deployment Notes
 

@@ -39,6 +39,9 @@ def run_doxygen(app, config):
 
 def setup(app):
     app.connect('config-inited', run_doxygen)
+    # Note: setup_version_selector creates directories but sphinx-multiversion
+    # will check out the old version's files, overwriting our templates.
+    # The real solution is to commit these files so they exist in all versions.
 
 project = 'Statistics'
 copyright = '2025, Richard Kubíček'
@@ -121,3 +124,39 @@ smv_latest_version = 'main'
 
 # Prefer tags over branches
 smv_prefer_remote_refs = False
+
+# Override templates and static files for all versions
+# This ensures old versions get the version selector even if they didn't have it originally
+import shutil
+
+def copy_version_selector_files(app, exception):
+    """Copy version selector templates/static files to all version builds."""
+    if exception is not None:
+        return
+
+    # Get the main branch templates/static directory
+    main_templates = os.path.join(app.srcdir, '_templates')
+    main_static = os.path.join(app.srcdir, '_static')
+
+    # Only proceed if we have the version selector files
+    version_selector_css = os.path.join(main_static, 'version-selector.css')
+    version_selector_js = os.path.join(main_static, 'version-selector.js')
+    layout_template = os.path.join(main_templates, 'layout.html')
+
+    if not all([os.path.exists(f) for f in [version_selector_css, version_selector_js, layout_template]]):
+        print("Warning: Version selector files not found, skipping copy")
+        return
+
+# Setup hook to ensure version selector works across all versions
+def setup_version_selector(app):
+    """Ensure version selector templates are available for all built versions."""
+    # This runs before each version build
+    source_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Ensure _templates directory exists
+    templates_dir = os.path.join(source_dir, '_templates')
+    os.makedirs(templates_dir, exist_ok=True)
+
+    # Ensure _static directory exists
+    static_dir = os.path.join(source_dir, '_static')
+    os.makedirs(static_dir, exist_ok=True)

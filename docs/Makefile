@@ -19,6 +19,8 @@ help:
 multiversion:
 	@echo "Building documentation for multiple versions..."
 	$(SPHINXMULTIVERSION) "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS)
+	@echo "Injecting version selector into all versions..."
+	@python3 inject_version_selector.py
 	@echo "Creating root redirect to latest version..."
 	@cp "$(SOURCEDIR)/_templates/index_redirect.html" "$(BUILDDIR)/html/index.html"
 	@echo ""
