@@ -9,7 +9,7 @@
   <title>Getting started &mdash; Statistics - Documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="_static/version-selector.css?v=16040d73" />
+      <link rel="stylesheet" type="text/css" href="_static/version-selector.css?v=4020c2dd" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
@@ -17,7 +17,7 @@
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/version-selector.js?v=bd7bb5b6"></script>
+      <script src="_static/version-selector.js?v=e80080bd"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -269,6 +269,38 @@ controlled in <code class="docutils literal notranslate"><span class="pre">inclu
       </dl>
     </div>
   </div>
+
+  <!-- Inline version selector script as fallback -->
+  <script>
+  (function() {
+    function initVersionSelector() {
+      var versionSelector = document.querySelector('.rst-versions');
+      if (versionSelector) {
+        var currentVersion = versionSelector.querySelector('.rst-current-version');
+        if (currentVersion) {
+          currentVersion.onclick = function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            versionSelector.classList.toggle('shift-up');
+            return false;
+          };
+
+          document.onclick = function(event) {
+            if (!versionSelector.contains(event.target)) {
+              versionSelector.classList.remove('shift-up');
+            }
+          };
+        }
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initVersionSelector);
+    } else {
+      initVersionSelector();
+    }
+  })();
+  </script>
   
 
 

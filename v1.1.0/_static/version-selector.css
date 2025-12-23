@@ -8,7 +8,8 @@
     color: #fcfcfc;
     background: #1f1d1d;
     font-family: "Lato", "proxima-nova", "Helvetica Neue", Arial, sans-serif;
-    z-index: 400;
+    z-index: 9999;
+    transition: all 0.3s ease;
 }
 
 .rst-versions .rst-current-version {
@@ -19,6 +20,15 @@
     font-size: 90%;
     cursor: pointer;
     color: #27ae60;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.rst-versions .rst-current-version:hover {
+    background-color: #333;
 }
 
 .rst-versions .rst-current-version .fa {
