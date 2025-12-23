@@ -18,6 +18,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           persist-credentials: true
+          fetch-depth: 0  # Fetch all history and tags for multiversion
 
       # Set up a Python environment
       - name: Set up Python
@@ -25,29 +26,20 @@ jobs:
         with:
           python-version: '3.x'
 
-      # Install Sphinx, the Read the Docs theme, Breathe, and Doxygen
+      # Install Sphinx, the Read the Docs theme, Breathe, sphinx-multiversion, and Doxygen
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install sphinx sphinx-rtd-theme breathe
+          pip install sphinx sphinx-rtd-theme breathe sphinx-multiversion
           sudo apt-get update
           sudo apt-get install -y doxygen
       
-      # Pre-create the Doxygen output directory
-      - name: Create Doxygen output folder
-        run: mkdir -p docs/build/doxygen
-
-      # Run Doxygen to generate the XML documentation
-      - name: Generate Doxygen XML
+      # Build the HTML docs with Sphinx multiversion
+      # Note: Doxygen runs automatically via conf.py setup hook for each version
+      - name: Build Sphinx documentation (all versions)
         run: |
           cd docs
-          doxygen Doxyfile
-
-      # Build the HTML docs with Sphinx
-      - name: Build Sphinx documentation
-        run: |
-          cd docs
-          make html
+          make multiversion
 
       # Publish the built HTML to the gh-pages branch
       - name: Deploy to GitHub Pages

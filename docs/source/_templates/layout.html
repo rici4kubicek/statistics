@@ -1,0 +1,26 @@
+{% extends "!layout.html" %}
+
+{% block footer %}
+  {{ super() }}
+
+  <!-- Version selector -->
+  {% if versions %}
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"> Statistics</span>
+      v: {{ current_version.name if current_version else 'unknown' }}
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl>
+        <dt>Versions</dt>
+        {% for item in versions %}
+        <dd{% if current_version and item.name == current_version.name %} class="rtd-current-item"{% endif %}>
+          <a href="{{ item.url }}">{{ item.name }}</a>
+        </dd>
+        {% endfor %}
+      </dl>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}

@@ -5,6 +5,7 @@
 # from the environment for the first two.
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
+SPHINXMULTIVERSION ?= sphinx-multiversion
 SOURCEDIR     = source
 BUILDDIR      = build
 
@@ -12,7 +13,22 @@ BUILDDIR      = build
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile
+.PHONY: help Makefile clean multiversion
+
+# Build documentation for multiple versions (tags and branches)
+multiversion:
+	@echo "Building documentation for multiple versions..."
+	$(SPHINXMULTIVERSION) "$(SOURCEDIR)" "$(BUILDDIR)/html" $(SPHINXOPTS)
+	@echo "Creating root redirect to latest version..."
+	@cp "$(SOURCEDIR)/_templates/index_redirect.html" "$(BUILDDIR)/html/index.html"
+	@echo ""
+	@echo "Build finished. The HTML pages for all versions are in $(BUILDDIR)/html"
+	@echo "Open $(BUILDDIR)/html/index.html to view the documentation."
+
+# Clean all build artifacts including multiversion builds
+clean:
+	rm -rf "$(BUILDDIR)"
+	@echo "Build directory cleaned."
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
