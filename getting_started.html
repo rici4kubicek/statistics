@@ -144,7 +144,7 @@ the library page in the PlatformIO registry.</p>
 </li>
 <li><p>PlatformIO (install directly from the registry via CLI)</p>
 <p>Run in the project root:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pio<span class="w"> </span>lib<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;rici4kubicek/Statistics&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pio<span class="w"> </span>lib<span class="w"> </span>install<span class="w"> </span><span class="s2">"rici4kubicek/Statistics"</span>
 </pre></div>
 </div>
 </li>
@@ -204,7 +204,7 @@ computing statistics for <code class="docutils literal notranslate"><span class=
 <span class="w">        </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">sd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Statistics_Stdev_U16</span><span class="p">(</span><span class="o">&amp;</span><span class="n">stat</span><span class="p">);</span>
 
 <span class="w">        </span><span class="c1">// Use llabs for fractional part to handle negative values correctly</span>
-<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;mean=%lld.%03lld min=%u max=%u var=%lld.%03lld sd=%lld.%03lld</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="n">printf</span><span class="p">(</span><span class="s">"mean=%lld.%03lld min=%u max=%u var=%lld.%03lld sd=%lld.%03lld</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
 <span class="w">               </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="p">)(</span><span class="n">mean</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">),</span><span class="w"> </span><span class="n">llabs</span><span class="p">(</span><span class="n">mean</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="p">),</span>
 <span class="w">               </span><span class="n">minv</span><span class="p">,</span><span class="w"> </span><span class="n">maxv</span><span class="p">,</span>
 <span class="w">               </span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="kt">long</span><span class="p">)(</span><span class="n">var</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">1000</span><span class="p">),</span><span class="w"> </span><span class="n">llabs</span><span class="p">(</span><span class="n">var</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="p">),</span>
