@@ -343,11 +343,12 @@ extracted from header comments and grouped using Doxygen.</p>
 <dt class="sig sig-object cpp" id="_CPPv425ExponentialSmoothing_InitP20ExponentialSmoothingif">
 <span id="_CPPv325ExponentialSmoothing_InitP20ExponentialSmoothingif"></span><span id="_CPPv225ExponentialSmoothing_InitP20ExponentialSmoothingif"></span><span id="ExponentialSmoothing_Init__ExponentialSmoothingP.i.float"></span><span class="target" id="group__exponential__smoothing__core_1gadfecfdeeba1883d742352e8a120dd93d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothing_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420ExponentialSmoothing" title="ExponentialSmoothing"><span class="n"><span class="pre">ExponentialSmoothing</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">factor</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">initValue</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425ExponentialSmoothing_InitP20ExponentialSmoothingif" title="Link to this definition"></a><br /></dt>
 <dd><p>Initialize the filter with a smoothing factor and starting value. </p>
+<p><code class="docutils literal notranslate"><span class="pre">factor</span></code> must be positive. A non-positive value leaves the filter in an invalid state where <a class="reference internal" href="#group__exponential__smoothing__core_1ga0674681ccd504d3e3e4a2281cc065c1b"><span class="std std-ref">ExponentialSmoothing_Process</span></a> and <a class="reference internal" href="#group__exponential__smoothing__core_1ga414234c6bb4ab1711b0ac3e8c128cadf"><span class="std std-ref">ExponentialSmoothing_GetValue</span></a> are no-ops (the latter returns 0).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filter</strong> – <strong>[out]</strong> Pointer to the filter instance to initialize. </p></li>
-<li><p><strong>factor</strong> – Smoothing factor (larger = smoother, slower to react). </p></li>
+<li><p><strong>factor</strong> – Smoothing factor, must be &gt; 0 (larger = smoother, slower to react). </p></li>
 <li><p><strong>initValue</strong> – Initial filtered value. </p></li>
 </ul>
 </dd>
@@ -467,7 +468,7 @@ extracted from header comments and grouped using Doxygen.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>reg</strong> – Pointer to the regression instance. </p></li>
 <li><p><strong>k</strong> – Extended uncertainty factor. </p></li>
-<li><p><strong>resY</strong> – Resolution of X values. </p></li>
+<li><p><strong>resY</strong> – Resolution of Y values. </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
