@@ -75,7 +75,7 @@ bool linReg_result(linReg_t * reg, float * pM, float * pB, float * pR, float * p
  * @brief Calculate uncertainty of the slope.
  * @param reg  Pointer to the regression instance.
  * @param k    Extended uncertainty factor.
- * @param resY Resolution of X values.
+ * @param resY Resolution of Y values.
  * @return Uncertainty of the slope.
  */
 float linReg_mUncertainty(linReg_t * reg, int32_t k, float resY);

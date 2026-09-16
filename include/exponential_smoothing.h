@@ -34,8 +34,12 @@ typedef struct {
 /**
  * @brief Initialize the filter with a smoothing factor and starting value.
  *
+ * @p factor must be positive. A non-positive value leaves the filter in an
+ * invalid state where @ref ExponentialSmoothing_Process and
+ * @ref ExponentialSmoothing_GetValue are no-ops (the latter returns 0).
+ *
  * @param[out] filter    Pointer to the filter instance to initialize.
- * @param      factor    Smoothing factor (larger = smoother, slower to react).
+ * @param      factor    Smoothing factor, must be > 0 (larger = smoother, slower to react).
  * @param      initValue Initial filtered value.
  */
 void ExponentialSmoothing_Init(ExponentialSmoothing * filter, int factor, float initValue);

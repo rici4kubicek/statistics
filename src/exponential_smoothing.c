@@ -11,13 +11,19 @@ void ExponentialSmoothing_Init(ExponentialSmoothing * filter, int factor, float 
         return;
     }
 
+    if (factor <= 0) {
+        filter->factor = 0;
+        filter->buffer = 0;
+        return;
+    }
+
     filter->factor = factor;
     filter->buffer = initValue * factor;
 }
 
 void ExponentialSmoothing_Process(ExponentialSmoothing * filter, float sample)
 {
-    if (!filter) {
+    if (!filter || filter->factor <= 0) {
         return;
     }
 
@@ -26,7 +32,7 @@ void ExponentialSmoothing_Process(ExponentialSmoothing * filter, float sample)
 
 float ExponentialSmoothing_GetValue(ExponentialSmoothing * filter)
 {
-    if (!filter) {
+    if (!filter || filter->factor <= 0) {
         return 0;
     }
 
