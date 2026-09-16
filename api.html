@@ -84,6 +84,22 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#main-structure">Main structure</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#header-file">Header file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exponential-smoothing-filter">Exponential smoothing filter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv425ExponentialSmoothing_InitP20ExponentialSmoothingif"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothing_Init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv428ExponentialSmoothing_ProcessP20ExponentialSmoothingf"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothing_Process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv429ExponentialSmoothing_GetValueP20ExponentialSmoothing"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothing_GetValue()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv420ExponentialSmoothing"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothing</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#linear-regression">Linear regression</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv412linReg_clearP8linReg_t"><code class="docutils literal notranslate"><span class="pre">linReg_clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv414linReg_processP8linReg_tff"><code class="docutils literal notranslate"><span class="pre">linReg_process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv416linReg_hasResultP8linReg_t"><code class="docutils literal notranslate"><span class="pre">linReg_hasResult()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv413linReg_resultP8linReg_tPfPfPfPf"><code class="docutils literal notranslate"><span class="pre">linReg_result()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv419linReg_mUncertaintyP8linReg_t7int32_tf"><code class="docutils literal notranslate"><span class="pre">linReg_mUncertainty()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv48linReg_t"><code class="docutils literal notranslate"><span class="pre">linReg_t</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -314,6 +330,158 @@ extracted from header comments and grouped using Doxygen.</p>
 <em>#include &lt;statistics.h&gt;</em></div>
 <p>Statistics buffer descriptor. </p>
 <p>The structure describes a ring-like buffer that stores <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> elements each of size <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">itemSize</span></a> bytes. New samples are written at <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">sampleIdx</span></a> and the index is advanced with wrap-around. </p>
+</dd></dl>
+
+</section>
+<section id="exponential-smoothing-filter">
+<h2>Exponential smoothing filter<a class="headerlink" href="#exponential-smoothing-filter" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">exponential_smoothing_core</span></code> group.</p></li>
+<li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/exponential_smoothing.h</span></code>.</p></li>
+</ul>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425ExponentialSmoothing_InitP20ExponentialSmoothingif">
+<span id="_CPPv325ExponentialSmoothing_InitP20ExponentialSmoothingif"></span><span id="_CPPv225ExponentialSmoothing_InitP20ExponentialSmoothingif"></span><span id="ExponentialSmoothing_Init__ExponentialSmoothingP.i.float"></span><span class="target" id="group__exponential__smoothing__core_1gadfecfdeeba1883d742352e8a120dd93d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothing_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420ExponentialSmoothing" title="ExponentialSmoothing"><span class="n"><span class="pre">ExponentialSmoothing</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">factor</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">initValue</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425ExponentialSmoothing_InitP20ExponentialSmoothingif" title="Link to this definition"></a><br /></dt>
+<dd><p>Initialize the filter with a smoothing factor and starting value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> – <strong>[out]</strong> Pointer to the filter instance to initialize. </p></li>
+<li><p><strong>factor</strong> – Smoothing factor (larger = smoother, slower to react). </p></li>
+<li><p><strong>initValue</strong> – Initial filtered value. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv428ExponentialSmoothing_ProcessP20ExponentialSmoothingf">
+<span id="_CPPv328ExponentialSmoothing_ProcessP20ExponentialSmoothingf"></span><span id="_CPPv228ExponentialSmoothing_ProcessP20ExponentialSmoothingf"></span><span id="ExponentialSmoothing_Process__ExponentialSmoothingP.float"></span><span class="target" id="group__exponential__smoothing__core_1ga0674681ccd504d3e3e4a2281cc065c1b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothing_Process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420ExponentialSmoothing" title="ExponentialSmoothing"><span class="n"><span class="pre">ExponentialSmoothing</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sample</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428ExponentialSmoothing_ProcessP20ExponentialSmoothingf" title="Link to this definition"></a><br /></dt>
+<dd><p>Feed a new sample into the filter. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> – Pointer to the filter instance. </p></li>
+<li><p><strong>sample</strong> – New sample value. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv429ExponentialSmoothing_GetValueP20ExponentialSmoothing">
+<span id="_CPPv329ExponentialSmoothing_GetValueP20ExponentialSmoothing"></span><span id="_CPPv229ExponentialSmoothing_GetValueP20ExponentialSmoothing"></span><span id="ExponentialSmoothing_GetValue__ExponentialSmoothingP"></span><span class="target" id="group__exponential__smoothing__core_1ga414234c6bb4ab1711b0ac3e8c128cadf"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothing_GetValue</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420ExponentialSmoothing" title="ExponentialSmoothing"><span class="n"><span class="pre">ExponentialSmoothing</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429ExponentialSmoothing_GetValueP20ExponentialSmoothing" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the current filtered value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filter</strong> – Pointer to the filter instance. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Current filtered value, or 0 if <code class="docutils literal notranslate"><span class="pre">filter</span></code> is NULL. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv420ExponentialSmoothing">
+<span id="_CPPv320ExponentialSmoothing"></span><span id="_CPPv220ExponentialSmoothing"></span><span id="ExponentialSmoothing"></span><span class="target" id="structExponentialSmoothing"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothing</span></span></span><a class="headerlink" href="#_CPPv420ExponentialSmoothing" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;exponential_smoothing.h&gt;</em></div>
+<p>Exponential smoothing filter state. </p>
+</dd></dl>
+
+</section>
+<section id="linear-regression">
+<h2>Linear regression<a class="headerlink" href="#linear-regression" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">linear_regression_core</span></code> group.</p></li>
+<li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/linear_regression.h</span></code>.</p></li>
+</ul>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv412linReg_clearP8linReg_t">
+<span id="_CPPv312linReg_clearP8linReg_t"></span><span id="_CPPv212linReg_clearP8linReg_t"></span><span id="linReg_clear__linReg_tP"></span><span class="target" id="group__linear__regression__core_1ga6356ef1127feff9259c3a7c55c8567a2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">linReg_clear</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48linReg_t" title="linReg_t"><span class="n"><span class="pre">linReg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412linReg_clearP8linReg_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Clear intermediate calculations and start a new regression. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reg</strong> – Pointer to the regression instance. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414linReg_processP8linReg_tff">
+<span id="_CPPv314linReg_processP8linReg_tff"></span><span id="_CPPv214linReg_processP8linReg_tff"></span><span id="linReg_process__linReg_tP.float.float"></span><span class="target" id="group__linear__regression__core_1gae0ec1dfe6329420b65bcaf705e910abf"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">linReg_process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48linReg_t" title="linReg_t"><span class="n"><span class="pre">linReg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414linReg_processP8linReg_tff" title="Link to this definition"></a><br /></dt>
+<dd><p>Add one X/Y point to the linear regression. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reg</strong> – Pointer to the regression instance. </p></li>
+<li><p><strong>x</strong> – X value. </p></li>
+<li><p><strong>y</strong> – Y value. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416linReg_hasResultP8linReg_t">
+<span id="_CPPv316linReg_hasResultP8linReg_t"></span><span id="_CPPv216linReg_hasResultP8linReg_t"></span><span id="linReg_hasResult__linReg_tP"></span><span class="target" id="group__linear__regression__core_1gafd02f7e46d57d0188c1b06ae6343f545"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">linReg_hasResult</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48linReg_t" title="linReg_t"><span class="n"><span class="pre">linReg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416linReg_hasResultP8linReg_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Check whether enough samples have been added to compute a result. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reg</strong> – Pointer to the regression instance. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if sufficient samples are present. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv413linReg_resultP8linReg_tPfPfPfPf">
+<span id="_CPPv313linReg_resultP8linReg_tPfPfPfPf"></span><span id="_CPPv213linReg_resultP8linReg_tPfPfPfPf"></span><span id="linReg_result__linReg_tP.floatP.floatP.floatP.floatP"></span><span class="target" id="group__linear__regression__core_1ga372de444e1fbf4a1d26ec0be7141ba42"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">linReg_result</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48linReg_t" title="linReg_t"><span class="n"><span class="pre">linReg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">pM</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">pB</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">pR</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">pJitter</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413linReg_resultP8linReg_tPfPfPfPf" title="Link to this definition"></a><br /></dt>
+<dd><p>Calculate current regression parameters. </p>
+<p>y = m*x + b</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reg</strong> – Pointer to the regression instance. </p></li>
+<li><p><strong>pM</strong> – Pointer to m - slope (can be NULL). </p></li>
+<li><p><strong>pB</strong> – Pointer to b - intercept (can be NULL). </p></li>
+<li><p><strong>pR</strong> – Pointer to r - correlation coefficient (can be NULL). </p></li>
+<li><p><strong>pJitter</strong> – Pointer to regression jitter (can be NULL). </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if sufficient number of samples are present to calculate m, b and jitter. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419linReg_mUncertaintyP8linReg_t7int32_tf">
+<span id="_CPPv319linReg_mUncertaintyP8linReg_t7int32_tf"></span><span id="_CPPv219linReg_mUncertaintyP8linReg_t7int32_tf"></span><span id="linReg_mUncertainty__linReg_tP.int32_t.float"></span><span class="target" id="group__linear__regression__core_1gad8ec7a46f153a9b40b63591a00231e25"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">linReg_mUncertainty</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48linReg_t" title="linReg_t"><span class="n"><span class="pre">linReg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">k</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">resY</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419linReg_mUncertaintyP8linReg_t7int32_tf" title="Link to this definition"></a><br /></dt>
+<dd><p>Calculate uncertainty of the slope. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reg</strong> – Pointer to the regression instance. </p></li>
+<li><p><strong>k</strong> – Extended uncertainty factor. </p></li>
+<li><p><strong>resY</strong> – Resolution of X values. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Uncertainty of the slope. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv48linReg_t">
+<span id="_CPPv38linReg_t"></span><span id="_CPPv28linReg_t"></span><span id="linReg_t"></span><span class="target" id="structlinReg__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">linReg_t</span></span></span><a class="headerlink" href="#_CPPv48linReg_t" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;linear_regression.h&gt;</em></div>
+<p>Online linear regression state. </p>
 </dd></dl>
 
 </section>
