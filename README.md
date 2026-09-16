@@ -15,3 +15,5 @@ scalar types. The documentation is generated with Doxygen and Sphinx (Breathe).
 - **no floating-point operations for integer types** - optimized for embedded CPUs without FPU (e.g., STM32F0, Cortex-M0)
 - fixed-point arithmetic for integer types (mean, variance, stdev scaled by 1000)
 - native float support for float data types
+- exponential smoothing (IIR) filter for cheap running averages (`exponential_smoothing.h`)
+- online (streaming) linear regression with slope, intercept, correlation and uncertainty (`linear_regression.h`)

@@ -1,8 +1,8 @@
 {
     "name": "Statistics",
-    "version": "1.2.0",
-    "description": "Implementation of simple statistics functionality for embedded systems.",
-    "keywords": "statistics, math, embedded, mean calculation, max determination",
+    "version": "1.3.0",
+    "description": "Implementation of simple statistics functionality for embedded systems, including an exponential smoothing filter and online linear regression.",
+    "keywords": "statistics, math, embedded, mean calculation, max determination, exponential smoothing, filter, linear regression",
     "repository": {
         "type": "git",
         "url": "https://github.com/rici4kubicek/statistics.git"
