@@ -206,11 +206,11 @@ extracted from header comments and grouped using Doxygen.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv416Statistics_ResetP10Statistics">
 <span id="_CPPv316Statistics_ResetP10Statistics"></span><span id="_CPPv216Statistics_ResetP10Statistics"></span><span id="Statistics_Reset__StatisticsP"></span><span class="target" id="group__statistics__core_1ga61668e25db16d9af341bd187e15ed163"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics_Reset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv410Statistics" title="Statistics"><span class="n"><span class="pre">Statistics</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416Statistics_ResetP10Statistics" title="Link to this definition"></a><br /></dt>
-<dd><p>Resets the statistical data contained in the provided Statistics structure.</p>
-<p>This function clears all sample data stored in the Statistics instance, resets the sample index, and indicates that not enough samples are available to calculate meaningful statistics. It safely handles a null pointer by exiting early without performing any operations.</p>
+<dd><p>Resets the statistical data contained in the provided <a class="reference internal" href="#structStatistics"><span class="std std-ref">Statistics</span></a> structure.</p>
+<p>This function clears all sample data stored in the <a class="reference internal" href="#structStatistics"><span class="std std-ref">Statistics</span></a> instance, resets the sample index, and indicates that not enough samples are available to calculate meaningful statistics. It safely handles a null pointer by exiting early without performing any operations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>stat</strong> – A pointer to the Statistics structure to reset. If the pointer is null, the function will safely exit without performing any operations. </p>
+<dd class="field-odd"><p><strong>stat</strong> – A pointer to the <a class="reference internal" href="#structStatistics"><span class="std std-ref">Statistics</span></a> structure to reset. If the pointer is null, the function will safely exit without performing any operations. </p>
 </dd>
 </dl>
 </dd></dl>
@@ -275,7 +275,7 @@ extracted from header comments and grouped using Doxygen.</p>
 <span id="_CPPv310Statistics"></span><span id="_CPPv210Statistics"></span><span id="Statistics"></span><span class="target" id="structStatistics"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics</span></span></span><a class="headerlink" href="#_CPPv410Statistics" title="Link to this definition"></a><br /></dt>
 <dd><div class="docutils container">
 <em>#include &lt;statistics.h&gt;</em></div>
-<p>Statistics buffer descriptor. </p>
+<p><a class="reference internal" href="#structStatistics"><span class="std std-ref">Statistics</span></a> buffer descriptor. </p>
 <p>The structure describes a ring-like buffer that stores <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> elements each of size <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">itemSize</span></a> bytes. New samples are written at <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">sampleIdx</span></a> and the index is advanced with wrap-around. </p>
 </dd></dl>
 
@@ -284,54 +284,18 @@ extracted from header comments and grouped using Doxygen.</p>
 <h2>Main structure<a class="headerlink" href="#main-structure" title="Link to this heading"></a></h2>
 <dl class="cpp struct">
 <dt class="sig sig-object cpp">
-<span class="target" id="structStatistics"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics</span></span></span><br /></dt>
-<dd><p>Statistics buffer descriptor. </p>
+<span class="target" id="id0"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics</span></span></span><br /></dt>
+<dd><p><a class="reference internal" href="#structStatistics"><span class="std std-ref">Statistics</span></a> buffer descriptor. </p>
 <p>The structure describes a ring-like buffer that stores <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> elements each of size <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">itemSize</span></a> bytes. New samples are written at <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">sampleIdx</span></a> and the index is advanced with wrap-around. </p>
 </dd></dl>
 
 </section>
 <section id="header-file">
 <h2>Header file<a class="headerlink" href="#header-file" title="Link to this heading"></a></h2>
-<p>Public API for a lightweight statistics helper working with fixed-size samples. </p>
-<p>This header exposes a small C API to collect samples of arbitrary, fixed size and compute basic statistics for a set of supported scalar types.</p>
-<p>Design highlights<ul class="simple">
-<li><p>The storage is a raw contiguous byte buffer; the size of one sample is given by <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">Statistics::itemSize</span></a>.</p></li>
-<li><p>Sample rotation policy is intentionally minimal: the write position is controlled by <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">Statistics::sampleIdx</span></a> and wraps to 0 when the configured capacity is reached. When a full wrap occurs, <a class="reference internal" href="#group__statistics__core_1ga9c943b26a4d9e061bc7dd2cf81a878f4"><span class="std std-ref">Statistics::enoughSamples</span></a> is set to true.</p></li>
-<li><p>Memory primitives are provided by the port layer in statistics_config.h.</p></li>
-</ul>
-</p>
-<p>See statistics.c for the implementation details. </p>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-type-specific-statistic-functions">Type-specific statistic functions</p>
-<p>For each enabled scalar type, a set of functions is generated. Replace &lt;T&gt; with one of: U8, I8, U16, I16, U32, I32, F (float).</p>
-<p><strong>Integer types (U8, I8, U16, I16, U32, I32):</strong><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Mean_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns mean * 1000</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Max_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span> <span class="pre">Statistics_Min_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Variance_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns variance * 1000</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">int64_t</span> <span class="pre">Statistics_Stdev_&lt;T&gt;(Statistics*</span> <span class="pre">stat)</span></code> - Returns stdev * 1000</p></li>
-</ul>
-</p>
-<p><strong>Float type (F):</strong><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Mean_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns mean as float</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Max_F(Statistics*</span> <span class="pre">stat)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Min_F(Statistics*</span> <span class="pre">stat)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Variance_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns variance as float</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">float</span> <span class="pre">Statistics_Stdev_F(Statistics*</span> <span class="pre">stat)</span></code> - Returns stdev as float</p></li>
-</ul>
-</p>
-<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;base&gt;</span></code> is the underlying C type for &lt;T&gt; (e.g., <code class="docutils literal notranslate"><span class="pre">uint16_t</span></code> for U16).</p>
-<p><strong>Note:</strong> Integer types use fixed-point arithmetic scaled by 1000 to avoid floating-point operations. Divide the result by 1000 to get the actual value. This is much faster on CPUs without FPU (e.g., STM32F0, Cortex-M0). </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>doxygenfile: Cannot find file “include/statistics.h </p>
 </div>
-<dl class="cpp struct">
-<dt class="sig sig-object cpp">
-<span class="target" id="structStatistics"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics</span></span></span><br /></dt>
-<dd><div class="docutils container">
-<em>#include &lt;statistics.h&gt;</em></div>
-<p>Statistics buffer descriptor. </p>
-<p>The structure describes a ring-like buffer that stores <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> elements each of size <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">itemSize</span></a> bytes. New samples are written at <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">sampleIdx</span></a> and the index is advanced with wrap-around. </p>
-</dd></dl>
-
 </section>
 <section id="exponential-smoothing-filter">
 <h2>Exponential smoothing filter<a class="headerlink" href="#exponential-smoothing-filter" title="Link to this heading"></a></h2>
