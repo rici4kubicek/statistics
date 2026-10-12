@@ -38,28 +38,26 @@
 
 /** @cond INTERNAL */
 
-/* Integer square root using Newton's method for 64-bit integers */
+/* Integer square root (floor) using the binary digit-by-digit method */
 static inline int64_t isqrt64(int64_t x)
 {
     if (x <= 0) {
         return 0;
     }
 
-    /* Initial estimate using bit manipulation */
-    int64_t res = x;
+    int64_t num = x;
+    int64_t res = 0;
     int64_t bit = (int64_t) 1 << 62;
 
-    /* Find the highest set bit */
-    while (bit > res) {
+    /* Start at the highest power of four <= x */
+    while (bit > num) {
         bit >>= 2;
     }
 
-    /* Newton-Raphson iterations */
     while (bit != 0) {
-        if (res >= bit) {
-            res -= bit;
-            res >>= 1;
-            res += bit;
+        if (num >= res + bit) {
+            num -= res + bit;
+            res = (res >> 1) + bit;
         } else {
             res >>= 1;
         }
@@ -301,12 +299,13 @@ bool Statistics_IsValid(const Statistics * stat)
         if (variance < 0) { \
             return -1; /* Error indicator */ \
         } \
-        /* Variance is scaled by 1000, so we need sqrt(variance * 1000) */ \
-        /* This gives us stdev * sqrt(1000) ≈ stdev * 31.62 */ \
-        /* To get stdev * 1000, we calculate: sqrt(variance) * sqrt(1000) */ \
-        int64_t sqrtVar = isqrt64(variance); \
+        /* Variance is scaled by 1000, so stdev * 1000 = sqrt(variance * 1000) */ \
+        if (variance <= INT64_MAX / 1000) { \
+            return isqrt64(variance * 1000); \
+        } \
+        /* Fallback for huge variances: sqrt(variance) * sqrt(1000), */ \
         /* sqrt(1000) ≈ 31.622776... ≈ 31623/1000 */ \
-        return (sqrtVar * 31623 + 500) / 1000; \
+        return (isqrt64(variance) * 31623 + 500) / 1000; \
     }
 
 /*
