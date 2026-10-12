@@ -95,6 +95,77 @@ void test_Statistics_Mean_Float(void)
     Statistics_Free(&st);
 }
 
+void test_Statistics_Variance_U8(void)
+{
+    Statistics st = {0};
+    Statistics_Init(&st, sizeof(uint8_t), 8);
+
+    const uint8_t data[8] = {2, 4, 4, 4, 5, 5, 7, 9};
+    fill_u8(&st, data, 8);
+
+    // Sample variance = 32/7 = 4.571428..., scaled by 1000
+    TEST_ASSERT_EQUAL_INT64(4571, Statistics_Variance_U8(&st));
+
+    Statistics_Free(&st);
+}
+
+void test_Statistics_Variance_I16_NonIntegerMean(void)
+{
+    Statistics st = {0};
+    Statistics_Init(&st, sizeof(int16_t), 3);
+
+    const int16_t data[3] = {-1, 0, 0};
+    for (uint32_t i = 0; i < 3; i++) {
+        Statistics_AddSample(&st, &data[i]);
+    }
+
+    // Mean = -1/3, sample variance = 1/3 = 0.3333..., scaled by 1000
+    TEST_ASSERT_EQUAL_INT64(333, Statistics_Variance_I16(&st));
+
+    Statistics_Free(&st);
+}
+
+void test_Statistics_Variance_U16_Large(void)
+{
+    Statistics st = {0};
+    Statistics_Init(&st, sizeof(uint16_t), 4);
+
+    const uint16_t data[4] = {1000, 2000, 3000, 4000};
+    fill_u16(&st, data, 4);
+
+    // Sample variance = 5000000/3 = 1666666.666..., scaled by 1000 and rounded
+    TEST_ASSERT_EQUAL_INT64(1666666667, Statistics_Variance_U16(&st));
+
+    Statistics_Free(&st);
+}
+
+void test_Statistics_Variance_U8_RoundHalfUp(void)
+{
+    Statistics st = {0};
+    Statistics_Init(&st, sizeof(uint8_t), 2);
+
+    const uint8_t data[2] = {0, 1};
+    fill_u8(&st, data, 2);
+
+    // Sample variance = 0.5 exactly, scaled by 1000
+    TEST_ASSERT_EQUAL_INT64(500, Statistics_Variance_U8(&st));
+
+    Statistics_Free(&st);
+}
+
+void test_Statistics_Variance_TooFewSamples(void)
+{
+    Statistics st = {0};
+    Statistics_Init(&st, sizeof(uint8_t), 1);
+
+    const uint8_t data[1] = {7};
+    fill_u8(&st, data, 1);
+
+    TEST_ASSERT_EQUAL_INT64(-1, Statistics_Variance_U8(&st));
+
+    Statistics_Free(&st);
+}
+
 void test_Statistics_AddSample_WritesToCurrentIndex(void)
 {
     Statistics st = {0};
@@ -346,6 +417,11 @@ int runUnityTests(void)
     RUN_TEST(test_Statistics_Mean_U8);
     RUN_TEST(test_Statistics_Mean_U16);
     RUN_TEST(test_Statistics_Mean_Float);
+    RUN_TEST(test_Statistics_Variance_U8);
+    RUN_TEST(test_Statistics_Variance_I16_NonIntegerMean);
+    RUN_TEST(test_Statistics_Variance_U16_Large);
+    RUN_TEST(test_Statistics_Variance_U8_RoundHalfUp);
+    RUN_TEST(test_Statistics_Variance_TooFewSamples);
     RUN_TEST(test_Statistics_AddSample_WritesToCurrentIndex);
     RUN_TEST(test_Statistics_Mean_U8_AllZero);
     RUN_TEST(test_Statistics_Rotation_IndexWrapsToZero);

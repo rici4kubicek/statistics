@@ -69,6 +69,29 @@ static inline int64_t isqrt64(int64_t x)
     return res;
 }
 
+/*
+ * Finish an exact integer sample variance, scaled by 1000 and rounded to nearest.
+ *
+ * With q = floor(mean) and r = sum - q * n (0 <= r < n), the deviations
+ * d_i = x_i - q give M2 = sum(d_i^2) - r^2 / n, so
+ * variance * 1000 = (1000 * d2 - 1000 * r^2 / n) / (n - 1).
+ */
+static inline int64_t varianceScaled(int64_t d2, int64_t r, int64_t n)
+{
+    int64_t t = 1000 * r * r;
+    int64_t tq = t / n;
+    int64_t tr = t % n;
+    int64_t a = 1000 * d2 - tq;
+    int64_t result = a / (n - 1);
+    int64_t rem = a % (n - 1);
+
+    /* Remaining fraction is (rem * n - tr) / (n * (n - 1)), round half up */
+    if (2 * (rem * n - tr) >= n * (n - 1)) {
+        result++;
+    }
+    return result;
+}
+
 /* Return pointer to the current sample slot. */
 static inline void * fieldPtr(Statistics * stat)
 {
@@ -262,37 +285,30 @@ bool Statistics_IsValid(const Statistics * stat)
         if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 1)) { \
             return -1; /* Error indicator */ \
         } \
-        /* Welford's online algorithm for numerical stability and overflow safety */ \
-        /* Computes variance incrementally without storing sum of squares */ \
-        /* This avoids overflow from squaring large values or many samples */ \
-        int64_t mean_scaled = 0; /* Running mean * 1000 */ \
-        int64_t m2 = 0; /* Running sum of squared deviations (unscaled) */ \
-\
+        /* Exact two-pass integer algorithm (no floating point, no truncation): */ \
+        /* shift samples by the integer part of the mean to keep squares small */ \
+        int64_t n = (int64_t) stat->samplesCnt; \
+        int64_t sum = 0; \
         for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
             _type value; \
             oneLoad(stat, idx, &value); \
-            int64_t val_scaled = (int64_t) value * 1000; \
-\
-            /* delta = x - mean (both scaled by 1000) */ \
-            int64_t delta = val_scaled - mean_scaled; \
-            /* mean += delta / n */ \
-            mean_scaled += delta / (int64_t) (idx + 1); \
-            /* delta2 = x - mean (after update, both scaled by 1000) */ \
-            int64_t delta2 = val_scaled - mean_scaled; \
-            /* M2 += delta * delta2 / 1000 (to keep M2 scaled by 1000) */ \
-            /* delta and delta2 are both scaled by 1000, product scaled by 1000000 */ \
-            m2 += (delta * delta2) / 1000; \
+            sum += (int64_t) value; \
         } \
-\
-        /* Variance = M2 / (n - 1), M2 is scaled by 1000, so result is scaled by 1000 */ \
-        int64_t n = (int64_t) stat->samplesCnt; \
-        int64_t variance_scaled = m2 / (n - 1); \
-        /* Round the result */ \
-        int64_t remainder = m2 % (n - 1); \
-        if (remainder * 2 >= (n - 1)) { \
-            variance_scaled++; \
+        /* q = floor(sum / n), r = sum - q * n with 0 <= r < n */ \
+        int64_t q = sum / n; \
+        if (sum % n < 0) { \
+            q--; \
         } \
-        return variance_scaled; \
+        int64_t r = sum - q * n; \
+\
+        int64_t d2 = 0; \
+        for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
+            _type value; \
+            oneLoad(stat, idx, &value); \
+            int64_t d = (int64_t) value - q; \
+            d2 += d * d; \
+        } \
+        return varianceScaled(d2, r, n); \
     } \
 \
     int64_t Statistics_Stdev_##_NameSuffix(Statistics * stat) \
