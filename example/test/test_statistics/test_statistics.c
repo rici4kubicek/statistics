@@ -400,6 +400,75 @@ void test_Statistics_Min_U8_Rotation(void)
     Statistics_Free(&st);
 }
 
+void test_Statistics_Stdev_U8(void)
+{
+    Statistics st = {0};
+    Statistics_Init(&st, sizeof(uint8_t), 8);
+
+    const uint8_t data[8] = {2, 4, 4, 4, 5, 5, 7, 9};
+    fill_u8(&st, data, 8);
+
+    // Sample stdev = 2.13809..., scaled by 1000
+    TEST_ASSERT_EQUAL_INT64(2138, Statistics_Stdev_U8(&st));
+
+    Statistics_Free(&st);
+}
+
+void test_Statistics_Stdev_I8_Negative(void)
+{
+    Statistics st = {0};
+    Statistics_Init(&st, sizeof(int8_t), 8);
+
+    const int8_t data[8] = {-2, -4, -4, -4, -5, -5, -7, -9};
+    for (uint32_t i = 0; i < 8; i++) {
+        Statistics_AddSample(&st, &data[i]);
+    }
+
+    TEST_ASSERT_EQUAL_INT64(2138, Statistics_Stdev_I8(&st));
+
+    Statistics_Free(&st);
+}
+
+void test_Statistics_Stdev_U16_Large(void)
+{
+    Statistics st = {0};
+    Statistics_Init(&st, sizeof(uint16_t), 4);
+
+    const uint16_t data[4] = {1000, 2000, 3000, 4000};
+    fill_u16(&st, data, 4);
+
+    // Sample stdev = 1290.9944..., scaled by 1000
+    TEST_ASSERT_EQUAL_INT64(1290994, Statistics_Stdev_U16(&st));
+
+    Statistics_Free(&st);
+}
+
+void test_Statistics_Stdev_U8_Constant(void)
+{
+    Statistics st = {0};
+    Statistics_Init(&st, sizeof(uint8_t), 4);
+
+    const uint8_t data[4] = {42, 42, 42, 42};
+    fill_u8(&st, data, 4);
+
+    TEST_ASSERT_EQUAL_INT64(0, Statistics_Stdev_U8(&st));
+
+    Statistics_Free(&st);
+}
+
+void test_Statistics_Stdev_Float(void)
+{
+    Statistics st = {0};
+    Statistics_Init(&st, sizeof(float), 8);
+
+    const float data[8] = {2.0f, 4.0f, 4.0f, 4.0f, 5.0f, 5.0f, 7.0f, 9.0f};
+    fill_f(&st, data);
+
+    TEST_ASSERT_FLOAT_WITHIN(0.001f, 2.13809f, Statistics_Stdev_F(&st));
+
+    Statistics_Free(&st);
+}
+
 void setUp(void)
 {
     // set stuff up here
@@ -436,6 +505,11 @@ int runUnityTests(void)
     RUN_TEST(test_Statistics_Min_U16);
     RUN_TEST(test_Statistics_Min_Float);
     RUN_TEST(test_Statistics_Min_U8_Rotation);
+    RUN_TEST(test_Statistics_Stdev_U8);
+    RUN_TEST(test_Statistics_Stdev_I8_Negative);
+    RUN_TEST(test_Statistics_Stdev_U16_Large);
+    RUN_TEST(test_Statistics_Stdev_U8_Constant);
+    RUN_TEST(test_Statistics_Stdev_Float);
     return UNITY_END();
 }
 
