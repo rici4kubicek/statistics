@@ -469,6 +469,20 @@ void test_Statistics_Stdev_Float(void)
     Statistics_Free(&st);
 }
 
+void test_Statistics_Stdev_U8_RoundsToNearest(void)
+{
+    Statistics st = {0};
+    Statistics_Init(&st, sizeof(uint8_t), 4);
+
+    const uint8_t data[4] = {0, 1, 2, 3};
+    fill_u8(&st, data, 4);
+
+    // Sample stdev = sqrt(5/3) = 1.290994..., scaled by 1000 and rounded
+    TEST_ASSERT_EQUAL_INT64(1291, Statistics_Stdev_U8(&st));
+
+    Statistics_Free(&st);
+}
+
 void setUp(void)
 {
     // set stuff up here
@@ -510,6 +524,7 @@ int runUnityTests(void)
     RUN_TEST(test_Statistics_Stdev_U16_Large);
     RUN_TEST(test_Statistics_Stdev_U8_Constant);
     RUN_TEST(test_Statistics_Stdev_Float);
+    RUN_TEST(test_Statistics_Stdev_U8_RoundsToNearest);
     return UNITY_END();
 }
 

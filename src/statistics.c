@@ -67,24 +67,37 @@ static inline int64_t isqrt64(int64_t x)
     return res;
 }
 
+/* Integer square root rounded to the nearest integer */
+static inline int64_t isqrt64Round(int64_t x)
+{
+    int64_t res = isqrt64(x);
+
+    /* Round up when x > (res + 0.5)^2, i.e. x - res^2 > res */
+    if (x - res * res > res) {
+        res++;
+    }
+    return res;
+}
+
 /**
- * @brief Finish an exact integer sample variance, scaled by 1000.
+ * @brief Finish an exact integer sample variance, multiplied by @p scale.
  *
  * With q = floor(mean) and r = sum - q * n (0 <= r < n), the deviations
  * d_i = x_i - q give M2 = sum(d_i^2) - r^2 / n, so
- * variance * 1000 = (1000 * d2 - 1000 * r^2 / n) / (n - 1).
+ * variance * scale = (scale * d2 - scale * r^2 / n) / (n - 1).
  *
  * @param d2 Sum of squared deviations from q, sum((x_i - q)^2).
  * @param r Remainder of the sum after removing q * n, 0 <= r < n.
  * @param n Number of samples, n >= 2.
- * @return Sample variance * 1000, rounded half up.
+ * @param scale Output scale factor; scale * d2 must not overflow.
+ * @return Sample variance * scale, rounded half up.
  */
-static inline int64_t varianceScaled(int64_t d2, int64_t r, int64_t n)
+static inline int64_t varianceScaled(int64_t d2, int64_t r, int64_t n, int64_t scale)
 {
-    int64_t t = 1000 * r * r;
+    int64_t t = scale * r * r;
     int64_t tq = t / n;
     int64_t tr = t % n;
-    int64_t a = 1000 * d2 - tq;
+    int64_t a = scale * d2 - tq;
     int64_t result = a / (n - 1);
     int64_t rem = a % (n - 1);
 
@@ -283,13 +296,11 @@ bool Statistics_IsValid(const Statistics * stat)
         return min; \
     } \
 \
-    int64_t Statistics_Variance_##_NameSuffix(Statistics * stat) \
+    /* Exact two-pass integer moments (no floating point, no truncation): */ \
+    /* shift samples by q = floor(mean) to keep squares small, */ \
+    /* return d2 = sum((x - q)^2) and r = sum - q * n with 0 <= r < n */ \
+    static void moments_##_NameSuffix(Statistics * stat, int64_t * pD2, int64_t * pR) \
     { \
-        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 1)) { \
-            return -1; /* Error indicator */ \
-        } \
-        /* Exact two-pass integer algorithm (no floating point, no truncation): */ \
-        /* shift samples by the integer part of the mean to keep squares small */ \
         int64_t n = (int64_t) stat->samplesCnt; \
         int64_t sum = 0; \
         for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
@@ -297,12 +308,10 @@ bool Statistics_IsValid(const Statistics * stat)
             oneLoad(stat, idx, &value); \
             sum += (int64_t) value; \
         } \
-        /* q = floor(sum / n), r = sum - q * n with 0 <= r < n */ \
         int64_t q = sum / n; \
         if (sum % n < 0) { \
             q--; \
         } \
-        int64_t r = sum - q * n; \
 \
         int64_t d2 = 0; \
         for (uint32_t idx = 0; idx < stat->samplesCnt; idx++) { \
@@ -311,18 +320,36 @@ bool Statistics_IsValid(const Statistics * stat)
             int64_t d = (int64_t) value - q; \
             d2 += d * d; \
         } \
-        return varianceScaled(d2, r, n); \
+        *pD2 = d2; \
+        *pR = sum - q * n; \
+    } \
+\
+    int64_t Statistics_Variance_##_NameSuffix(Statistics * stat) \
+    { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 1)) { \
+            return -1; /* Error indicator */ \
+        } \
+        int64_t d2, r; \
+        moments_##_NameSuffix(stat, &d2, &r); \
+        return varianceScaled(d2, r, (int64_t) stat->samplesCnt, 1000); \
     } \
 \
     int64_t Statistics_Stdev_##_NameSuffix(Statistics * stat) \
     { \
-        int64_t variance = Statistics_Variance_##_NameSuffix(stat); \
-        if (variance < 0) { \
+        if (!(stat && stat->valid && stat->samples && stat->samplesCnt > 1)) { \
             return -1; /* Error indicator */ \
         } \
-        /* Variance is scaled by 1000, so stdev * 1000 = sqrt(variance * 1000) */ \
+        int64_t d2, r; \
+        int64_t n = (int64_t) stat->samplesCnt; \
+        moments_##_NameSuffix(stat, &d2, &r); \
+        /* stdev * 1000 = sqrt(variance * 1000000), computed from the exact */ \
+        /* moments so the variance is not rounded at the coarser 1000 scale */ \
+        if (d2 <= INT64_MAX / 1000000) { \
+            return isqrt64Round(varianceScaled(d2, r, n, 1000000)); \
+        } \
+        int64_t variance = varianceScaled(d2, r, n, 1000); \
         if (variance <= INT64_MAX / 1000) { \
-            return isqrt64(variance * 1000); \
+            return isqrt64Round(variance * 1000); \
         } \
         /* Fallback for huge variances: sqrt(variance) * sqrt(1000), */ \
         /* sqrt(1000) ≈ 31.622776... ≈ 31623/1000 */ \
