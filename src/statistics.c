@@ -69,12 +69,17 @@ static inline int64_t isqrt64(int64_t x)
     return res;
 }
 
-/*
- * Finish an exact integer sample variance, scaled by 1000 and rounded to nearest.
+/**
+ * @brief Finish an exact integer sample variance, scaled by 1000.
  *
  * With q = floor(mean) and r = sum - q * n (0 <= r < n), the deviations
  * d_i = x_i - q give M2 = sum(d_i^2) - r^2 / n, so
  * variance * 1000 = (1000 * d2 - 1000 * r^2 / n) / (n - 1).
+ *
+ * @param d2 Sum of squared deviations from q, sum((x_i - q)^2).
+ * @param r Remainder of the sum after removing q * n, 0 <= r < n.
+ * @param n Number of samples, n >= 2.
+ * @return Sample variance * 1000, rounded half up.
  */
 static inline int64_t varianceScaled(int64_t d2, int64_t r, int64_t n)
 {
