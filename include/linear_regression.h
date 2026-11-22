@@ -5,9 +5,11 @@
  * @file linear_regression.h
  * @brief Public API for an online (streaming) linear regression.
  *
- * The regression accumulates running means of x, y, x*x, y*y and x*y so
- * that slope, intercept, correlation coefficient and jitter can be derived
- * at any point without storing individual samples.
+ * The regression accumulates the running means of x and y and the centered
+ * sums Sxx, Syy and Sxy (Welford's online algorithm) so that slope,
+ * intercept, correlation coefficient, jitter and slope uncertainty can be
+ * derived at any point without storing individual samples. The centered sums
+ * keep the results stable when the data has a large constant offset.
  *
  * See @ref linear_regression.c for the implementation details.
  */
@@ -28,11 +30,17 @@ extern "C" {
  * @brief Online linear regression state.
  */
 typedef struct {
+    /** Running mean of x. */
     float mean_x;
-    float mean_xx;
+    /** Running mean of y. */
     float mean_y;
-    float mean_yy;
-    float mean_xy;
+    /** Centered sum of squares of x: sum (x - mean_x)^2. */
+    float s_xx;
+    /** Centered sum of squares of y: sum (y - mean_y)^2. */
+    float s_yy;
+    /** Centered sum of products: sum (x - mean_x)(y - mean_y). */
+    float s_xy;
+    /** Number of processed points. */
     float n;
 } linReg_t;
 
@@ -73,10 +81,18 @@ bool linReg_result(linReg_t * reg, float * pM, float * pB, float * pR, float * p
 
 /**
  * @brief Calculate uncertainty of the slope.
+ *
+ * Uses the centered statistics of the samples, so the result does not change
+ * when all X or all Y values are shifted by a constant:
+ * Sxx = sum (x - mean_x)^2, SSE = Syy - Sxy^2 / Sxx (clamped to >= 0),
+ * U = k * sqrt((SSE / (n - 2) + resY^2 / 3) / Sxx) for n > 2 and
+ * U = k * sqrt((resY^2 / 3) / Sxx) for n == 2.
+ *
  * @param reg  Pointer to the regression instance.
  * @param k    Extended uncertainty factor.
  * @param resY Resolution of Y values.
- * @return Uncertainty of the slope.
+ * @return Uncertainty of the slope, INFINITY for n <= 1 or when all X values
+ *         are equal (Sxx == 0).
  */
 float linReg_mUncertainty(linReg_t * reg, int32_t k, float resY);
 
