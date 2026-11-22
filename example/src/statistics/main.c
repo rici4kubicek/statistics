@@ -1,16 +1,13 @@
+/* Statistics ring buffer: min, max, mean, variance, stdev for uint8_t and float samples */
 #include "statistics.h"
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
-Statistics stat;
+static Statistics stat;
 
-int main()
+int main(void)
 {
-    printf("Hello, world!\n");
-    fflush(stdout);
-
     Statistics_Init(&stat, sizeof(uint8_t), 4);
     if (!Statistics_IsValid(&stat)) {
         fprintf(stderr, "Statistics init failed: out of memory or invalid parameters.\n");
@@ -66,5 +63,6 @@ int main()
 
     Statistics_Free(&statF);
     Statistics_Free(&stat);
+
     return 0;
 }

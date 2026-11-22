@@ -31,41 +31,13 @@
 #include "statistics.h"
 
 #include "statistics_config.h"
+#include "statistics_int_math.h"
 #include <stddef.h>
 #include <stdlib.h>
 
 #include <stdint.h>
 
 /** @cond INTERNAL */
-
-/* Integer square root (floor) using the binary digit-by-digit method */
-static inline int64_t isqrt64(int64_t x)
-{
-    if (x <= 0) {
-        return 0;
-    }
-
-    int64_t num = x;
-    int64_t res = 0;
-    int64_t bit = (int64_t) 1 << 62;
-
-    /* Start at the highest power of four <= x */
-    while (bit > num) {
-        bit >>= 2;
-    }
-
-    while (bit != 0) {
-        if (num >= res + bit) {
-            num -= res + bit;
-            res = (res >> 1) + bit;
-        } else {
-            res >>= 1;
-        }
-        bit >>= 2;
-    }
-
-    return res;
-}
 
 /* Return pointer to the current sample slot. */
 static inline void * fieldPtr(Statistics * stat)
@@ -301,11 +273,11 @@ bool Statistics_IsValid(const Statistics * stat)
         } \
         /* Variance is scaled by 1000, so stdev * 1000 = sqrt(variance * 1000) */ \
         if (variance <= INT64_MAX / 1000) { \
-            return isqrt64(variance * 1000); \
+            return (int64_t) StatInt_Isqrt64((uint64_t) (variance * 1000)); \
         } \
         /* Fallback for huge variances: sqrt(variance) * sqrt(1000), */ \
         /* sqrt(1000) ≈ 31.622776... ≈ 31623/1000 */ \
-        return (isqrt64(variance) * 31623 + 500) / 1000; \
+        return ((int64_t) StatInt_Isqrt64((uint64_t) variance) * 31623 + 500) / 1000; \
     }
 
 /*
@@ -384,11 +356,11 @@ bool Statistics_IsValid(const Statistics * stat)
             return variance; \
         } \
         /* For float, we can use a simple sqrt approximation or keep using integer sqrt */ \
-        /* Using the existing isqrt64 scaled up for better precision */ \
+        /* Using the existing StatInt_Isqrt64 scaled up for better precision */ \
         int64_t scaledVar = (int64_t) (variance * 1000000.0f); \
         if (scaledVar < 0) \
             scaledVar = 0; \
-        int64_t scaledStd = isqrt64(scaledVar); \
+        int64_t scaledStd = StatInt_Isqrt64(scaledVar); \
         return (float) scaledStd / 1000.0f; \
     }
 
