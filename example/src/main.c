@@ -1,4 +1,8 @@
+#include "exponential_smoothing_i32.h"
+#include "mean_accumulator_i32.h"
 #include "statistics.h"
+#include "statistics_int_math.h"
+#include "window_regression_i32.h"
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -66,5 +70,38 @@ int main()
 
     Statistics_Free(&statF);
     Statistics_Free(&stat);
+
+    printf("\n--- Integer modules (no float) ---\n");
+    printf("StatInt_Map_I32(512, 0..1023 -> 0..255): %" PRId32 "\n", StatInt_Map_I32(512, 0, 1023, 0, 255));
+    printf("StatInt_Clamp_I32(StatInt_Map_I32(1500, ...), 0, 255): %" PRId32 "\n", StatInt_Clamp_I32(StatInt_Map_I32(1500, 0, 1023, 0, 255), 0, 255));
+
+    ExponentialSmoothingI32 ema;
+    ExponentialSmoothingI32_Init(&ema, 2, EXPONENTIAL_SMOOTHING_I32_FRAC_DEFAULT, 0);
+    for (int i = 0; i < 4; i++) {
+        ExponentialSmoothingI32_Process(&ema, 100);
+        printf("EMA step %d: %" PRId32 "\n", i + 1, ExponentialSmoothingI32_GetValue(&ema));
+    }
+
+    MeanAccumulatorI32 meanAcc;
+    MeanAccumulatorI32_Reset(&meanAcc);
+    MeanAccumulatorI32_Add(&meanAcc, -2);
+    MeanAccumulatorI32_Add(&meanAcc, -3);
+    printf("Mean of -2, -3: %" PRId32 "\n", MeanAccumulatorI32_Mean(&meanAcc));
+
+    /* two channels sharing one time axis: y0 = 1000 + 3 t, y1 = -t */
+    static uint32_t times[8];
+    static int32_t values[8 * 2];
+    static WindowRegressionI32Line lines[2];
+    WindowRegressionI32 drift;
+    WindowRegressionI32_Init(&drift, times, values, lines, 8, 2);
+    for (uint32_t t = 0; t < 10; t++) {
+        const int32_t y[2] = {1000 + 3 * (int32_t) t, -(int32_t) t};
+        WindowRegressionI32_Push(&drift, t, y);
+    }
+    if (WindowRegressionI32_Fit(&drift, 4, 0)) {
+        int32_t ahead;
+        WindowRegressionI32_Evaluate(&drift, 0, 20, &ahead);
+        printf("Drift slope ch0: %" PRId64 "/65536 per tick, value at t=20: %" PRId32 "\n", lines[0].slopeQ16, ahead);
+    }
     return 0;
 }
