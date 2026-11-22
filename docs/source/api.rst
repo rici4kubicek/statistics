@@ -4,16 +4,74 @@ API reference
 This section documents the public C API of the library. The documentation is
 extracted from header comments and grouped using Doxygen.
 
-Overview
---------
+Basic statistics
+----------------
 
-- Core structures and functions live in the ``statistics_core`` group.
-- Main header file: ``include/statistics.h``.
+- Structures and functions live in the ``statistics_core`` group.
+- Header file: ``include/statistics.h``.
+- A ``Statistics`` instance is a ring buffer of :math:`N` samples of one scalar
+  type, allocated in ``Statistics_Init`` (port layer ``statPortMalloc``) and
+  released by ``Statistics_Free``. When the buffer is full, the oldest sample
+  is overwritten.
+
+Lifecycle and buffer functions:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 40 60
+
+   * - Function
+     - Purpose
+   * - ``Statistics_Init(stat, itemSize, samplesCount)``
+     - Allocate and zero a window of ``samplesCount`` samples of ``itemSize`` bytes.
+   * - ``Statistics_IsValid(stat)``
+     - ``false`` after a failed allocation or after ``Statistics_Free``.
+   * - ``Statistics_AddSample(stat, &sample)``
+     - Store one sample at the write index, then advance and wrap the index.
+   * - ``Statistics_HaveEnoughSamples(stat)``
+     - ``true`` once the window has been filled at least once.
+   * - ``Statistics_Reset(stat)``
+     - Zero the samples, reset the write index and the "enough" flag.
+   * - ``Statistics_Free(stat)``
+     - Release the buffer and mark the instance invalid.
+
+Type-specific functions are generated for each type enabled in
+``statistics_config.h`` (see :doc:`user_configuration`), with the suffix
+``<T>`` in ``U8``, ``I8``, ``U16``, ``I16``, ``U32``, ``I32`` and ``F``:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 28 24 24 24
+
+   * - Function
+     - Integer types return
+     - ``F`` returns
+     - On error
+   * - ``Statistics_Mean_<T>``
+     - ``int64_t``, mean × 1000
+     - ``float``
+     - ``0``
+   * - ``Statistics_Min_<T>`` / ``Statistics_Max_<T>``
+     - sample type
+     - ``float``
+     - ``0``
+   * - ``Statistics_Variance_<T>``
+     - ``int64_t``, variance × 1000
+     - ``float``
+     - ``-1`` (``F``: NaN)
+   * - ``Statistics_Stdev_<T>``
+     - ``int64_t``, stdev × 1000
+     - ``float``
+     - ``-1`` (``F``: NaN)
+
+An error is an invalid instance, or fewer than two samples for variance and stdev.
 
 .. rubric:: Mathematical definition
 
-The functions work on all :math:`N` samples of the ring buffer
-(:math:`N` = ``samplesCnt``, the capacity), :math:`x_1 \dots x_N`:
+The functions always work on all :math:`N` slots of the window
+(:math:`N` = ``samplesCnt``, the capacity), :math:`x_1 \dots x_N`. Slots that
+have not been written yet hold 0, so check ``Statistics_HaveEnoughSamples``
+before using the results.
 
 .. math::
 
@@ -26,8 +84,8 @@ The functions work on all :math:`N` samples of the ring buffer
    s^2 = \frac{1}{N-1} \sum_{i=1}^{N} \left(x_i - \bar{x}\right)^2 \quad (N \ge 2), \qquad
    s = \sqrt{s^2}
 
-Integer types return fixed-point values scaled by 1000. :math:`R(\cdot)` is
-rounding half away from zero:
+Integer types use 64-bit integer arithmetic only and return values scaled by
+1000. :math:`R(\cdot)` is rounding half away from zero:
 
 .. math::
 
@@ -35,27 +93,33 @@ rounding half away from zero:
    \mathrm{Variance} = V \approx R\!\left(1000\,s^2\right), \qquad
    \mathrm{Stdev} = \left\lfloor \sqrt{1000\,V} \right\rfloor \approx 1000\,s
 
-:math:`V` is computed with Welford's online algorithm in 64-bit integers
-(intermediate divisions truncate, the final division rounds). Float types
-return :math:`\bar{x}`, :math:`s^2` and :math:`s` directly, with
-:math:`s^2 = \left(\sum x_i^2 - (\sum x_i)^2 / N\right) / (N-1)`.
+:math:`V` comes from Welford's online algorithm: intermediate divisions
+truncate, the final division by :math:`N - 1` rounds. Example: a return value
+of ``890250`` means ``890.250``.
 
-Groups
-------
+The float type computes in ``float``:
+
+.. math::
+
+   \mathrm{Mean} = \bar{x}, \qquad
+   \mathrm{Variance} = \frac{\sum x_i^2 - \left(\sum x_i\right)^2 / N}{N - 1}, \qquad
+   \mathrm{Stdev} = \frac{\left\lfloor \sqrt{10^{6}\,\mathrm{Variance}} \right\rfloor}{1000}
+
+so the float stdev has a resolution of 0.001.
+
+.. rubric:: Functions
 
 .. doxygengroup:: statistics_core
    :project: Statistics
    :content-only:
 
-Main structure
---------------
+.. rubric:: Statistics structure
 
 .. doxygenstruct:: Statistics
    :project: Statistics
    :members:
 
-Header file
------------
+.. rubric:: Header file
 
 .. doxygenfile:: include/statistics.h
    :project: Statistics
