@@ -16,6 +16,7 @@
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -189,6 +190,26 @@ extracted from header comments and grouped using Doxygen.</p>
 <li><p>Core structures and functions live in the <code class="docutils literal notranslate"><span class="pre">statistics_core</span></code> group.</p></li>
 <li><p>Main header file: <code class="docutils literal notranslate"><span class="pre">include/statistics.h</span></code>.</p></li>
 </ul>
+<p class="rubric">Mathematical definition</p>
+<p>The functions work on all <span class="math notranslate nohighlight">\(N\)</span> samples of the ring buffer
+(<span class="math notranslate nohighlight">\(N\)</span> = <code class="docutils literal notranslate"><span class="pre">samplesCnt</span></code>, the capacity), <span class="math notranslate nohighlight">\(x_1 \dots x_N\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Max} = \max_i x_i, \qquad
+\mathrm{Min} = \min_i x_i, \qquad
+\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i\]</div>
+<div class="math notranslate nohighlight">
+\[s^2 = \frac{1}{N-1} \sum_{i=1}^{N} \left(x_i - \bar{x}\right)^2 \quad (N \ge 2), \qquad
+s = \sqrt{s^2}\]</div>
+<p>Integer types return fixed-point values scaled by 1000. <span class="math notranslate nohighlight">\(R(\cdot)\)</span> is
+rounding half away from zero:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Mean} = R\!\left(1000\,\bar{x}\right), \qquad
+\mathrm{Variance} = V \approx R\!\left(1000\,s^2\right), \qquad
+\mathrm{Stdev} = \left\lfloor \sqrt{1000\,V} \right\rfloor \approx 1000\,s\]</div>
+<p><span class="math notranslate nohighlight">\(V\)</span> is computed with Welford’s online algorithm in 64-bit integers
+(intermediate divisions truncate, the final division rounds). Float types
+return <span class="math notranslate nohighlight">\(\bar{x}\)</span>, <span class="math notranslate nohighlight">\(s^2\)</span> and <span class="math notranslate nohighlight">\(s\)</span> directly, with
+<span class="math notranslate nohighlight">\(s^2 = \left(\sum x_i^2 - (\sum x_i)^2 / N\right) / (N-1)\)</span>.</p>
 </section>
 <section id="groups">
 <h2>Groups<a class="headerlink" href="#groups" title="Link to this heading"></a></h2>
@@ -389,6 +410,16 @@ extracted from header comments and grouped using Doxygen.</p>
 <li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">exponential_smoothing_core</span></code> group.</p></li>
 <li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/exponential_smoothing.h</span></code>.</p></li>
 </ul>
+<p class="rubric">Mathematical definition</p>
+<p>With the smoothing factor <span class="math notranslate nohighlight">\(N\)</span> (<code class="docutils literal notranslate"><span class="pre">factor</span></code>), the accumulator
+<span class="math notranslate nohighlight">\(B\)</span> holds the filtered value scaled by <span class="math notranslate nohighlight">\(N\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[B_0 = N\,y_0, \qquad
+B_k = B_{k-1} - \frac{B_{k-1}}{N} + x_k, \qquad
+y_k = \frac{B_k}{N}\]</div>
+<p>which is the exponential moving average with <span class="math notranslate nohighlight">\(\alpha = 1/N\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[y_k = y_{k-1} + \frac{1}{N}\left(x_k - y_{k-1}\right)\]</div>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv425ExponentialSmoothing_InitP20ExponentialSmoothingif">
 <span id="_CPPv325ExponentialSmoothing_InitP20ExponentialSmoothingif"></span><span id="_CPPv225ExponentialSmoothing_InitP20ExponentialSmoothingif"></span><span id="ExponentialSmoothing_Init__ExponentialSmoothingP.i.float"></span><span class="target" id="group__exponential__smoothing__core_1gadfecfdeeba1883d742352e8a120dd93d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothing_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420ExponentialSmoothing" title="ExponentialSmoothing"><span class="n"><span class="pre">ExponentialSmoothing</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">factor</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">initValue</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425ExponentialSmoothing_InitP20ExponentialSmoothingif" title="Link to this definition"></a><br /></dt>
@@ -448,6 +479,31 @@ extracted from header comments and grouped using Doxygen.</p>
 <li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">linear_regression_core</span></code> group.</p></li>
 <li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/linear_regression.h</span></code>.</p></li>
 </ul>
+<p class="rubric">Mathematical definition</p>
+<p>Each point updates running means over <span class="math notranslate nohighlight">\(n\)</span> points,
+<span class="math notranslate nohighlight">\(\bar{u}_n = \bar{u}_{n-1} + (u_n - \bar{u}_{n-1}) / n\)</span> for
+<span class="math notranslate nohighlight">\(u \in \{x, x^2, y, y^2, xy\}\)</span>. From them:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_x^2 = \overline{x^2} - \bar{x}^2, \qquad
+\sigma_y^2 = \overline{y^2} - \bar{y}^2, \qquad
+\sigma_{xy} = \overline{xy} - \bar{x}\,\bar{y}\]</div>
+<p>The result (<span class="math notranslate nohighlight">\(n \ge 3\)</span>) of the line <span class="math notranslate nohighlight">\(y = m x + b\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[m = \frac{\sigma_{xy}}{\sigma_x^2} \;(0 \text{ if } \sigma_x^2 = 0), \qquad
+b = \bar{y} - m\,\bar{x}, \qquad
+r = \frac{\sigma_{xy}}{\sigma_x \sigma_y} \;(1 \text{ if } \sigma_x^2 = 0 \text{ or } \sigma_y^2 = 0)\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{jitter} = \sqrt{\frac{S_{yy} - m^2 S_{xx}}{n - 2}}, \qquad
+S_{xx} = n\,\sigma_x^2, \quad S_{yy} = n\,\sigma_y^2\]</div>
+<p>Slope uncertainty with the coverage factor <span class="math notranslate nohighlight">\(k\)</span> and the Y resolution
+<span class="math notranslate nohighlight">\(\Delta_y\)</span>, <span class="math notranslate nohighlight">\(u_{\mathrm{res}}^2 = \Delta_y^2 / 3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}U_m =
+\begin{cases}
+\infty &amp; n \le 1 \\
+k \sqrt{u_{\mathrm{res}}^2 / \overline{x^2}} &amp; n = 2 \\
+k \sqrt{\left(\overline{y^2} / (n - 2) + u_{\mathrm{res}}^2\right) / \overline{x^2}} &amp; n \ge 3
+\end{cases}\end{split}\]</div>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv412linReg_clearP8linReg_t">
 <span id="_CPPv312linReg_clearP8linReg_t"></span><span id="_CPPv212linReg_clearP8linReg_t"></span><span id="linReg_clear__linReg_tP"></span><span class="target" id="group__linear__regression__core_1ga6356ef1127feff9259c3a7c55c8567a2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">linReg_clear</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48linReg_t" title="linReg_t"><span class="n"><span class="pre">linReg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412linReg_clearP8linReg_t" title="Link to this definition"></a><br /></dt>
@@ -542,6 +598,26 @@ extracted from header comments and grouped using Doxygen.</p>
 <li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">statistics_int_math</span></code> group.</p></li>
 <li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/statistics_int_math.h</span></code>.</p></li>
 </ul>
+<p class="rubric">Mathematical definition</p>
+<p><span class="math notranslate nohighlight">\(R(\cdot)\)</span> is rounding half away from zero,
+<span class="math notranslate nohighlight">\(R(q) = \mathrm{sgn}(q) \left\lfloor |q| + \tfrac{1}{2} \right\rfloor\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{FloorShift}(v, s) = \left\lfloor \frac{v}{2^{s}} \right\rfloor \;(s &gt; 63 \text{ acts as } 63), \qquad
+\mathrm{DivRound}(v, d) = R\!\left(\frac{v}{d}\right) \;(d &gt; 0), \qquad
+\mathrm{Isqrt64}(v) = \left\lfloor \sqrt{v} \right\rfloor\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{Clamp}(v, lo, hi) = \min\!\left(\max(v, lo), hi\right) \quad (lo \le hi)\]</div>
+<p>Linear range mapping from <span class="math notranslate nohighlight">\([x_0, x_1]\)</span> (<code class="docutils literal notranslate"><span class="pre">inMin</span></code>, <code class="docutils literal notranslate"><span class="pre">inMax</span></code>) to
+<span class="math notranslate nohighlight">\([y_0, y_1]\)</span> (<code class="docutils literal notranslate"><span class="pre">outMin</span></code>, <code class="docutils literal notranslate"><span class="pre">outMax</span></code>), without output clamping:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathrm{Map\_I32}(x) =
+\begin{cases}
+y_0 &amp; x_0 = x_1 \\
+\mathrm{sat}_{32}\!\left(y_0 + R\!\left(\dfrac{(x - x_0)(y_1 - y_0)}{x_1 - x_0}\right)\right) &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathrm{sat}_{32}\)</span> limits to <span class="math notranslate nohighlight">\([-2^{31}, 2^{31} - 1]\)</span>.
+<code class="docutils literal notranslate"><span class="pre">StatFloat_Clamp</span></code> uses the same clamp definition. <code class="docutils literal notranslate"><span class="pre">StatFloat_Map</span></code> is the
+same mapping without <span class="math notranslate nohighlight">\(R\)</span> and without saturation.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv418StatInt_FloorShift7int64_tj">
 <span id="_CPPv318StatInt_FloorShift7int64_tj"></span><span id="_CPPv218StatInt_FloorShift7int64_tj"></span><span id="StatInt_FloorShift__int64_t.unsigned"></span><span class="target" id="group__statistics__int__math_1ga97173756d0cec9608de531065f50fea7"></span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StatInt_FloorShift</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shift</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418StatInt_FloorShift7int64_tj" title="Link to this definition"></a><br /></dt>
@@ -724,6 +800,18 @@ extracted from header comments and grouped using Doxygen.</p>
 <li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">exponential_smoothing_i32_core</span></code> group.</p></li>
 <li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/exponential_smoothing_i32.h</span></code>.</p></li>
 </ul>
+<p class="rubric">Mathematical definition</p>
+<p>The accumulator <span class="math notranslate nohighlight">\(A\)</span> holds the filtered value in Q<span class="math notranslate nohighlight">\(F\)</span> fixed point
+(<span class="math notranslate nohighlight">\(F\)</span> = <code class="docutils literal notranslate"><span class="pre">frac</span></code>, <span class="math notranslate nohighlight">\(s\)</span> = <code class="docutils literal notranslate"><span class="pre">shift</span></code>). Inputs are first clamped to the
+representable range, <span class="math notranslate nohighlight">\(c(x) = \mathrm{Clamp}\left(x, \lfloor -2^{31} / 2^F \rfloor, \lfloor (2^{31} - 1) / 2^F \rfloor\right)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[A_0 = 2^{F} c(y_0), \qquad
+A_k = A_{k-1} + \left\lfloor \frac{2^{F} c(x_k) - A_{k-1}}{2^{s}} \right\rfloor\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{GetValue} = \left\lfloor \frac{A_k + 2^{F-1}}{2^{F}} \right\rfloor \;(F &gt; 0), \qquad
+\mathrm{GetValue} = A_k \;(F = 0)\]</div>
+<p>This is the exponential moving average
+<span class="math notranslate nohighlight">\(y_k = y_{k-1} + \alpha (x_k - y_{k-1})\)</span> with <span class="math notranslate nohighlight">\(\alpha = 2^{-s}\)</span>.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv428ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t">
 <span id="_CPPv328ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t"></span><span id="_CPPv228ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t"></span><span id="ExponentialSmoothingI32_Init__ExponentialSmoothingI32P.unsigned.unsigned.int32_t"></span><span class="target" id="group__exponential__smoothing__i32__core_1gaf2dbe989640927348ce975b6a1acd5c5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothingI32_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423ExponentialSmoothingI32" title="ExponentialSmoothingI32"><span class="n"><span class="pre">ExponentialSmoothingI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shift</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">frac</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">initValue</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t" title="Link to this definition"></a><br /></dt>
@@ -817,6 +905,16 @@ extracted from header comments and grouped using Doxygen.</p>
 <li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">mean_accumulator_i32_core</span></code> group.</p></li>
 <li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/mean_accumulator_i32.h</span></code>.</p></li>
 </ul>
+<p class="rubric">Mathematical definition</p>
+<p>For the <span class="math notranslate nohighlight">\(n\)</span> added samples <span class="math notranslate nohighlight">\(x_1 \dots x_n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}S = \sum_{i=1}^{n} x_i, \qquad
+\mathrm{Mean} =
+\begin{cases}
+0 &amp; n = 0 \\
+R\!\left(S / n\right) &amp; n \ge 1
+\end{cases}\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(R\)</span> rounding half away from zero (<code class="docutils literal notranslate"><span class="pre">StatInt_DivRound</span></code>).</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv424MeanAccumulatorI32_ResetP18MeanAccumulatorI32">
 <span id="_CPPv324MeanAccumulatorI32_ResetP18MeanAccumulatorI32"></span><span id="_CPPv224MeanAccumulatorI32_ResetP18MeanAccumulatorI32"></span><span id="MeanAccumulatorI32_Reset__MeanAccumulatorI32P"></span><span class="target" id="group__mean__accumulator__i32__core_1ga48ecbd9e99435961e888bf7b5f2000f8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeanAccumulatorI32_Reset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv418MeanAccumulatorI32" title="MeanAccumulatorI32"><span class="n"><span class="pre">MeanAccumulatorI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">acc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424MeanAccumulatorI32_ResetP18MeanAccumulatorI32" title="Link to this definition"></a><br /></dt>
@@ -888,6 +986,32 @@ extracted from header comments and grouped using Doxygen.</p>
 <li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">window_regression_i32_core</span></code> group.</p></li>
 <li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/window_regression_i32.h</span></code>.</p></li>
 </ul>
+<p class="rubric">Mathematical definition</p>
+<p>The window holds <span class="math notranslate nohighlight">\(n\)</span> samples <span class="math notranslate nohighlight">\((t_i, y_i)\)</span> per channel, with
+<span class="math notranslate nohighlight">\(t_N\)</span>, <span class="math notranslate nohighlight">\(y_N\)</span> the newest one. Ages are wrap-safe uint32
+differences, limited to the oldest age <span class="math notranslate nohighlight">\(a_{\max}\)</span>, and scaled by the
+smallest <span class="math notranslate nohighlight">\(s\)</span> with <span class="math notranslate nohighlight">\(\lfloor a_{\max} / 2^s \rfloor &lt; 2^{13}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[a_i = (t_N - t_i) \bmod 2^{32}, \qquad
+x_i = -\left\lfloor \frac{a_i}{2^{s}} \right\rfloor, \qquad
+d_i = \mathrm{Clamp}\!\left(y_i - y_N, -2^{20}, 2^{20}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[S_x = \sum x_i, \quad S_{xx} = \sum x_i^2, \quad
+S_d = \sum d_i, \quad S_{xd} = \sum x_i d_i\]</div>
+<p>The fit needs <span class="math notranslate nohighlight">\(n \ge \max(\mathrm{minCount}, 2)\)</span> and
+<span class="math notranslate nohighlight">\(n S_{xx} - S_x^2 &gt; 0\)</span>. Slope <span class="math notranslate nohighlight">\(m\)</span> in Q16 per x unit, clamped to
+<span class="math notranslate nohighlight">\(\pm m_{\max}\)</span> when <span class="math notranslate nohighlight">\(m_{\max}\)</span> (<code class="docutils literal notranslate"><span class="pre">slopeMaxQ16</span></code>) is not 0:</p>
+<div class="math notranslate nohighlight">
+\[m = \mathrm{Clamp}\!\left(R\!\left(\frac{2^{16}\,(n S_{xd} - S_x S_d)}{2^{s}\,(n S_{xx} - S_x^2)}\right), -m_{\max}, m_{\max}\right)\]</div>
+<p>Level <span class="math notranslate nohighlight">\(L\)</span> in Q16 at <span class="math notranslate nohighlight">\(t_N\)</span>: the line goes through the centroid
+<span class="math notranslate nohighlight">\((\bar{t}, \bar{y})\)</span>, also when <span class="math notranslate nohighlight">\(m\)</span> is clamped:</p>
+<div class="math notranslate nohighlight">
+\[L = 2^{16} y_N + R\!\left(\frac{2^{16} S_d + m \sum a_i}{n}\right)
+\;\approx\; 2^{16}\left(\bar{y} + \frac{m}{2^{16}} \left(t_N - \bar{t}\right)\right)\]</div>
+<p>Evaluation at <span class="math notranslate nohighlight">\(t\)</span>, with the signed difference
+<span class="math notranslate nohighlight">\(\Delta = (t - t_N) \bmod 2^{32}\)</span> taken in <span class="math notranslate nohighlight">\([-2^{31}, 2^{31})\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Evaluate}(t) = \mathrm{sat}_{32}\!\left(\left\lfloor \frac{L + m\,\Delta + 2^{15}}{2^{16}} \right\rfloor\right)\]</div>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv424WindowRegressionI32_InitP19WindowRegressionI32P8uint32_tP7int32_tP23WindowRegressionI32Line8uint16_t7uint8_t">
 <span id="_CPPv324WindowRegressionI32_InitP19WindowRegressionI32P8uint32_tP7int32_tP23WindowRegressionI32Line8uint16_t7uint8_t"></span><span id="_CPPv224WindowRegressionI32_InitP19WindowRegressionI32P8uint32_tP7int32_tP23WindowRegressionI32Line8uint16_t7uint8_t"></span><span id="WindowRegressionI32_Init__WindowRegressionI32P.uint32_tP.int32_tP.WindowRegressionI32LineP.uint16_t.uint8_t"></span><span class="target" id="group__window__regression__i32__core_1ga3a2d1732f18f714f1dbd3e95e7d5a4a0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WindowRegressionI32_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419WindowRegressionI32" title="WindowRegressionI32"><span class="n"><span class="pre">WindowRegressionI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">xStorage</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">yStorage</span></span>, <a class="reference internal" href="#_CPPv423WindowRegressionI32Line" title="WindowRegressionI32Line"><span class="n"><span class="pre">WindowRegressionI32Line</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">lines</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">capacity</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">channels</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424WindowRegressionI32_InitP19WindowRegressionI32P8uint32_tP7int32_tP23WindowRegressionI32Line8uint16_t7uint8_t" title="Link to this definition"></a><br /></dt>
