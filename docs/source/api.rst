@@ -159,28 +159,47 @@ Linear regression
 
 .. rubric:: Mathematical definition
 
-Each point updates running means over :math:`n` points,
-:math:`\bar{u}_n = \bar{u}_{n-1} + (u_n - \bar{u}_{n-1}) / n` for
-:math:`u \in \{x, x^2, y, y^2, xy\}`. From them:
+Each point :math:`(x_k, y_k)` updates the means and the centered sums with
+Welford's online algorithm (:math:`k` = number of points after the update):
 
 .. math::
 
-   \sigma_x^2 = \overline{x^2} - \bar{x}^2, \qquad
-   \sigma_y^2 = \overline{y^2} - \bar{y}^2, \qquad
-   \sigma_{xy} = \overline{xy} - \bar{x}\,\bar{y}
-
-The result (:math:`n \ge 3`) of the line :math:`y = m x + b`:
+   \delta_x = x_k - \bar{x}_{k-1}, \quad
+   \delta_y = y_k - \bar{y}_{k-1}, \qquad
+   \bar{x}_k = \bar{x}_{k-1} + \frac{\delta_x}{k}, \quad
+   \bar{y}_k = \bar{y}_{k-1} + \frac{\delta_y}{k}
 
 .. math::
 
-   m = \frac{\sigma_{xy}}{\sigma_x^2} \;(0 \text{ if } \sigma_x^2 = 0), \qquad
+   S_{xx} \mathrel{+}= \delta_x \left(x_k - \bar{x}_k\right), \quad
+   S_{yy} \mathrel{+}= \delta_y \left(y_k - \bar{y}_k\right), \quad
+   S_{xy} \mathrel{+}= \delta_x \left(y_k - \bar{y}_k\right)
+
+so that over :math:`n` points
+
+.. math::
+
+   S_{xx} = \sum \left(x_i - \bar{x}\right)^2, \quad
+   S_{yy} = \sum \left(y_i - \bar{y}\right)^2, \quad
+   S_{xy} = \sum \left(x_i - \bar{x}\right)\left(y_i - \bar{y}\right)
+
+The centered sums keep the results stable when the data has a large constant
+offset. The result (:math:`n \ge 3`) of the line :math:`y = m x + b`:
+
+.. math::
+
+   m = \frac{S_{xy}}{S_{xx}} \;(0 \text{ if } S_{xx} = 0), \qquad
    b = \bar{y} - m\,\bar{x}, \qquad
-   r = \frac{\sigma_{xy}}{\sigma_x \sigma_y} \;(1 \text{ if } \sigma_x^2 = 0 \text{ or } \sigma_y^2 = 0)
+   r = \frac{S_{xy}}{\sqrt{S_{xx} S_{yy}}} \;(1 \text{ if } S_{xx} = 0 \text{ or } S_{yy} = 0)
+
+The residual sum of squares of the fitted line, clamped against rounding:
 
 .. math::
 
-   \mathrm{jitter} = \sqrt{\frac{S_{yy} - m^2 S_{xx}}{n - 2}}, \qquad
-   S_{xx} = n\,\sigma_x^2, \quad S_{yy} = n\,\sigma_y^2
+   \mathrm{SSE} = \max\!\left(0,\; S_{yy} - \frac{S_{xy}^2}{S_{xx}}\right) \;(S_{xx} > 0), \qquad
+   \mathrm{jitter} = \sqrt{\frac{\mathrm{SSE}}{n - 2}}
+
+With :math:`S_{xx} = 0` the jitter uses :math:`S_{yy}` in place of SSE.
 
 Slope uncertainty with the coverage factor :math:`k` and the Y resolution
 :math:`\Delta_y`, :math:`u_{\mathrm{res}}^2 = \Delta_y^2 / 3`:
@@ -189,10 +208,13 @@ Slope uncertainty with the coverage factor :math:`k` and the Y resolution
 
    U_m =
    \begin{cases}
-   \infty & n \le 1 \\
-   k \sqrt{u_{\mathrm{res}}^2 / \overline{x^2}} & n = 2 \\
-   k \sqrt{\left(\overline{y^2} / (n - 2) + u_{\mathrm{res}}^2\right) / \overline{x^2}} & n \ge 3
+   \infty & n \le 1 \text{ or } S_{xx} = 0 \\
+   k \sqrt{u_{\mathrm{res}}^2 / S_{xx}} & n = 2 \\
+   k \sqrt{\left(\mathrm{SSE} / (n - 2) + u_{\mathrm{res}}^2\right) / S_{xx}} & n \ge 3
    \end{cases}
+
+:math:`U_m` does not change when all X or all Y values are shifted by a
+constant.
 
 .. doxygengroup:: linear_regression_core
    :project: Statistics
