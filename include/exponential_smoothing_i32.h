@@ -97,6 +97,29 @@ int32_t ExponentialSmoothingI32_GetValue(const ExponentialSmoothingI32 * filter)
  */
 void ExponentialSmoothingI32_Reset(ExponentialSmoothingI32 * filter, int32_t value);
 
+/**
+ * @brief Change the smoothing factor of a running filter.
+ *
+ * Keeps the accumulator and @ref ExponentialSmoothingI32::frac unchanged, so
+ * the filtered value does not jump. The new alpha = 1 / 2^shift applies from
+ * the next @ref ExponentialSmoothingI32_Process; the time constant is about
+ * 2^shift samples. Example: track fast with shift 2, then switch to shift 7.
+ *
+ * @param filter Pointer to the filter instance.
+ * @param shift  New shift, <= @ref EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX.
+ * @return true on success; false if @p filter is NULL or invalid or @p shift
+ *         is out of range (the filter is then unchanged).
+ */
+bool ExponentialSmoothingI32_SetShift(ExponentialSmoothingI32 * filter, unsigned shift);
+
+/**
+ * @brief Current smoothing shift (alpha = 1 / 2^shift).
+ *
+ * @param filter Pointer to the filter instance.
+ * @return Shift, 0 if @p filter is NULL or invalid.
+ */
+unsigned ExponentialSmoothingI32_GetShift(const ExponentialSmoothingI32 * filter);
+
 /** @} */ /* end of exponential_smoothing_i32_core */
 
 #ifdef __cplusplus

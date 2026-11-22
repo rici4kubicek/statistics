@@ -64,3 +64,18 @@ void ExponentialSmoothingI32_Reset(ExponentialSmoothingI32 * filter, int32_t val
 
     filter->acc = toFixed(filter, value);
 }
+
+bool ExponentialSmoothingI32_SetShift(ExponentialSmoothingI32 * filter, unsigned shift)
+{
+    if (!filter || !filter->valid || shift > EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX) {
+        return false;
+    }
+
+    filter->shift = (uint8_t) shift;
+    return true;
+}
+
+unsigned ExponentialSmoothingI32_GetShift(const ExponentialSmoothingI32 * filter)
+{
+    return (filter && filter->valid) ? filter->shift : 0;
+}

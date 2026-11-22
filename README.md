@@ -29,7 +29,9 @@ structs and storage; no module pulls in soft-float code.
   Float variants `StatFloat_Clamp` / `StatFloat_Map` are in a separate source file and only
   declared with `STATISTICS_FLOAT_ENABLED`.
 - `exponential_smoothing_i32.h` - fixed-point EMA,
-  `acc += StatInt_FloorShift((x << frac) - acc, shift)`.
+  `acc += StatInt_FloorShift((x << frac) - acc, shift)`;
+  `ExponentialSmoothingI32_SetShift` changes the rate of a running filter
+  (e.g. fast start, then slow tracking) without losing the fraction bits.
 - `mean_accumulator_i32.h` - int64 sum + count, rounded mean.
 - `window_regression_i32.h` - sliding-window least-squares line over several
   y channels sharing one x (time) axis; wrap-safe uint32 time, optional slope
@@ -62,6 +64,6 @@ void onSample(uint32_t now, const int32_t sample[AXES])
 ```
 
 Code size on Cortex-M0+ (`arm-none-eabi-gcc` 15.3, `-Os`, text bytes):
-`statistics_int_math` 730, `exponential_smoothing_i32` 232,
+`statistics_int_math` 730, `exponential_smoothing_i32` 272,
 `mean_accumulator_i32` 94, `window_regression_i32` 1210, plus libgcc 64-bit
 helpers (`__aeabi_uldivmod`, `__aeabi_lmul`, shifts) when not already linked.
