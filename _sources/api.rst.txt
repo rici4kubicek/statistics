@@ -286,6 +286,15 @@ representable range, :math:`c(x) = \mathrm{Clamp}\left(x, \lfloor -2^{31} / 2^F 
 This is the exponential moving average
 :math:`y_k = y_{k-1} + \alpha (x_k - y_{k-1})` with :math:`\alpha = 2^{-s}`.
 
+``ExponentialSmoothingI32_SetShift`` replaces :math:`s` by :math:`s'` and keeps
+:math:`A`. The value does not jump, and from the next sample on
+
+.. math::
+
+   A_{k+1} = A_k + \left\lfloor \frac{2^{F} c(x_{k+1}) - A_k}{2^{s'}} \right\rfloor
+
+with a time constant of about :math:`2^{s'}` samples.
+
 .. doxygengroup:: exponential_smoothing_i32_core
    :project: Statistics
    :content-only:

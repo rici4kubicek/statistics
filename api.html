@@ -122,6 +122,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv431ExponentialSmoothingI32_ProcessP23ExponentialSmoothingI327int32_t"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_Process()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv432ExponentialSmoothingI32_GetValuePK23ExponentialSmoothingI32"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_GetValue()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv429ExponentialSmoothingI32_ResetP23ExponentialSmoothingI327int32_t"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_Reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv432ExponentialSmoothingI32_SetShiftP23ExponentialSmoothingI32j"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_SetShift()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv432ExponentialSmoothingI32_GetShiftPK23ExponentialSmoothingI32"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_GetShift()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.EXPONENTIAL_SMOOTHING_I32_FRAC_DEFAULT"><code class="docutils literal notranslate"><span class="pre">EXPONENTIAL_SMOOTHING_I32_FRAC_DEFAULT</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX"><code class="docutils literal notranslate"><span class="pre">EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#c.EXPONENTIAL_SMOOTHING_I32_FRAC_MAX"><code class="docutils literal notranslate"><span class="pre">EXPONENTIAL_SMOOTHING_I32_FRAC_MAX</span></code></a></li>
@@ -902,6 +904,11 @@ A_k = A_{k-1} + \left\lfloor \frac{2^{F} c(x_k) - A_{k-1}}{2^{s}} \right\rfloor\
 \mathrm{GetValue} = A_k \;(F = 0)\]</div>
 <p>This is the exponential moving average
 <span class="math notranslate nohighlight">\(y_k = y_{k-1} + \alpha (x_k - y_{k-1})\)</span> with <span class="math notranslate nohighlight">\(\alpha = 2^{-s}\)</span>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_SetShift</span></code> replaces <span class="math notranslate nohighlight">\(s\)</span> by <span class="math notranslate nohighlight">\(s'\)</span> and keeps
+<span class="math notranslate nohighlight">\(A\)</span>. The value does not jump, and from the next sample on</p>
+<div class="math notranslate nohighlight">
+\[A_{k+1} = A_k + \left\lfloor \frac{2^{F} c(x_{k+1}) - A_k}{2^{s'}} \right\rfloor\]</div>
+<p>with a time constant of about <span class="math notranslate nohighlight">\(2^{s'}\)</span> samples.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv428ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t">
 <span id="_CPPv328ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t"></span><span id="_CPPv228ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t"></span><span id="ExponentialSmoothingI32_Init__ExponentialSmoothingI32P.unsigned.unsigned.int32_t"></span><span class="target" id="group__exponential__smoothing__i32__core_1gaf2dbe989640927348ce975b6a1acd5c5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothingI32_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423ExponentialSmoothingI32" title="ExponentialSmoothingI32"><span class="n"><span class="pre">ExponentialSmoothingI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shift</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">frac</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">initValue</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t" title="Link to this definition"></a><br /></dt>
@@ -958,6 +965,38 @@ A_k = A_{k-1} + \left\lfloor \frac{2^{F} c(x_k) - A_{k-1}}{2^{s}} \right\rfloor\
 <li><p><strong>filter</strong> – Pointer to the filter instance. </p></li>
 <li><p><strong>value</strong> – New filtered value, clamped to the input range. </p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432ExponentialSmoothingI32_SetShiftP23ExponentialSmoothingI32j">
+<span id="_CPPv332ExponentialSmoothingI32_SetShiftP23ExponentialSmoothingI32j"></span><span id="_CPPv232ExponentialSmoothingI32_SetShiftP23ExponentialSmoothingI32j"></span><span id="ExponentialSmoothingI32_SetShift__ExponentialSmoothingI32P.unsigned"></span><span class="target" id="group__exponential__smoothing__i32__core_1gac937f47939ee7377dd0375709d795ba6"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothingI32_SetShift</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423ExponentialSmoothingI32" title="ExponentialSmoothingI32"><span class="n"><span class="pre">ExponentialSmoothingI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shift</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432ExponentialSmoothingI32_SetShiftP23ExponentialSmoothingI32j" title="Link to this definition"></a><br /></dt>
+<dd><p>Change the smoothing factor of a running filter. </p>
+<p>Keeps the accumulator and ExponentialSmoothingI32::frac unchanged, so the filtered value does not jump. The new alpha = 1 / 2^shift applies from the next <a class="reference internal" href="#group__exponential__smoothing__i32__core_1ga1795e85fc1f7fdd295825de6a583483b"><span class="std std-ref">ExponentialSmoothingI32_Process</span></a>; the time constant is about 2^shift samples. Example: track fast with shift 2, then switch to shift 7.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> – Pointer to the filter instance. </p></li>
+<li><p><strong>shift</strong> – New shift, &lt;= <a class="reference internal" href="#group__exponential__smoothing__i32__core_1gaa99a65adbea0a0543bf5d46cbb30e8af"><span class="std std-ref">EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX</span></a>. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true on success; false if <code class="docutils literal notranslate"><span class="pre">filter</span></code> is NULL or invalid or <code class="docutils literal notranslate"><span class="pre">shift</span></code> is out of range (the filter is then unchanged). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432ExponentialSmoothingI32_GetShiftPK23ExponentialSmoothingI32">
+<span id="_CPPv332ExponentialSmoothingI32_GetShiftPK23ExponentialSmoothingI32"></span><span id="_CPPv232ExponentialSmoothingI32_GetShiftPK23ExponentialSmoothingI32"></span><span id="ExponentialSmoothingI32_GetShift__ExponentialSmoothingI32CP"></span><span class="target" id="group__exponential__smoothing__i32__core_1ga54094ab60424014205087108480bd4cd"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothingI32_GetShift</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv423ExponentialSmoothingI32" title="ExponentialSmoothingI32"><span class="n"><span class="pre">ExponentialSmoothingI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432ExponentialSmoothingI32_GetShiftPK23ExponentialSmoothingI32" title="Link to this definition"></a><br /></dt>
+<dd><p>Current smoothing shift (alpha = 1 / 2^shift). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filter</strong> – Pointer to the filter instance. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Shift, 0 if <code class="docutils literal notranslate"><span class="pre">filter</span></code> is NULL or invalid. </p>
 </dd>
 </dl>
 </dd></dl>
