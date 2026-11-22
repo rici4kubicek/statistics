@@ -17,11 +17,47 @@
     ],
     "examples": [
         {
-            "name": "Basic usage of min-max and mean calculation",
+            "name": "Statistics ring buffer: min, max, mean, variance and stdev (uint8_t and float)",
             "base": "example",
             "files": [
                 "platformio.ini",
-                "src/main.c",
+                "src/statistics/main.c",
+                "scripts/run_native.py"
+            ]
+        },
+        {
+            "name": "Integer helpers: range mapping with rounding and clamping",
+            "base": "example",
+            "files": [
+                "platformio.ini",
+                "src/int_math/main.c",
+                "scripts/run_native.py"
+            ]
+        },
+        {
+            "name": "Fixed-point exponential smoothing (no float)",
+            "base": "example",
+            "files": [
+                "platformio.ini",
+                "src/exponential_smoothing_i32/main.c",
+                "scripts/run_native.py"
+            ]
+        },
+        {
+            "name": "Integer mean accumulator (no float)",
+            "base": "example",
+            "files": [
+                "platformio.ini",
+                "src/mean_accumulator_i32/main.c",
+                "scripts/run_native.py"
+            ]
+        },
+        {
+            "name": "Integer sliding-window line fit over several channels (no float)",
+            "base": "example",
+            "files": [
+                "platformio.ini",
+                "src/window_regression_i32/main.c",
                 "scripts/run_native.py"
             ]
         }
