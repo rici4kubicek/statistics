@@ -63,7 +63,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#basic-statistics">Basic statistics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#groups">Groups</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv422_STAT_SUPPORT_TYPE_INT7uint8_t2U8"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_INT()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv422_STAT_SUPPORT_TYPE_INT6int8_t2I8"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_INT()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv422_STAT_SUPPORT_TYPE_INT8uint16_t3U16"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_INT()</span></code></a></li>
@@ -88,6 +89,8 @@
 <li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv410Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#main-structure">Main structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#header-file">Header file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#exponential-smoothing-filter">Exponential smoothing filter</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv425ExponentialSmoothing_InitP20ExponentialSmoothingif"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothing_Init()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv428ExponentialSmoothing_ProcessP20ExponentialSmoothingf"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothing_Process()</span></code></a></li>
@@ -102,50 +105,6 @@
 <li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv413linReg_resultP8linReg_tPfPfPfPf"><code class="docutils literal notranslate"><span class="pre">linReg_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv419linReg_mUncertaintyP8linReg_t7int32_tf"><code class="docutils literal notranslate"><span class="pre">linReg_mUncertainty()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv48linReg_t"><code class="docutils literal notranslate"><span class="pre">linReg_t</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#integer-math-helpers">Integer math helpers</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv418StatInt_FloorShift7int64_tj"><code class="docutils literal notranslate"><span class="pre">StatInt_FloorShift()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv416StatInt_DivRound7int64_t7int64_t"><code class="docutils literal notranslate"><span class="pre">StatInt_DivRound()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv415StatInt_Isqrt648uint64_t"><code class="docutils literal notranslate"><span class="pre">StatInt_Isqrt64()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv417StatInt_Clamp_I327int32_t7int32_t7int32_t"><code class="docutils literal notranslate"><span class="pre">StatInt_Clamp_I32()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv417StatInt_Clamp_I647int64_t7int64_t7int64_t"><code class="docutils literal notranslate"><span class="pre">StatInt_Clamp_I64()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv417StatInt_Clamp_U328uint32_t8uint32_t8uint32_t"><code class="docutils literal notranslate"><span class="pre">StatInt_Clamp_U32()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv415StatInt_Map_I327int32_t7int32_t7int32_t7int32_t7int32_t"><code class="docutils literal notranslate"><span class="pre">StatInt_Map_I32()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv415StatFloat_Clampfff"><code class="docutils literal notranslate"><span class="pre">StatFloat_Clamp()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv413StatFloat_Mapfffff"><code class="docutils literal notranslate"><span class="pre">StatFloat_Map()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#fixed-point-exponential-smoothing-filter">Fixed-point exponential smoothing filter</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv428ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_Init()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv431ExponentialSmoothingI32_ProcessP23ExponentialSmoothingI327int32_t"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_Process()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv432ExponentialSmoothingI32_GetValuePK23ExponentialSmoothingI32"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_GetValue()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv429ExponentialSmoothingI32_ResetP23ExponentialSmoothingI327int32_t"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_Reset()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#c.EXPONENTIAL_SMOOTHING_I32_FRAC_DEFAULT"><code class="docutils literal notranslate"><span class="pre">EXPONENTIAL_SMOOTHING_I32_FRAC_DEFAULT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#c.EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX"><code class="docutils literal notranslate"><span class="pre">EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#c.EXPONENTIAL_SMOOTHING_I32_FRAC_MAX"><code class="docutils literal notranslate"><span class="pre">EXPONENTIAL_SMOOTHING_I32_FRAC_MAX</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv423ExponentialSmoothingI32"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#integer-mean-accumulator">Integer mean accumulator</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv424MeanAccumulatorI32_ResetP18MeanAccumulatorI32"><code class="docutils literal notranslate"><span class="pre">MeanAccumulatorI32_Reset()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv422MeanAccumulatorI32_AddP18MeanAccumulatorI327int32_t"><code class="docutils literal notranslate"><span class="pre">MeanAccumulatorI32_Add()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv424MeanAccumulatorI32_CountPK18MeanAccumulatorI32"><code class="docutils literal notranslate"><span class="pre">MeanAccumulatorI32_Count()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv423MeanAccumulatorI32_MeanPK18MeanAccumulatorI32"><code class="docutils literal notranslate"><span class="pre">MeanAccumulatorI32_Mean()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv418MeanAccumulatorI32"><code class="docutils literal notranslate"><span class="pre">MeanAccumulatorI32</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#integer-sliding-window-regression">Integer sliding-window regression</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv424WindowRegressionI32_InitP19WindowRegressionI32P8uint32_tP7int32_tP23WindowRegressionI32Line8uint16_t7uint8_t"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Init()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv424WindowRegressionI32_PushP19WindowRegressionI328uint32_tA_K7int32_t"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Push()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv425WindowRegressionI32_CountPK19WindowRegressionI32"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Count()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv425WindowRegressionI32_ClearP19WindowRegressionI32"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Clear()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv423WindowRegressionI32_FitP19WindowRegressionI328uint16_t8uint32_t"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Fit()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv428WindowRegressionI32_EvaluatePK19WindowRegressionI327uint8_t8uint32_tP7int32_t"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Evaluate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#c.WINDOW_REGRESSION_I32_CAPACITY_MAX"><code class="docutils literal notranslate"><span class="pre">WINDOW_REGRESSION_I32_CAPACITY_MAX</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#c.WINDOW_REGRESSION_I32_Y_DELTA_MAX"><code class="docutils literal notranslate"><span class="pre">WINDOW_REGRESSION_I32_Y_DELTA_MAX</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv423WindowRegressionI32Line"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32Line</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="api.html#_CPPv419WindowRegressionI32"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -211,13 +170,12 @@ scalar types. The documentation is generated with Doxygen and Sphinx (Breathe).<
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api.html#basic-statistics">Basic statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#groups">Groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#main-structure">Main structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api.html#header-file">Header file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#exponential-smoothing-filter">Exponential smoothing filter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="api.html#linear-regression">Linear regression</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#integer-math-helpers">Integer math helpers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#fixed-point-exponential-smoothing-filter">Fixed-point exponential smoothing filter</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#integer-mean-accumulator">Integer mean accumulator</a></li>
-<li class="toctree-l2"><a class="reference internal" href="api.html#integer-sliding-window-regression">Integer sliding-window regression</a></li>
 </ul>
 </li>
 </ul>
