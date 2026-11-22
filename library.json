@@ -1,6 +1,6 @@
 {
     "name": "Statistics",
-    "version": "1.4.0",
+    "version": "2.0.0",
     "description": "Implementation of simple statistics functionality for embedded systems, including an exponential smoothing filter, online linear regression and float-free integer modules (fixed-point EMA, mean accumulator, sliding-window regression, integer math helpers) for MCUs without FPU.",
     "keywords": "statistics, math, embedded, mean calculation, max determination, exponential smoothing, filter, linear regression, fixed point, integer, no fpu, cortex-m0, sliding window, clamp, map",
     "repository": {
