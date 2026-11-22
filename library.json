@@ -17,7 +17,7 @@
     ],
     "examples": [
         {
-            "name": "Statistics ring buffer: min, max, mean, variance and stdev (uint8_t and float)",
+            "name": "Statistics ring buffer - min max mean variance stdev",
             "base": "example",
             "files": [
                 "platformio.ini",
@@ -26,7 +26,7 @@
             ]
         },
         {
-            "name": "Integer helpers: range mapping with rounding and clamping",
+            "name": "Integer helpers - range mapping and clamping",
             "base": "example",
             "files": [
                 "platformio.ini",
@@ -35,7 +35,7 @@
             ]
         },
         {
-            "name": "Fixed-point exponential smoothing (no float)",
+            "name": "Fixed-point exponential smoothing",
             "base": "example",
             "files": [
                 "platformio.ini",
@@ -44,7 +44,7 @@
             ]
         },
         {
-            "name": "Integer mean accumulator (no float)",
+            "name": "Integer mean accumulator",
             "base": "example",
             "files": [
                 "platformio.ini",
@@ -53,7 +53,7 @@
             ]
         },
         {
-            "name": "Integer sliding-window line fit over several channels (no float)",
+            "name": "Integer sliding-window line fit",
             "base": "example",
             "files": [
                 "platformio.ini",
