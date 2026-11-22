@@ -16,6 +16,7 @@
       <script src="_static/documentation_options.js?v=5929fcd5"></script>
       <script src="_static/doctools.js?v=fd6eb6e6"></script>
       <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -63,8 +64,7 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#groups">Groups</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#basic-statistics">Basic statistics</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv422_STAT_SUPPORT_TYPE_INT7uint8_t2U8"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_INT()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv422_STAT_SUPPORT_TYPE_INT6int8_t2I8"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_INT()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv422_STAT_SUPPORT_TYPE_INT8uint16_t3U16"><code class="docutils literal notranslate"><span class="pre">_STAT_SUPPORT_TYPE_INT()</span></code></a></li>
@@ -89,8 +89,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv410Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#main-structure">Main structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#header-file">Header file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#exponential-smoothing-filter">Exponential smoothing filter</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv425ExponentialSmoothing_InitP20ExponentialSmoothingif"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothing_Init()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv428ExponentialSmoothing_ProcessP20ExponentialSmoothingf"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothing_Process()</span></code></a></li>
@@ -105,6 +103,50 @@
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv413linReg_resultP8linReg_tPfPfPfPf"><code class="docutils literal notranslate"><span class="pre">linReg_result()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv419linReg_mUncertaintyP8linReg_t7int32_tf"><code class="docutils literal notranslate"><span class="pre">linReg_mUncertainty()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#_CPPv48linReg_t"><code class="docutils literal notranslate"><span class="pre">linReg_t</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#integer-math-helpers">Integer math helpers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv418StatInt_FloorShift7int64_tj"><code class="docutils literal notranslate"><span class="pre">StatInt_FloorShift()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv416StatInt_DivRound7int64_t7int64_t"><code class="docutils literal notranslate"><span class="pre">StatInt_DivRound()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv415StatInt_Isqrt648uint64_t"><code class="docutils literal notranslate"><span class="pre">StatInt_Isqrt64()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv417StatInt_Clamp_I327int32_t7int32_t7int32_t"><code class="docutils literal notranslate"><span class="pre">StatInt_Clamp_I32()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv417StatInt_Clamp_I647int64_t7int64_t7int64_t"><code class="docutils literal notranslate"><span class="pre">StatInt_Clamp_I64()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv417StatInt_Clamp_U328uint32_t8uint32_t8uint32_t"><code class="docutils literal notranslate"><span class="pre">StatInt_Clamp_U32()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv415StatInt_Map_I327int32_t7int32_t7int32_t7int32_t7int32_t"><code class="docutils literal notranslate"><span class="pre">StatInt_Map_I32()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv415StatFloat_Clampfff"><code class="docutils literal notranslate"><span class="pre">StatFloat_Clamp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv413StatFloat_Mapfffff"><code class="docutils literal notranslate"><span class="pre">StatFloat_Map()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#fixed-point-exponential-smoothing-filter">Fixed-point exponential smoothing filter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv428ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_Init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv431ExponentialSmoothingI32_ProcessP23ExponentialSmoothingI327int32_t"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_Process()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv432ExponentialSmoothingI32_GetValuePK23ExponentialSmoothingI32"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_GetValue()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv429ExponentialSmoothingI32_ResetP23ExponentialSmoothingI327int32_t"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32_Reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.EXPONENTIAL_SMOOTHING_I32_FRAC_DEFAULT"><code class="docutils literal notranslate"><span class="pre">EXPONENTIAL_SMOOTHING_I32_FRAC_DEFAULT</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX"><code class="docutils literal notranslate"><span class="pre">EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.EXPONENTIAL_SMOOTHING_I32_FRAC_MAX"><code class="docutils literal notranslate"><span class="pre">EXPONENTIAL_SMOOTHING_I32_FRAC_MAX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv423ExponentialSmoothingI32"><code class="docutils literal notranslate"><span class="pre">ExponentialSmoothingI32</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#integer-mean-accumulator">Integer mean accumulator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv424MeanAccumulatorI32_ResetP18MeanAccumulatorI32"><code class="docutils literal notranslate"><span class="pre">MeanAccumulatorI32_Reset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv422MeanAccumulatorI32_AddP18MeanAccumulatorI327int32_t"><code class="docutils literal notranslate"><span class="pre">MeanAccumulatorI32_Add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv424MeanAccumulatorI32_CountPK18MeanAccumulatorI32"><code class="docutils literal notranslate"><span class="pre">MeanAccumulatorI32_Count()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv423MeanAccumulatorI32_MeanPK18MeanAccumulatorI32"><code class="docutils literal notranslate"><span class="pre">MeanAccumulatorI32_Mean()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv418MeanAccumulatorI32"><code class="docutils literal notranslate"><span class="pre">MeanAccumulatorI32</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#integer-sliding-window-regression">Integer sliding-window regression</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv424WindowRegressionI32_InitP19WindowRegressionI32P8uint32_tP7int32_tP23WindowRegressionI32Line8uint16_t7uint8_t"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv424WindowRegressionI32_PushP19WindowRegressionI328uint32_tA_K7int32_t"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Push()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv425WindowRegressionI32_CountPK19WindowRegressionI32"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Count()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv425WindowRegressionI32_ClearP19WindowRegressionI32"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Clear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv423WindowRegressionI32_FitP19WindowRegressionI328uint16_t8uint32_t"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Fit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv428WindowRegressionI32_EvaluatePK19WindowRegressionI327uint8_t8uint32_tP7int32_t"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32_Evaluate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.WINDOW_REGRESSION_I32_CAPACITY_MAX"><code class="docutils literal notranslate"><span class="pre">WINDOW_REGRESSION_I32_CAPACITY_MAX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c.WINDOW_REGRESSION_I32_Y_DELTA_MAX"><code class="docutils literal notranslate"><span class="pre">WINDOW_REGRESSION_I32_Y_DELTA_MAX</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv423WindowRegressionI32Line"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32Line</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#_CPPv419WindowRegressionI32"><code class="docutils literal notranslate"><span class="pre">WindowRegressionI32</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -139,15 +181,117 @@
 <h1>API reference<a class="headerlink" href="#api-reference" title="Link to this heading"></a></h1>
 <p>This section documents the public C API of the library. The documentation is
 extracted from header comments and grouped using Doxygen.</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<section id="basic-statistics">
+<h2>Basic statistics<a class="headerlink" href="#basic-statistics" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Core structures and functions live in the <code class="docutils literal notranslate"><span class="pre">statistics_core</span></code> group.</p></li>
-<li><p>Main header file: <code class="docutils literal notranslate"><span class="pre">include/statistics.h</span></code>.</p></li>
+<li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">statistics_core</span></code> group.</p></li>
+<li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/statistics.h</span></code>.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">Statistics</span></code> instance is a ring buffer of <span class="math notranslate nohighlight">\(N\)</span> samples of one scalar
+type, allocated in <code class="docutils literal notranslate"><span class="pre">Statistics_Init</span></code> (port layer <code class="docutils literal notranslate"><span class="pre">statPortMalloc</span></code>) and
+released by <code class="docutils literal notranslate"><span class="pre">Statistics_Free</span></code>. When the buffer is full, the oldest sample
+is overwritten.</p></li>
 </ul>
-</section>
-<section id="groups">
-<h2>Groups<a class="headerlink" href="#groups" title="Link to this heading"></a></h2>
+<p>Lifecycle and buffer functions:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 40.0%" />
+<col style="width: 60.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Statistics_Init(stat,</span> <span class="pre">itemSize,</span> <span class="pre">samplesCount)</span></code></p></td>
+<td><p>Allocate and zero a window of <code class="docutils literal notranslate"><span class="pre">samplesCount</span></code> samples of <code class="docutils literal notranslate"><span class="pre">itemSize</span></code> bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Statistics_IsValid(stat)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">false</span></code> after a failed allocation or after <code class="docutils literal notranslate"><span class="pre">Statistics_Free</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Statistics_AddSample(stat,</span> <span class="pre">&amp;sample)</span></code></p></td>
+<td><p>Store one sample at the write index, then advance and wrap the index.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Statistics_HaveEnoughSamples(stat)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> once the window has been filled at least once.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Statistics_Reset(stat)</span></code></p></td>
+<td><p>Zero the samples, reset the write index and the “enough” flag.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Statistics_Free(stat)</span></code></p></td>
+<td><p>Release the buffer and mark the instance invalid.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Type-specific functions are generated for each type enabled in
+<code class="docutils literal notranslate"><span class="pre">statistics_config.h</span></code> (see <a class="reference internal" href="user_configuration.html"><span class="doc">User configuration</span></a>), with the suffix
+<code class="docutils literal notranslate"><span class="pre">&lt;T&gt;</span></code> in <code class="docutils literal notranslate"><span class="pre">U8</span></code>, <code class="docutils literal notranslate"><span class="pre">I8</span></code>, <code class="docutils literal notranslate"><span class="pre">U16</span></code>, <code class="docutils literal notranslate"><span class="pre">I16</span></code>, <code class="docutils literal notranslate"><span class="pre">U32</span></code>, <code class="docutils literal notranslate"><span class="pre">I32</span></code> and <code class="docutils literal notranslate"><span class="pre">F</span></code>:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 24.0%" />
+<col style="width: 24.0%" />
+<col style="width: 24.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Integer types return</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">F</span></code> returns</p></th>
+<th class="head"><p>On error</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Statistics_Mean_&lt;T&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int64_t</span></code>, mean × 1000</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Statistics_Min_&lt;T&gt;</span></code> / <code class="docutils literal notranslate"><span class="pre">Statistics_Max_&lt;T&gt;</span></code></p></td>
+<td><p>sample type</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Statistics_Variance_&lt;T&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int64_t</span></code>, variance × 1000</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-1</span></code> (<code class="docutils literal notranslate"><span class="pre">F</span></code>: NaN)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Statistics_Stdev_&lt;T&gt;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">int64_t</span></code>, stdev × 1000</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">float</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-1</span></code> (<code class="docutils literal notranslate"><span class="pre">F</span></code>: NaN)</p></td>
+</tr>
+</tbody>
+</table>
+<p>An error is an invalid instance, or fewer than two samples for variance and stdev.</p>
+<p class="rubric">Mathematical definition</p>
+<p>The functions always work on all <span class="math notranslate nohighlight">\(N\)</span> slots of the window
+(<span class="math notranslate nohighlight">\(N\)</span> = <code class="docutils literal notranslate"><span class="pre">samplesCnt</span></code>, the capacity), <span class="math notranslate nohighlight">\(x_1 \dots x_N\)</span>. Slots that
+have not been written yet hold 0, so check <code class="docutils literal notranslate"><span class="pre">Statistics_HaveEnoughSamples</span></code>
+before using the results.</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Max} = \max_i x_i, \qquad
+\mathrm{Min} = \min_i x_i, \qquad
+\bar{x} = \frac{1}{N} \sum_{i=1}^{N} x_i\]</div>
+<div class="math notranslate nohighlight">
+\[s^2 = \frac{1}{N-1} \sum_{i=1}^{N} \left(x_i - \bar{x}\right)^2 \quad (N \ge 2), \qquad
+s = \sqrt{s^2}\]</div>
+<p>Integer types use 64-bit integer arithmetic only and return values scaled by
+1000. <span class="math notranslate nohighlight">\(R(\cdot)\)</span> is rounding half away from zero:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Mean} = R\!\left(1000\,\bar{x}\right), \qquad
+\mathrm{Variance} = V \approx R\!\left(1000\,s^2\right), \qquad
+\mathrm{Stdev} = \left\lfloor \sqrt{1000\,V} \right\rfloor \approx 1000\,s\]</div>
+<p><span class="math notranslate nohighlight">\(V\)</span> comes from Welford’s online algorithm: intermediate divisions
+truncate, the final division by <span class="math notranslate nohighlight">\(N - 1\)</span> rounds. Example: a return value
+of <code class="docutils literal notranslate"><span class="pre">890250</span></code> means <code class="docutils literal notranslate"><span class="pre">890.250</span></code>.</p>
+<p>The float type computes in <code class="docutils literal notranslate"><span class="pre">float</span></code>:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Mean} = \bar{x}, \qquad
+\mathrm{Variance} = \frac{\sum x_i^2 - \left(\sum x_i\right)^2 / N}{N - 1}, \qquad
+\mathrm{Stdev} = \frac{\left\lfloor \sqrt{10^{6}\,\mathrm{Variance}} \right\rfloor}{1000}\]</div>
+<p>so the float stdev has a resolution of 0.001.</p>
+<p class="rubric">Functions</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv422_STAT_SUPPORT_TYPE_INT7uint8_t2U8">
 <span id="_CPPv322_STAT_SUPPORT_TYPE_INT7uint8_t2U8"></span><span id="_CPPv222_STAT_SUPPORT_TYPE_INT7uint8_t2U8"></span><span id="_STAT_SUPPORT_TYPE_INT__uint8_t.U8"></span><span class="target" id="group__statistics__core_1gacfa38c29644c21101d2e63b646b66889"></span><span class="sig-name descname"><span class="n"><span class="pre">_STAT_SUPPORT_TYPE_INT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span>, <span class="n"><span class="pre">U8</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422_STAT_SUPPORT_TYPE_INT7uint8_t2U8" title="Link to this definition"></a><br /></dt>
@@ -321,9 +465,7 @@ extracted from header comments and grouped using Doxygen.</p>
 <p>The structure describes a ring-like buffer that stores <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> elements each of size <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">itemSize</span></a> bytes. New samples are written at <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">sampleIdx</span></a> and the index is advanced with wrap-around. </p>
 </dd></dl>
 
-</section>
-<section id="main-structure">
-<h2>Main structure<a class="headerlink" href="#main-structure" title="Link to this heading"></a></h2>
+<p class="rubric">Statistics structure</p>
 <dl class="cpp struct">
 <dt class="sig sig-object cpp">
 <span class="target" id="id0"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">Statistics</span></span></span><br /></dt>
@@ -331,9 +473,7 @@ extracted from header comments and grouped using Doxygen.</p>
 <p>The structure describes a ring-like buffer that stores <a class="reference internal" href="#group__statistics__core_1ga9e89d31e64718f2b336959ece47dbada"><span class="std std-ref">samplesCnt</span></a> elements each of size <a class="reference internal" href="#group__statistics__core_1ga55227e6c4c0a16fb674b91ceb83dcdab"><span class="std std-ref">itemSize</span></a> bytes. New samples are written at <a class="reference internal" href="#group__statistics__core_1ga727d79f195047fdcb2785deb3d9abe93"><span class="std std-ref">sampleIdx</span></a> and the index is advanced with wrap-around. </p>
 </dd></dl>
 
-</section>
-<section id="header-file">
-<h2>Header file<a class="headerlink" href="#header-file" title="Link to this heading"></a></h2>
+<p class="rubric">Header file</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>doxygenfile: Cannot find file “include/statistics.h </p>
@@ -345,6 +485,16 @@ extracted from header comments and grouped using Doxygen.</p>
 <li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">exponential_smoothing_core</span></code> group.</p></li>
 <li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/exponential_smoothing.h</span></code>.</p></li>
 </ul>
+<p class="rubric">Mathematical definition</p>
+<p>With the smoothing factor <span class="math notranslate nohighlight">\(N\)</span> (<code class="docutils literal notranslate"><span class="pre">factor</span></code>), the accumulator
+<span class="math notranslate nohighlight">\(B\)</span> holds the filtered value scaled by <span class="math notranslate nohighlight">\(N\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[B_0 = N\,y_0, \qquad
+B_k = B_{k-1} - \frac{B_{k-1}}{N} + x_k, \qquad
+y_k = \frac{B_k}{N}\]</div>
+<p>which is the exponential moving average with <span class="math notranslate nohighlight">\(\alpha = 1/N\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[y_k = y_{k-1} + \frac{1}{N}\left(x_k - y_{k-1}\right)\]</div>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv425ExponentialSmoothing_InitP20ExponentialSmoothingif">
 <span id="_CPPv325ExponentialSmoothing_InitP20ExponentialSmoothingif"></span><span id="_CPPv225ExponentialSmoothing_InitP20ExponentialSmoothingif"></span><span id="ExponentialSmoothing_Init__ExponentialSmoothingP.i.float"></span><span class="target" id="group__exponential__smoothing__core_1gadfecfdeeba1883d742352e8a120dd93d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothing_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv420ExponentialSmoothing" title="ExponentialSmoothing"><span class="n"><span class="pre">ExponentialSmoothing</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">factor</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">initValue</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425ExponentialSmoothing_InitP20ExponentialSmoothingif" title="Link to this definition"></a><br /></dt>
@@ -404,6 +554,45 @@ extracted from header comments and grouped using Doxygen.</p>
 <li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">linear_regression_core</span></code> group.</p></li>
 <li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/linear_regression.h</span></code>.</p></li>
 </ul>
+<p class="rubric">Mathematical definition</p>
+<p>Each point <span class="math notranslate nohighlight">\((x_k, y_k)\)</span> updates the means and the centered sums with
+Welford’s online algorithm (<span class="math notranslate nohighlight">\(k\)</span> = number of points after the update):</p>
+<div class="math notranslate nohighlight">
+\[\delta_x = x_k - \bar{x}_{k-1}, \quad
+\delta_y = y_k - \bar{y}_{k-1}, \qquad
+\bar{x}_k = \bar{x}_{k-1} + \frac{\delta_x}{k}, \quad
+\bar{y}_k = \bar{y}_{k-1} + \frac{\delta_y}{k}\]</div>
+<div class="math notranslate nohighlight">
+\[S_{xx} \mathrel{+}= \delta_x \left(x_k - \bar{x}_k\right), \quad
+S_{yy} \mathrel{+}= \delta_y \left(y_k - \bar{y}_k\right), \quad
+S_{xy} \mathrel{+}= \delta_x \left(y_k - \bar{y}_k\right)\]</div>
+<p>so that over <span class="math notranslate nohighlight">\(n\)</span> points</p>
+<div class="math notranslate nohighlight">
+\[S_{xx} = \sum \left(x_i - \bar{x}\right)^2, \quad
+S_{yy} = \sum \left(y_i - \bar{y}\right)^2, \quad
+S_{xy} = \sum \left(x_i - \bar{x}\right)\left(y_i - \bar{y}\right)\]</div>
+<p>The centered sums keep the results stable when the data has a large constant
+offset. The result (<span class="math notranslate nohighlight">\(n \ge 3\)</span>) of the line <span class="math notranslate nohighlight">\(y = m x + b\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[m = \frac{S_{xy}}{S_{xx}} \;(0 \text{ if } S_{xx} = 0), \qquad
+b = \bar{y} - m\,\bar{x}, \qquad
+r = \frac{S_{xy}}{\sqrt{S_{xx} S_{yy}}} \;(1 \text{ if } S_{xx} = 0 \text{ or } S_{yy} = 0)\]</div>
+<p>The residual sum of squares of the fitted line, clamped against rounding:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{SSE} = \max\!\left(0,\; S_{yy} - \frac{S_{xy}^2}{S_{xx}}\right) \;(S_{xx} &gt; 0), \qquad
+\mathrm{jitter} = \sqrt{\frac{\mathrm{SSE}}{n - 2}}\]</div>
+<p>With <span class="math notranslate nohighlight">\(S_{xx} = 0\)</span> the jitter uses <span class="math notranslate nohighlight">\(S_{yy}\)</span> in place of SSE.</p>
+<p>Slope uncertainty with the coverage factor <span class="math notranslate nohighlight">\(k\)</span> and the Y resolution
+<span class="math notranslate nohighlight">\(\Delta_y\)</span>, <span class="math notranslate nohighlight">\(u_{\mathrm{res}}^2 = \Delta_y^2 / 3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}U_m =
+\begin{cases}
+\infty &amp; n \le 1 \text{ or } S_{xx} = 0 \\
+k \sqrt{u_{\mathrm{res}}^2 / S_{xx}} &amp; n = 2 \\
+k \sqrt{\left(\mathrm{SSE} / (n - 2) + u_{\mathrm{res}}^2\right) / S_{xx}} &amp; n \ge 3
+\end{cases}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(U_m\)</span> does not change when all X or all Y values are shifted by a
+constant.</p>
 <dl class="cpp function">
 <dt class="sig sig-object cpp" id="_CPPv412linReg_clearP8linReg_t">
 <span id="_CPPv312linReg_clearP8linReg_t"></span><span id="_CPPv212linReg_clearP8linReg_t"></span><span id="linReg_clear__linReg_tP"></span><span class="target" id="group__linear__regression__core_1ga6356ef1127feff9259c3a7c55c8567a2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">linReg_clear</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48linReg_t" title="linReg_t"><span class="n"><span class="pre">linReg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412linReg_clearP8linReg_t" title="Link to this definition"></a><br /></dt>
@@ -490,6 +679,555 @@ extracted from header comments and grouped using Doxygen.</p>
 <dd><div class="docutils container">
 <em>#include &lt;linear_regression.h&gt;</em></div>
 <p>Online linear regression state. </p>
+</dd></dl>
+
+</section>
+<section id="integer-math-helpers">
+<h2>Integer math helpers<a class="headerlink" href="#integer-math-helpers" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">statistics_int_math</span></code> group.</p></li>
+<li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/statistics_int_math.h</span></code>.</p></li>
+</ul>
+<p class="rubric">Mathematical definition</p>
+<p><span class="math notranslate nohighlight">\(R(\cdot)\)</span> is rounding half away from zero,
+<span class="math notranslate nohighlight">\(R(q) = \mathrm{sgn}(q) \left\lfloor |q| + \tfrac{1}{2} \right\rfloor\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{FloorShift}(v, s) = \left\lfloor \frac{v}{2^{s}} \right\rfloor \;(s &gt; 63 \text{ acts as } 63), \qquad
+\mathrm{DivRound}(v, d) = R\!\left(\frac{v}{d}\right) \;(d &gt; 0), \qquad
+\mathrm{Isqrt64}(v) = \left\lfloor \sqrt{v} \right\rfloor\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{Clamp}(v, lo, hi) = \min\!\left(\max(v, lo), hi\right) \quad (lo \le hi)\]</div>
+<p>Linear range mapping from <span class="math notranslate nohighlight">\([x_0, x_1]\)</span> (<code class="docutils literal notranslate"><span class="pre">inMin</span></code>, <code class="docutils literal notranslate"><span class="pre">inMax</span></code>) to
+<span class="math notranslate nohighlight">\([y_0, y_1]\)</span> (<code class="docutils literal notranslate"><span class="pre">outMin</span></code>, <code class="docutils literal notranslate"><span class="pre">outMax</span></code>), without output clamping:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathrm{Map\_I32}(x) =
+\begin{cases}
+y_0 &amp; x_0 = x_1 \\
+\mathrm{sat}_{32}\!\left(y_0 + R\!\left(\dfrac{(x - x_0)(y_1 - y_0)}{x_1 - x_0}\right)\right) &amp; \text{otherwise}
+\end{cases}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathrm{sat}_{32}\)</span> limits to <span class="math notranslate nohighlight">\([-2^{31}, 2^{31} - 1]\)</span>.
+<code class="docutils literal notranslate"><span class="pre">StatFloat_Clamp</span></code> uses the same clamp definition. <code class="docutils literal notranslate"><span class="pre">StatFloat_Map</span></code> is the
+same mapping without <span class="math notranslate nohighlight">\(R\)</span> and without saturation.</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418StatInt_FloorShift7int64_tj">
+<span id="_CPPv318StatInt_FloorShift7int64_tj"></span><span id="_CPPv218StatInt_FloorShift7int64_tj"></span><span id="StatInt_FloorShift__int64_t.unsigned"></span><span class="target" id="group__statistics__int__math_1ga97173756d0cec9608de531065f50fea7"></span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StatInt_FloorShift</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shift</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418StatInt_FloorShift7int64_tj" title="Link to this definition"></a><br /></dt>
+<dd><p>Arithmetic shift right with floor rounding: floor(value / 2^shift). </p>
+<p>Unlike <code class="docutils literal notranslate"><span class="pre">value</span> <span class="pre">&gt;&gt;</span> <span class="pre">shift</span></code>, the result does not depend on the implementation-defined right shift of negative values. Example: <code class="docutils literal notranslate"><a class="reference internal" href="#group__statistics__int__math_1ga97173756d0cec9608de531065f50fea7"><span class="std std-ref"><span class="pre">StatInt_FloorShift</span></span></a><span class="pre">(-1,</span> <span class="pre">4)</span> <span class="pre">==</span> <span class="pre">-1</span></code>, <code class="docutils literal notranslate"><a class="reference internal" href="#group__statistics__int__math_1ga97173756d0cec9608de531065f50fea7"><span class="std std-ref"><span class="pre">StatInt_FloorShift</span></span></a><span class="pre">(-16,</span> <span class="pre">4)</span> <span class="pre">==</span> <span class="pre">-1</span></code>, <code class="docutils literal notranslate"><a class="reference internal" href="#group__statistics__int__math_1ga97173756d0cec9608de531065f50fea7"><span class="std std-ref"><span class="pre">StatInt_FloorShift</span></span></a><span class="pre">(-17,</span> <span class="pre">4)</span> <span class="pre">==</span> <span class="pre">-2</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – Value to shift (full int64_t range). </p></li>
+<li><p><strong>shift</strong> – Shift count; values above 63 behave like 63 (result 0 for value &gt;= 0, -1 for value &lt; 0). </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>floor(value / 2^shift). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416StatInt_DivRound7int64_t7int64_t">
+<span id="_CPPv316StatInt_DivRound7int64_t7int64_t"></span><span id="_CPPv216StatInt_DivRound7int64_t7int64_t"></span><span id="StatInt_DivRound__int64_t.int64_t"></span><span class="target" id="group__statistics__int__math_1gaed1b5ffc48afa9078490ca656daf79bf"></span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StatInt_DivRound</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">divisor</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416StatInt_DivRound7int64_t7int64_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Integer division rounded half away from zero. </p>
+<p>Example: <code class="docutils literal notranslate"><span class="pre">StatInt_DivRound(5,</span> <span class="pre">2)</span> <span class="pre">==</span> <span class="pre">3</span></code>, <code class="docutils literal notranslate"><a class="reference internal" href="#group__statistics__int__math_1gaed1b5ffc48afa9078490ca656daf79bf"><span class="std std-ref"><span class="pre">StatInt_DivRound</span></span></a><span class="pre">(-5,</span> <span class="pre">2)</span> <span class="pre">==</span> <span class="pre">-3</span></code>, <code class="docutils literal notranslate"><span class="pre">StatInt_DivRound(4,</span> <span class="pre">3)</span> <span class="pre">==</span> <span class="pre">1</span></code>. Works for the full int64_t range of <code class="docutils literal notranslate"><span class="pre">value</span></code>. On Cortex-M0+ one call costs one <code class="docutils literal notranslate"><span class="pre">__aeabi_uldivmod</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – Dividend (full int64_t range). </p></li>
+<li><p><strong>divisor</strong> – Divisor, precondition: divisor &gt; 0. Returns 0 when violated. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>round(value / divisor). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415StatInt_Isqrt648uint64_t">
+<span id="_CPPv315StatInt_Isqrt648uint64_t"></span><span id="_CPPv215StatInt_Isqrt648uint64_t"></span><span id="StatInt_Isqrt64__uint64_t"></span><span class="target" id="group__statistics__int__math_1ga0d2d96ee46f8930a3ddeaa1928e34771"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StatInt_Isqrt64</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415StatInt_Isqrt648uint64_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Integer square root: floor(sqrt(value)). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – Radicand (full uint64_t range). </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>floor(sqrt(value)), always fits uint32_t. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417StatInt_Clamp_I327int32_t7int32_t7int32_t">
+<span id="_CPPv317StatInt_Clamp_I327int32_t7int32_t7int32_t"></span><span id="_CPPv217StatInt_Clamp_I327int32_t7int32_t7int32_t"></span><span id="StatInt_Clamp_I32__int32_t.int32_t.int32_t"></span><span class="target" id="group__statistics__int__math_1ga724340ce5221b8ada80d585757cb5183"></span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StatInt_Clamp_I32</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">lo</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hi</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417StatInt_Clamp_I327int32_t7int32_t7int32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Clamp a value into [lo, hi]. </p>
+<p>Precondition: lo &lt;= hi. When violated the result is lo for value &lt; lo, otherwise hi for value &gt; hi, otherwise value (no undefined behavior).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – Value to clamp. </p></li>
+<li><p><strong>lo</strong> – Lower bound. </p></li>
+<li><p><strong>hi</strong> – Upper bound. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">value</span></code> limited to [lo, hi]. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417StatInt_Clamp_I647int64_t7int64_t7int64_t">
+<span id="_CPPv317StatInt_Clamp_I647int64_t7int64_t7int64_t"></span><span id="_CPPv217StatInt_Clamp_I647int64_t7int64_t7int64_t"></span><span id="StatInt_Clamp_I64__int64_t.int64_t.int64_t"></span><span class="target" id="group__statistics__int__math_1ga020512aa805abf54a824fd49bd6e2c43"></span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StatInt_Clamp_I64</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">lo</span></span>, <span class="n"><span class="pre">int64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hi</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417StatInt_Clamp_I647int64_t7int64_t7int64_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Clamp a value into [lo, hi].    </p>
+<p>Precondition: lo &lt;= hi. When violated the result is lo for value &lt; lo, otherwise hi for value &gt; hi, otherwise value (no undefined behavior).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – Value to clamp. </p></li>
+<li><p><strong>lo</strong> – Lower bound. </p></li>
+<li><p><strong>hi</strong> – Upper bound. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">value</span></code> limited to [lo, hi].    </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417StatInt_Clamp_U328uint32_t8uint32_t8uint32_t">
+<span id="_CPPv317StatInt_Clamp_U328uint32_t8uint32_t8uint32_t"></span><span id="_CPPv217StatInt_Clamp_U328uint32_t8uint32_t8uint32_t"></span><span id="StatInt_Clamp_U32__uint32_t.uint32_t.uint32_t"></span><span class="target" id="group__statistics__int__math_1ga48e0cc36b960c1bc9cbf3ab1238b76da"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StatInt_Clamp_U32</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">lo</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hi</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417StatInt_Clamp_U328uint32_t8uint32_t8uint32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Clamp a value into [lo, hi].    </p>
+<p>Precondition: lo &lt;= hi. When violated the result is lo for value &lt; lo, otherwise hi for value &gt; hi, otherwise value (no undefined behavior).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – Value to clamp. </p></li>
+<li><p><strong>lo</strong> – Lower bound. </p></li>
+<li><p><strong>hi</strong> – Upper bound. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">value</span></code> limited to [lo, hi].    </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415StatInt_Map_I327int32_t7int32_t7int32_t7int32_t7int32_t">
+<span id="_CPPv315StatInt_Map_I327int32_t7int32_t7int32_t7int32_t7int32_t"></span><span id="_CPPv215StatInt_Map_I327int32_t7int32_t7int32_t7int32_t7int32_t"></span><span id="StatInt_Map_I32__int32_t.int32_t.int32_t.int32_t.int32_t"></span><span class="target" id="group__statistics__int__math_1ga65bbd0cf1472cf894175c236da24f188"></span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StatInt_Map_I32</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">inMin</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">inMax</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">outMin</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">outMax</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415StatInt_Map_I327int32_t7int32_t7int32_t7int32_t7int32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Linear range mapping (Arduino <code class="docutils literal notranslate"><span class="pre">map()</span></code> style) with rounding. </p>
+<p>Returns outMin + (value - inMin) * (outMax - outMin) / (inMax - inMin), with the division rounded half away from zero (see <a class="reference internal" href="#group__statistics__int__math_1gaed1b5ffc48afa9078490ca656daf79bf"><span class="std std-ref">StatInt_DivRound</span></a>).</p>
+<p><ul class="simple">
+<li><p>Reversed ranges are allowed (inMin &gt; inMax and/or outMin &gt; outMax).</p></li>
+<li><p>inMin == inMax returns outMin.</p></li>
+<li><p>The output is NOT clamped to [outMin, outMax]: a value outside the input range is extrapolated. Combine with <a class="reference internal" href="#group__statistics__int__math_1ga724340ce5221b8ada80d585757cb5183"><span class="std std-ref">StatInt_Clamp_I32</span></a> when needed.</p></li>
+<li><p>A result outside the int32_t range saturates to INT32_MIN / INT32_MAX.</p></li>
+<li><p>No overflow for any int32_t arguments (64-bit intermediates; at most two unsigned 64-bit divisions per call).</p></li>
+</ul>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – Input value. </p></li>
+<li><p><strong>inMin</strong> – Input value mapped to <code class="docutils literal notranslate"><span class="pre">outMin</span></code>. </p></li>
+<li><p><strong>inMax</strong> – Input value mapped to <code class="docutils literal notranslate"><span class="pre">outMax</span></code>. </p></li>
+<li><p><strong>outMin</strong> – Output for <code class="docutils literal notranslate"><span class="pre">inMin</span></code>. </p></li>
+<li><p><strong>outMax</strong> – Output for <code class="docutils literal notranslate"><span class="pre">inMax</span></code>. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mapped value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415StatFloat_Clampfff">
+<span id="_CPPv315StatFloat_Clampfff"></span><span id="_CPPv215StatFloat_Clampfff"></span><span id="StatFloat_Clamp__float.float.float"></span><span class="target" id="group__statistics__int__math_1gabc5126aaa12064025fbe6739d8e5807e"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StatFloat_Clamp</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">lo</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">hi</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415StatFloat_Clampfff" title="Link to this definition"></a><br /></dt>
+<dd><p>Clamp a float into [lo, hi]. Same rules as <a class="reference internal" href="#group__statistics__int__math_1ga724340ce5221b8ada80d585757cb5183"><span class="std std-ref">StatInt_Clamp_I32</span></a>. </p>
+<p>A NaN <code class="docutils literal notranslate"><span class="pre">value</span></code> is returned unchanged.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – Value to clamp. </p></li>
+<li><p><strong>lo</strong> – Lower bound. </p></li>
+<li><p><strong>hi</strong> – Upper bound. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">value</span></code> limited to [lo, hi]. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv413StatFloat_Mapfffff">
+<span id="_CPPv313StatFloat_Mapfffff"></span><span id="_CPPv213StatFloat_Mapfffff"></span><span id="StatFloat_Map__float.float.float.float.float"></span><span class="target" id="group__statistics__int__math_1ga3f456065341e26bde6354d7eefb2ad53"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">StatFloat_Map</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">inMin</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">inMax</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">outMin</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">outMax</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413StatFloat_Mapfffff" title="Link to this definition"></a><br /></dt>
+<dd><p>Linear range mapping for floats. Same rules as <a class="reference internal" href="#group__statistics__int__math_1ga65bbd0cf1472cf894175c236da24f188"><span class="std std-ref">StatInt_Map_I32</span></a> (inMin == inMax returns outMin, no output clamping), no rounding. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value</strong> – Input value. </p></li>
+<li><p><strong>inMin</strong> – Input value mapped to <code class="docutils literal notranslate"><span class="pre">outMin</span></code>. </p></li>
+<li><p><strong>inMax</strong> – Input value mapped to <code class="docutils literal notranslate"><span class="pre">outMax</span></code>. </p></li>
+<li><p><strong>outMin</strong> – Output for <code class="docutils literal notranslate"><span class="pre">inMin</span></code>. </p></li>
+<li><p><strong>outMax</strong> – Output for <code class="docutils literal notranslate"><span class="pre">inMax</span></code>. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Mapped value. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="fixed-point-exponential-smoothing-filter">
+<h2>Fixed-point exponential smoothing filter<a class="headerlink" href="#fixed-point-exponential-smoothing-filter" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">exponential_smoothing_i32_core</span></code> group.</p></li>
+<li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/exponential_smoothing_i32.h</span></code>.</p></li>
+</ul>
+<p class="rubric">Mathematical definition</p>
+<p>The accumulator <span class="math notranslate nohighlight">\(A\)</span> holds the filtered value in Q<span class="math notranslate nohighlight">\(F\)</span> fixed point
+(<span class="math notranslate nohighlight">\(F\)</span> = <code class="docutils literal notranslate"><span class="pre">frac</span></code>, <span class="math notranslate nohighlight">\(s\)</span> = <code class="docutils literal notranslate"><span class="pre">shift</span></code>). Inputs are first clamped to the
+representable range, <span class="math notranslate nohighlight">\(c(x) = \mathrm{Clamp}\left(x, \lfloor -2^{31} / 2^F \rfloor, \lfloor (2^{31} - 1) / 2^F \rfloor\right)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[A_0 = 2^{F} c(y_0), \qquad
+A_k = A_{k-1} + \left\lfloor \frac{2^{F} c(x_k) - A_{k-1}}{2^{s}} \right\rfloor\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{GetValue} = \left\lfloor \frac{A_k + 2^{F-1}}{2^{F}} \right\rfloor \;(F &gt; 0), \qquad
+\mathrm{GetValue} = A_k \;(F = 0)\]</div>
+<p>This is the exponential moving average
+<span class="math notranslate nohighlight">\(y_k = y_{k-1} + \alpha (x_k - y_{k-1})\)</span> with <span class="math notranslate nohighlight">\(\alpha = 2^{-s}\)</span>.</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv428ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t">
+<span id="_CPPv328ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t"></span><span id="_CPPv228ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t"></span><span id="ExponentialSmoothingI32_Init__ExponentialSmoothingI32P.unsigned.unsigned.int32_t"></span><span class="target" id="group__exponential__smoothing__i32__core_1gaf2dbe989640927348ce975b6a1acd5c5"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothingI32_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423ExponentialSmoothingI32" title="ExponentialSmoothingI32"><span class="n"><span class="pre">ExponentialSmoothingI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">shift</span></span>, <span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">frac</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">initValue</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428ExponentialSmoothingI32_InitP23ExponentialSmoothingI32jj7int32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Initialize the filter. </p>
+<p>Valid input range for samples and <code class="docutils literal notranslate"><span class="pre">initValue</span></code> is [INT32_MIN / 2^frac, INT32_MAX / 2^frac] (frac = 8: +-8388607); values outside are clamped to it.</p>
+<p>An invalid parameter (<code class="docutils literal notranslate"><span class="pre">shift</span></code> &gt; <a class="reference internal" href="#group__exponential__smoothing__i32__core_1gaa99a65adbea0a0543bf5d46cbb30e8af"><span class="std std-ref">EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX</span></a>, <code class="docutils literal notranslate"><span class="pre">frac</span></code> &gt; <a class="reference internal" href="#group__exponential__smoothing__i32__core_1ga145ef900761291a888b17cb3488146de"><span class="std std-ref">EXPONENTIAL_SMOOTHING_I32_FRAC_MAX</span></a>) leaves the filter in an invalid state where <a class="reference internal" href="#group__exponential__smoothing__i32__core_1ga1795e85fc1f7fdd295825de6a583483b"><span class="std std-ref">ExponentialSmoothingI32_Process</span></a> and <a class="reference internal" href="#group__exponential__smoothing__i32__core_1ga2e9bcdc806dd51fb3cd80800d0c7b86c"><span class="std std-ref">ExponentialSmoothingI32_Reset</span></a> are no-ops and <a class="reference internal" href="#group__exponential__smoothing__i32__core_1ga19331c563475eeb750f0af8badc53216"><span class="std std-ref">ExponentialSmoothingI32_GetValue</span></a> returns 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> – <strong>[out]</strong> Pointer to the filter instance to initialize. </p></li>
+<li><p><strong>shift</strong> – alpha = 1 / 2^shift, 0 = no smoothing. </p></li>
+<li><p><strong>frac</strong> – Fractional bits of the accumulator, usually <a class="reference internal" href="#group__exponential__smoothing__i32__core_1gac45ae55d342471a1c45960e61b46d368"><span class="std std-ref">EXPONENTIAL_SMOOTHING_I32_FRAC_DEFAULT</span></a>. </p></li>
+<li><p><strong>initValue</strong> – Initial filtered value. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv431ExponentialSmoothingI32_ProcessP23ExponentialSmoothingI327int32_t">
+<span id="_CPPv331ExponentialSmoothingI32_ProcessP23ExponentialSmoothingI327int32_t"></span><span id="_CPPv231ExponentialSmoothingI32_ProcessP23ExponentialSmoothingI327int32_t"></span><span id="ExponentialSmoothingI32_Process__ExponentialSmoothingI32P.int32_t"></span><span class="target" id="group__exponential__smoothing__i32__core_1ga1795e85fc1f7fdd295825de6a583483b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothingI32_Process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423ExponentialSmoothingI32" title="ExponentialSmoothingI32"><span class="n"><span class="pre">ExponentialSmoothingI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sample</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431ExponentialSmoothingI32_ProcessP23ExponentialSmoothingI327int32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Feed a new sample into the filter. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> – Pointer to the filter instance. </p></li>
+<li><p><strong>sample</strong> – New sample, clamped to the input range (see <a class="reference internal" href="#group__exponential__smoothing__i32__core_1gaf2dbe989640927348ce975b6a1acd5c5"><span class="std std-ref">ExponentialSmoothingI32_Init</span></a>). </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432ExponentialSmoothingI32_GetValuePK23ExponentialSmoothingI32">
+<span id="_CPPv332ExponentialSmoothingI32_GetValuePK23ExponentialSmoothingI32"></span><span id="_CPPv232ExponentialSmoothingI32_GetValuePK23ExponentialSmoothingI32"></span><span id="ExponentialSmoothingI32_GetValue__ExponentialSmoothingI32CP"></span><span class="target" id="group__exponential__smoothing__i32__core_1ga19331c563475eeb750f0af8badc53216"></span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothingI32_GetValue</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv423ExponentialSmoothingI32" title="ExponentialSmoothingI32"><span class="n"><span class="pre">ExponentialSmoothingI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432ExponentialSmoothingI32_GetValuePK23ExponentialSmoothingI32" title="Link to this definition"></a><br /></dt>
+<dd><p>Get the current filtered value rounded to an integer (half up, toward +infinity). </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filter</strong> – Pointer to the filter instance. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Filtered value, or 0 if <code class="docutils literal notranslate"><span class="pre">filter</span></code> is NULL or invalid. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv429ExponentialSmoothingI32_ResetP23ExponentialSmoothingI327int32_t">
+<span id="_CPPv329ExponentialSmoothingI32_ResetP23ExponentialSmoothingI327int32_t"></span><span id="_CPPv229ExponentialSmoothingI32_ResetP23ExponentialSmoothingI327int32_t"></span><span id="ExponentialSmoothingI32_Reset__ExponentialSmoothingI32P.int32_t"></span><span class="target" id="group__exponential__smoothing__i32__core_1ga2e9bcdc806dd51fb3cd80800d0c7b86c"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothingI32_Reset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv423ExponentialSmoothingI32" title="ExponentialSmoothingI32"><span class="n"><span class="pre">ExponentialSmoothingI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">filter</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429ExponentialSmoothingI32_ResetP23ExponentialSmoothingI327int32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Set the filtered value, keeping shift and frac. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filter</strong> – Pointer to the filter instance. </p></li>
+<li><p><strong>value</strong> – New filtered value, clamped to the input range. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.EXPONENTIAL_SMOOTHING_I32_FRAC_DEFAULT">
+<span class="target" id="group__exponential__smoothing__i32__core_1gac45ae55d342471a1c45960e61b46d368"></span><span class="sig-name descname"><span class="n"><span class="pre">EXPONENTIAL_SMOOTHING_I32_FRAC_DEFAULT</span></span></span><a class="headerlink" href="#c.EXPONENTIAL_SMOOTHING_I32_FRAC_DEFAULT" title="Link to this definition"></a><br /></dt>
+<dd><p>Default number of fractional bits of the accumulator. </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX">
+<span class="target" id="group__exponential__smoothing__i32__core_1gaa99a65adbea0a0543bf5d46cbb30e8af"></span><span class="sig-name descname"><span class="n"><span class="pre">EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX</span></span></span><a class="headerlink" href="#c.EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX" title="Link to this definition"></a><br /></dt>
+<dd><p>Largest accepted <code class="docutils literal notranslate"><span class="pre">shift</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.EXPONENTIAL_SMOOTHING_I32_FRAC_MAX">
+<span class="target" id="group__exponential__smoothing__i32__core_1ga145ef900761291a888b17cb3488146de"></span><span class="sig-name descname"><span class="n"><span class="pre">EXPONENTIAL_SMOOTHING_I32_FRAC_MAX</span></span></span><a class="headerlink" href="#c.EXPONENTIAL_SMOOTHING_I32_FRAC_MAX" title="Link to this definition"></a><br /></dt>
+<dd><p>Largest accepted <code class="docutils literal notranslate"><span class="pre">frac</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv423ExponentialSmoothingI32">
+<span id="_CPPv323ExponentialSmoothingI32"></span><span id="_CPPv223ExponentialSmoothingI32"></span><span id="ExponentialSmoothingI32"></span><span class="target" id="structExponentialSmoothingI32"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ExponentialSmoothingI32</span></span></span><a class="headerlink" href="#_CPPv423ExponentialSmoothingI32" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;exponential_smoothing_i32.h&gt;</em></div>
+<p>Fixed-point exponential smoothing filter state. </p>
+</dd></dl>
+
+</section>
+<section id="integer-mean-accumulator">
+<h2>Integer mean accumulator<a class="headerlink" href="#integer-mean-accumulator" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">mean_accumulator_i32_core</span></code> group.</p></li>
+<li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/mean_accumulator_i32.h</span></code>.</p></li>
+</ul>
+<p class="rubric">Mathematical definition</p>
+<p>For the <span class="math notranslate nohighlight">\(n\)</span> added samples <span class="math notranslate nohighlight">\(x_1 \dots x_n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}S = \sum_{i=1}^{n} x_i, \qquad
+\mathrm{Mean} =
+\begin{cases}
+0 &amp; n = 0 \\
+R\!\left(S / n\right) &amp; n \ge 1
+\end{cases}\end{split}\]</div>
+<p>with <span class="math notranslate nohighlight">\(R\)</span> rounding half away from zero (<code class="docutils literal notranslate"><span class="pre">StatInt_DivRound</span></code>).</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424MeanAccumulatorI32_ResetP18MeanAccumulatorI32">
+<span id="_CPPv324MeanAccumulatorI32_ResetP18MeanAccumulatorI32"></span><span id="_CPPv224MeanAccumulatorI32_ResetP18MeanAccumulatorI32"></span><span id="MeanAccumulatorI32_Reset__MeanAccumulatorI32P"></span><span class="target" id="group__mean__accumulator__i32__core_1ga48ecbd9e99435961e888bf7b5f2000f8"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeanAccumulatorI32_Reset</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv418MeanAccumulatorI32" title="MeanAccumulatorI32"><span class="n"><span class="pre">MeanAccumulatorI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">acc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424MeanAccumulatorI32_ResetP18MeanAccumulatorI32" title="Link to this definition"></a><br /></dt>
+<dd><p>Clear the accumulator (sum and count = 0). Also serves as init. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>acc</strong> – Pointer to the accumulator instance. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422MeanAccumulatorI32_AddP18MeanAccumulatorI327int32_t">
+<span id="_CPPv322MeanAccumulatorI32_AddP18MeanAccumulatorI327int32_t"></span><span id="_CPPv222MeanAccumulatorI32_AddP18MeanAccumulatorI327int32_t"></span><span id="MeanAccumulatorI32_Add__MeanAccumulatorI32P.int32_t"></span><span class="target" id="group__mean__accumulator__i32__core_1gaa8a881070ef188e91f680a46ff40a8ed"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeanAccumulatorI32_Add</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv418MeanAccumulatorI32" title="MeanAccumulatorI32"><span class="n"><span class="pre">MeanAccumulatorI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">acc</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">sample</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422MeanAccumulatorI32_AddP18MeanAccumulatorI327int32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Add one sample. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>acc</strong> – Pointer to the accumulator instance. </p></li>
+<li><p><strong>sample</strong> – Sample value. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true if added, false if <code class="docutils literal notranslate"><span class="pre">acc</span></code> is NULL or already holds UINT32_MAX samples. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424MeanAccumulatorI32_CountPK18MeanAccumulatorI32">
+<span id="_CPPv324MeanAccumulatorI32_CountPK18MeanAccumulatorI32"></span><span id="_CPPv224MeanAccumulatorI32_CountPK18MeanAccumulatorI32"></span><span id="MeanAccumulatorI32_Count__MeanAccumulatorI32CP"></span><span class="target" id="group__mean__accumulator__i32__core_1gaaf8b1f937ac498affbecc596cd8c43c3"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeanAccumulatorI32_Count</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv418MeanAccumulatorI32" title="MeanAccumulatorI32"><span class="n"><span class="pre">MeanAccumulatorI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">acc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424MeanAccumulatorI32_CountPK18MeanAccumulatorI32" title="Link to this definition"></a><br /></dt>
+<dd><p>Number of added samples. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>acc</strong> – Pointer to the accumulator instance. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Sample count, 0 if <code class="docutils literal notranslate"><span class="pre">acc</span></code> is NULL. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423MeanAccumulatorI32_MeanPK18MeanAccumulatorI32">
+<span id="_CPPv323MeanAccumulatorI32_MeanPK18MeanAccumulatorI32"></span><span id="_CPPv223MeanAccumulatorI32_MeanPK18MeanAccumulatorI32"></span><span id="MeanAccumulatorI32_Mean__MeanAccumulatorI32CP"></span><span class="target" id="group__mean__accumulator__i32__core_1ga6b2eddec871299249ad98a2ab3413a1d"></span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeanAccumulatorI32_Mean</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv418MeanAccumulatorI32" title="MeanAccumulatorI32"><span class="n"><span class="pre">MeanAccumulatorI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">acc</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423MeanAccumulatorI32_MeanPK18MeanAccumulatorI32" title="Link to this definition"></a><br /></dt>
+<dd><p>Mean of the added samples, rounded half away from zero. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>acc</strong> – Pointer to the accumulator instance. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rounded mean, 0 if <code class="docutils literal notranslate"><span class="pre">acc</span></code> is NULL or empty. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv418MeanAccumulatorI32">
+<span id="_CPPv318MeanAccumulatorI32"></span><span id="_CPPv218MeanAccumulatorI32"></span><span id="MeanAccumulatorI32"></span><span class="target" id="structMeanAccumulatorI32"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">MeanAccumulatorI32</span></span></span><a class="headerlink" href="#_CPPv418MeanAccumulatorI32" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;mean_accumulator_i32.h&gt;</em></div>
+<p>Integer mean accumulator state. </p>
+</dd></dl>
+
+</section>
+<section id="integer-sliding-window-regression">
+<h2>Integer sliding-window regression<a class="headerlink" href="#integer-sliding-window-regression" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Structures and functions live in the <code class="docutils literal notranslate"><span class="pre">window_regression_i32_core</span></code> group.</p></li>
+<li><p>Header file: <code class="docutils literal notranslate"><span class="pre">include/window_regression_i32.h</span></code>.</p></li>
+</ul>
+<p class="rubric">Mathematical definition</p>
+<p>The window holds <span class="math notranslate nohighlight">\(n\)</span> samples <span class="math notranslate nohighlight">\((t_i, y_i)\)</span> per channel, with
+<span class="math notranslate nohighlight">\(t_N\)</span>, <span class="math notranslate nohighlight">\(y_N\)</span> the newest one. Ages are wrap-safe uint32
+differences, limited to the oldest age <span class="math notranslate nohighlight">\(a_{\max}\)</span>, and scaled by the
+smallest <span class="math notranslate nohighlight">\(s\)</span> with <span class="math notranslate nohighlight">\(\lfloor a_{\max} / 2^s \rfloor &lt; 2^{13}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[a_i = (t_N - t_i) \bmod 2^{32}, \qquad
+x_i = -\left\lfloor \frac{a_i}{2^{s}} \right\rfloor, \qquad
+d_i = \mathrm{Clamp}\!\left(y_i - y_N, -2^{20}, 2^{20}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[S_x = \sum x_i, \quad S_{xx} = \sum x_i^2, \quad
+S_d = \sum d_i, \quad S_{xd} = \sum x_i d_i\]</div>
+<p>The fit needs <span class="math notranslate nohighlight">\(n \ge \max(\mathrm{minCount}, 2)\)</span> and
+<span class="math notranslate nohighlight">\(n S_{xx} - S_x^2 &gt; 0\)</span>. Slope <span class="math notranslate nohighlight">\(m\)</span> in Q16 per x unit, clamped to
+<span class="math notranslate nohighlight">\(\pm m_{\max}\)</span> when <span class="math notranslate nohighlight">\(m_{\max}\)</span> (<code class="docutils literal notranslate"><span class="pre">slopeMaxQ16</span></code>) is not 0:</p>
+<div class="math notranslate nohighlight">
+\[m = \mathrm{Clamp}\!\left(R\!\left(\frac{2^{16}\,(n S_{xd} - S_x S_d)}{2^{s}\,(n S_{xx} - S_x^2)}\right), -m_{\max}, m_{\max}\right)\]</div>
+<p>Level <span class="math notranslate nohighlight">\(L\)</span> in Q16 at <span class="math notranslate nohighlight">\(t_N\)</span>: the line goes through the centroid
+<span class="math notranslate nohighlight">\((\bar{t}, \bar{y})\)</span>, also when <span class="math notranslate nohighlight">\(m\)</span> is clamped:</p>
+<div class="math notranslate nohighlight">
+\[L = 2^{16} y_N + R\!\left(\frac{2^{16} S_d + m \sum a_i}{n}\right)
+\;\approx\; 2^{16}\left(\bar{y} + \frac{m}{2^{16}} \left(t_N - \bar{t}\right)\right)\]</div>
+<p>Evaluation at <span class="math notranslate nohighlight">\(t\)</span>, with the signed difference
+<span class="math notranslate nohighlight">\(\Delta = (t - t_N) \bmod 2^{32}\)</span> taken in <span class="math notranslate nohighlight">\([-2^{31}, 2^{31})\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{Evaluate}(t) = \mathrm{sat}_{32}\!\left(\left\lfloor \frac{L + m\,\Delta + 2^{15}}{2^{16}} \right\rfloor\right)\]</div>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424WindowRegressionI32_InitP19WindowRegressionI32P8uint32_tP7int32_tP23WindowRegressionI32Line8uint16_t7uint8_t">
+<span id="_CPPv324WindowRegressionI32_InitP19WindowRegressionI32P8uint32_tP7int32_tP23WindowRegressionI32Line8uint16_t7uint8_t"></span><span id="_CPPv224WindowRegressionI32_InitP19WindowRegressionI32P8uint32_tP7int32_tP23WindowRegressionI32Line8uint16_t7uint8_t"></span><span id="WindowRegressionI32_Init__WindowRegressionI32P.uint32_tP.int32_tP.WindowRegressionI32LineP.uint16_t.uint8_t"></span><span class="target" id="group__window__regression__i32__core_1ga3a2d1732f18f714f1dbd3e95e7d5a4a0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WindowRegressionI32_Init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419WindowRegressionI32" title="WindowRegressionI32"><span class="n"><span class="pre">WindowRegressionI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">xStorage</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">yStorage</span></span>, <a class="reference internal" href="#_CPPv423WindowRegressionI32Line" title="WindowRegressionI32Line"><span class="n"><span class="pre">WindowRegressionI32Line</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">lines</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">capacity</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">channels</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424WindowRegressionI32_InitP19WindowRegressionI32P8uint32_tP7int32_tP23WindowRegressionI32Line8uint16_t7uint8_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Initialize the regression with caller-owned storage. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reg</strong> – <strong>[out]</strong> Pointer to the instance to initialize. </p></li>
+<li><p><strong>xStorage</strong> – x ring, <code class="docutils literal notranslate"><span class="pre">capacity</span></code> elements. </p></li>
+<li><p><strong>yStorage</strong> – y rings, <code class="docutils literal notranslate"><span class="pre">capacity</span></code> * <code class="docutils literal notranslate"><span class="pre">channels</span></code> elements. </p></li>
+<li><p><strong>lines</strong> – Fit results, <code class="docutils literal notranslate"><span class="pre">channels</span></code> elements. </p></li>
+<li><p><strong>capacity</strong> – Window size, 2..<a class="reference internal" href="#group__window__regression__i32__core_1ga6057c933c80053d80874bba6cbc993fc"><span class="std std-ref">WINDOW_REGRESSION_I32_CAPACITY_MAX</span></a>. </p></li>
+<li><p><strong>channels</strong> – Number of y channels, &gt;= 1. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true on success; false on NULL storage or an out-of-range parameter (the instance is then invalid and all calls are no-ops). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424WindowRegressionI32_PushP19WindowRegressionI328uint32_tA_K7int32_t">
+<span id="_CPPv324WindowRegressionI32_PushP19WindowRegressionI328uint32_tA_K7int32_t"></span><span id="_CPPv224WindowRegressionI32_PushP19WindowRegressionI328uint32_tA_K7int32_t"></span><span id="WindowRegressionI32_Push__WindowRegressionI32P.uint32_t.int32_tCA"></span><span class="target" id="group__window__regression__i32__core_1ga5cbb551dcc008b3d8de6ee3fd4ce7cab"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WindowRegressionI32_Push</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419WindowRegressionI32" title="WindowRegressionI32"><span class="n"><span class="pre">WindowRegressionI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">y</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424WindowRegressionI32_PushP19WindowRegressionI328uint32_tA_K7int32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Add one sample: x and one y per channel. Overwrites the oldest sample when the window is full. Does not change the last fit result. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reg</strong> – Pointer to the instance. </p></li>
+<li><p><strong>x</strong> – Sample x (time), non-decreasing mod 2^32. </p></li>
+<li><p><strong>y</strong> – WindowRegressionI32::channels y values. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425WindowRegressionI32_CountPK19WindowRegressionI32">
+<span id="_CPPv325WindowRegressionI32_CountPK19WindowRegressionI32"></span><span id="_CPPv225WindowRegressionI32_CountPK19WindowRegressionI32"></span><span id="WindowRegressionI32_Count__WindowRegressionI32CP"></span><span class="target" id="group__window__regression__i32__core_1ga403281995bb5858c3b1e0c19096c75f6"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WindowRegressionI32_Count</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv419WindowRegressionI32" title="WindowRegressionI32"><span class="n"><span class="pre">WindowRegressionI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425WindowRegressionI32_CountPK19WindowRegressionI32" title="Link to this definition"></a><br /></dt>
+<dd><p>Number of stored samples. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reg</strong> – Pointer to the instance. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Stored samples, 0 if <code class="docutils literal notranslate"><span class="pre">reg</span></code> is NULL or invalid. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425WindowRegressionI32_ClearP19WindowRegressionI32">
+<span id="_CPPv325WindowRegressionI32_ClearP19WindowRegressionI32"></span><span id="_CPPv225WindowRegressionI32_ClearP19WindowRegressionI32"></span><span id="WindowRegressionI32_Clear__WindowRegressionI32P"></span><span class="target" id="group__window__regression__i32__core_1gab1fc8bffd856df113738c69180472d46"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WindowRegressionI32_Clear</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419WindowRegressionI32" title="WindowRegressionI32"><span class="n"><span class="pre">WindowRegressionI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425WindowRegressionI32_ClearP19WindowRegressionI32" title="Link to this definition"></a><br /></dt>
+<dd><p>Drop all samples and the fit result. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>reg</strong> – Pointer to the instance. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423WindowRegressionI32_FitP19WindowRegressionI328uint16_t8uint32_t">
+<span id="_CPPv323WindowRegressionI32_FitP19WindowRegressionI328uint16_t8uint32_t"></span><span id="_CPPv223WindowRegressionI32_FitP19WindowRegressionI328uint16_t8uint32_t"></span><span id="WindowRegressionI32_Fit__WindowRegressionI32P.uint16_t.uint32_t"></span><span class="target" id="group__window__regression__i32__core_1gaf31a7e3f307159b5c208b13f19b8134a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WindowRegressionI32_Fit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419WindowRegressionI32" title="WindowRegressionI32"><span class="n"><span class="pre">WindowRegressionI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span>, <span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">minCount</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">slopeMaxQ16</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423WindowRegressionI32_FitP19WindowRegressionI328uint16_t8uint32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Fit a least-squares line per channel over the stored samples. </p>
+<p>On success the result is in WindowRegressionI32::lines and WindowRegressionI32::fitX is the newest x.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reg</strong> – Pointer to the instance. </p></li>
+<li><p><strong>minCount</strong> – Minimum stored samples for a result (values &lt; 2 act as 2). </p></li>
+<li><p><strong>slopeMaxQ16</strong> – |slope| limit in Q16 per x unit, 0 = no limit. A clamped line still goes through the centroid of the samples. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true on success; false when fewer than <code class="docutils literal notranslate"><span class="pre">minCount</span></code> samples are stored or all stored x are equal (no result, fitted = false). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv428WindowRegressionI32_EvaluatePK19WindowRegressionI327uint8_t8uint32_tP7int32_t">
+<span id="_CPPv328WindowRegressionI32_EvaluatePK19WindowRegressionI327uint8_t8uint32_tP7int32_t"></span><span id="_CPPv228WindowRegressionI32_EvaluatePK19WindowRegressionI327uint8_t8uint32_tP7int32_t"></span><span id="WindowRegressionI32_Evaluate__WindowRegressionI32CP.uint8_t.uint32_t.int32_tP"></span><span class="target" id="group__window__regression__i32__core_1ga707fb089b47e4cf608d6af2856becd68"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WindowRegressionI32_Evaluate</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv419WindowRegressionI32" title="WindowRegressionI32"><span class="n"><span class="pre">WindowRegressionI32</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">reg</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">channel</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">x</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">value</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428WindowRegressionI32_EvaluatePK19WindowRegressionI327uint8_t8uint32_tP7int32_t" title="Link to this definition"></a><br /></dt>
+<dd><p>Value of the last fitted line of a channel at <code class="docutils literal notranslate"><span class="pre">x</span></code>. </p>
+<p><code class="docutils literal notranslate"><span class="pre">x</span></code> is taken relative to WindowRegressionI32::fitX as a wrap-safe signed difference, so it must lie within +-2^31 of it. The result is rounded half up and saturates to the int32_t range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>reg</strong> – Pointer to the instance. </p></li>
+<li><p><strong>channel</strong> – Channel index. </p></li>
+<li><p><strong>x</strong> – x to evaluate the line at. </p></li>
+<li><p><strong>value</strong> – <strong>[out]</strong> Line value at <code class="docutils literal notranslate"><span class="pre">x</span></code>. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>true on success; false if there is no fit result, <code class="docutils literal notranslate"><span class="pre">channel</span></code> is out of range or a pointer is NULL (<code class="docutils literal notranslate"><span class="pre">value</span></code> is not written). </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.WINDOW_REGRESSION_I32_CAPACITY_MAX">
+<span class="target" id="group__window__regression__i32__core_1ga6057c933c80053d80874bba6cbc993fc"></span><span class="sig-name descname"><span class="n"><span class="pre">WINDOW_REGRESSION_I32_CAPACITY_MAX</span></span></span><a class="headerlink" href="#c.WINDOW_REGRESSION_I32_CAPACITY_MAX" title="Link to this definition"></a><br /></dt>
+<dd><p>Largest supported window capacity (keeps the fit sums inside int64_t). </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.WINDOW_REGRESSION_I32_Y_DELTA_MAX">
+<span class="target" id="group__window__regression__i32__core_1gab40370dbc00ddd4370a29dd337986f38"></span><span class="sig-name descname"><span class="n"><span class="pre">WINDOW_REGRESSION_I32_Y_DELTA_MAX</span></span></span><a class="headerlink" href="#c.WINDOW_REGRESSION_I32_Y_DELTA_MAX" title="Link to this definition"></a><br /></dt>
+<dd><p>Largest accepted |y - yNewest|, larger differences are clamped. </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv423WindowRegressionI32Line">
+<span id="_CPPv323WindowRegressionI32Line"></span><span id="_CPPv223WindowRegressionI32Line"></span><span id="WindowRegressionI32Line"></span><span class="target" id="structWindowRegressionI32Line"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WindowRegressionI32Line</span></span></span><a class="headerlink" href="#_CPPv423WindowRegressionI32Line" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;window_regression_i32.h&gt;</em></div>
+<p>Fitted line of one channel: y(x) = level + slope * (x - fitX). </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv419WindowRegressionI32">
+<span id="_CPPv319WindowRegressionI32"></span><span id="_CPPv219WindowRegressionI32"></span><span id="WindowRegressionI32"></span><span class="target" id="structWindowRegressionI32"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">WindowRegressionI32</span></span></span><a class="headerlink" href="#_CPPv419WindowRegressionI32" title="Link to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;window_regression_i32.h&gt;</em></div>
+<p>Sliding-window regression state. Treat the fields as read-only. </p>
 </dd></dl>
 
 </section>
