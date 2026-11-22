@@ -155,6 +155,89 @@ void test_invalid(void)
     TEST_ASSERT_EQUAL_INT32(0, ExponentialSmoothingI32_GetValue(NULL));
 }
 
+/* independent reference: acc += floor((x * 2^frac - acc) / 2^shift) in int64 */
+static int64_t refStep(int64_t acc, int32_t x, unsigned shift, unsigned frac)
+{
+    const int64_t d = (int64_t) x * ((int64_t) 1 << frac) - acc;
+    const int64_t step = d >= 0 ? d / ((int64_t) 1 << shift) : -((-d + ((int64_t) 1 << shift) - 1) / ((int64_t) 1 << shift));
+    return acc + step;
+}
+
+static int32_t sampleAt(int i)
+{
+    /* negative levels with a ripple: -1000, then a step to -2500 during the slow phase */
+    return (i < 45 ? -1000 : -2500) + ((i % 3) - 1) * 37;
+}
+
+void test_set_shift_fast_to_slow_matches_reference(void)
+{
+    ExponentialSmoothingI32 filter;
+    ExponentialSmoothingI32_Init(&filter, 2, 8, 0);
+    int64_t ref = 0;
+
+    for (int i = 0; i < 90; i++) {
+        if (i == 30) {
+            TEST_ASSERT_TRUE(ExponentialSmoothingI32_SetShift(&filter, 7));
+        }
+        const unsigned shift = i < 30 ? 2 : 7;
+        ExponentialSmoothingI32_Process(&filter, sampleAt(i));
+        ref = refStep(ref, sampleAt(i), shift, 8);
+        TEST_ASSERT_EQUAL_INT32((int32_t) ref, filter.acc);
+    }
+    TEST_ASSERT_EQUAL_UINT(7, ExponentialSmoothingI32_GetShift(&filter));
+    TEST_ASSERT_TRUE(ExponentialSmoothingI32_GetValue(&filter) < -1000);
+    TEST_ASSERT_TRUE(ExponentialSmoothingI32_GetValue(&filter) > -2500);
+}
+
+void test_set_shift_no_jump(void)
+{
+    ExponentialSmoothingI32 filter;
+    ExponentialSmoothingI32_Init(&filter, 2, 8, 0);
+    for (int i = 0; i < 5; i++) {
+        ExponentialSmoothingI32_Process(&filter, -333);
+    }
+    const int32_t acc = filter.acc;
+    const int32_t value = ExponentialSmoothingI32_GetValue(&filter);
+    TEST_ASSERT_NOT_EQUAL(0, acc & 0xFF); /* fraction bits in use */
+
+    TEST_ASSERT_TRUE(ExponentialSmoothingI32_SetShift(&filter, 7));
+    TEST_ASSERT_EQUAL_INT32(acc, filter.acc);
+    TEST_ASSERT_EQUAL_INT32(value, ExponentialSmoothingI32_GetValue(&filter));
+    TEST_ASSERT_EQUAL_UINT8(8, filter.frac);
+
+    /* the first slow step moves by 1/128 of the difference only */
+    ExponentialSmoothingI32_Process(&filter, -333);
+    TEST_ASSERT_EQUAL_INT32((int32_t) refStep(acc, -333, 7, 8), filter.acc);
+}
+
+void test_set_shift_invalid(void)
+{
+    ExponentialSmoothingI32 filter;
+    ExponentialSmoothingI32_Init(&filter, 3, 8, -12);
+    ExponentialSmoothingI32_Process(&filter, 50);
+    const ExponentialSmoothingI32 before = filter;
+
+    TEST_ASSERT_FALSE(ExponentialSmoothingI32_SetShift(&filter, EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX + 1));
+    TEST_ASSERT_FALSE(ExponentialSmoothingI32_SetShift(&filter, 1000));
+    TEST_ASSERT_EQUAL_INT32(before.acc, filter.acc);
+    TEST_ASSERT_EQUAL_UINT8(before.shift, filter.shift);
+    TEST_ASSERT_EQUAL_UINT8(before.frac, filter.frac);
+    TEST_ASSERT_EQUAL_UINT(3, ExponentialSmoothingI32_GetShift(&filter));
+
+    TEST_ASSERT_TRUE(ExponentialSmoothingI32_SetShift(&filter, EXPONENTIAL_SMOOTHING_I32_SHIFT_MAX));
+    TEST_ASSERT_TRUE(ExponentialSmoothingI32_SetShift(&filter, 0));
+    TEST_ASSERT_EQUAL_UINT(0, ExponentialSmoothingI32_GetShift(&filter));
+
+    TEST_ASSERT_FALSE(ExponentialSmoothingI32_SetShift(NULL, 2));
+    TEST_ASSERT_EQUAL_UINT(0, ExponentialSmoothingI32_GetShift(NULL));
+
+    ExponentialSmoothingI32 invalid;
+    ExponentialSmoothingI32_Init(&invalid, 40, 8, 0);
+    TEST_ASSERT_FALSE(ExponentialSmoothingI32_SetShift(&invalid, 2));
+    TEST_ASSERT_FALSE(invalid.valid);
+    TEST_ASSERT_EQUAL_UINT(0, ExponentialSmoothingI32_GetShift(&invalid));
+}
+
 void setUp(void)
 {
 }
@@ -174,5 +257,8 @@ int main(void)
     RUN_TEST(test_rounding);
     RUN_TEST(test_reset);
     RUN_TEST(test_invalid);
+    RUN_TEST(test_set_shift_fast_to_slow_matches_reference);
+    RUN_TEST(test_set_shift_no_jump);
+    RUN_TEST(test_set_shift_invalid);
     return UNITY_END();
 }
